@@ -29,7 +29,7 @@ export default function TrainersPreviewBanner() {
                       alt="trainer image"/>
                   </div>
 
-                  <div className="w-full md:w-[60%] min-h-[290px] md:h-full flex flex-col px-2 ">
+                  <div className="w-full md:w-[60%] min-h-[290px] md:h-full flex flex-col px-2 md:py-1 md:px-3 ">
                     <div className="w-full flex items-center h-[30px]">
                       <button
                         onClick={()=>setShowTrainerDetails(prev => prev == ind ? -1 : ind)}
