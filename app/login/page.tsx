@@ -1,4 +1,6 @@
+import MailIcon from '@/assets/icons/MailIcon'
 import Messages from './messages'
+import LockIcon from '@/assets/icons/LockIcon'
 
 export default function Login() {
   return (
@@ -8,7 +10,7 @@ export default function Login() {
         action="/auth/sign-in"
         method="post"
       >
-        <label className="text-md" htmlFor="email">
+        <label className="text-lg" htmlFor="email">
           אימייל
         </label>
         <input
@@ -17,7 +19,9 @@ export default function Login() {
           placeholder="you@example.com"
           required
         />
-        <label className="text-md" htmlFor="password">
+        <MailIcon classNameStyle='h-5 w-5 text mt-[-47px] mb-[30px] ml-2' />
+
+        <label className="text-lg" htmlFor="password">
           סיסמא
         </label>
         <input
@@ -27,6 +31,10 @@ export default function Login() {
           placeholder="••••••••"
           required
         />
+        <button >
+          <LockIcon classNameStyle='h-5 w-5 text mt-[-64px] mb-[30px] ml-2' />
+        </button>
+
         <button className="bg-primary rounded px-4 py-2 text-black mb-2">
           התחברות
         </button>
