@@ -2,9 +2,9 @@ import Messages from './messages'
 
 export default function Login() {
   return (
-    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md h-[80vh] justify-center gap-2 ">
+    <div className="flex flex-col w-full px-8  h-[80vh] justify-center">
       <form
-        className="flex-1 flex flex-col w-full text-end justify-center gap-2 text-foreground"
+        className="flex flex-col w-[70vw] sm:w-[60vw] md:w-[50vw] lg:w-[40vw] xl:w-[30vw] text text-end justify-center gap-2 "
         action="/auth/sign-in"
         method="post"
       >

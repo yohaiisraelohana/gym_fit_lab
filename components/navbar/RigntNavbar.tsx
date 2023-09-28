@@ -13,7 +13,7 @@ export default function RigntNavbar({user} : { user : TUser | null }) {
 
   return (
     <div className="ml-auto flex gap-2 items-center">
-      { false ? (
+      { user ? (
         <UserProfileImg handleClick={()=>setOpenUserMenu(prev => !prev)}/>
       ) : (
         <AnimatedGradientBorder rounded="2px" >

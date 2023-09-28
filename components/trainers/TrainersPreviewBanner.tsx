@@ -12,7 +12,7 @@ export default function TrainersPreviewBanner() {
         <p className="text text-xl m-auto "> ! מאות מאמנים מנוסים </p>
         <p className="text text-xl m-auto "> מצא את המאמן המתאים בשבילך </p>
         <div className=" m-auto w-[90vw] overflow-x-auto">
-          <div className="w-fit overflow-x-scroll flex my-5 gap-5">
+          <div className="w-fit overflow-x-scroll flex mt-5 mb-8 gap-5">
             {[1,2,3,4,5,6,7].map((n,ind)=>(
               <form 
                 onSubmit={(e) => {
