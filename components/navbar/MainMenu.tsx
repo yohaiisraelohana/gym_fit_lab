@@ -5,7 +5,7 @@ export default function MainMenu() {
 
 
   return (
-    <div className='flex m-auto gap-3 text-[1.1rem] max-md:hidden'>
+    <div className='flex m-auto gap-3 text-[1.1rem]  max-md:hidden'>
         {mainMenu.map((menuItem)=>(
             <Link
                 href={menuItem.href} 

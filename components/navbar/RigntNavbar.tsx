@@ -14,14 +14,17 @@ export default function RigntNavbar({user} : { user : TUser | null }) {
   return (
     <div className="ml-auto flex gap-2 items-center">
       { user ? (
-        <UserProfileImg handleClick={()=>setOpenUserMenu(prev => !prev)}/>
+        <UserProfileImg 
+          gender={null}
+          profile_img={null} 
+          handleClick={()=>setOpenUserMenu(prev => !prev)}/>
       ) : (
         <AnimatedGradientBorder rounded="2px" >
             <Link href={"/login"} className="text hover:bg-neutral-800  p-1 px-2 rounded-sm ">התחבר</Link>
         </AnimatedGradientBorder>
       ) }
       
-      { openUserMenu && <UserMenu email={user?.email} />}
+      { openUserMenu && <UserMenu email={user?.email} name={user?.name} />}
       <MainMenuDropDawn/>
     </div>
   )

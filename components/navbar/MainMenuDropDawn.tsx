@@ -19,12 +19,12 @@ export default function MainMenuDropDawn() {
           <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
         {openMenu &&
-            <div className="absolute top-16 left-0 text-[1.5rem] flex flex-col px-4 w-full bg-background shadow-md shadow-white py-1 rounded-b-md">
+            <div className="absolute top-16 left-0 text-xl flex flex-col px-4 w-full bg-background shadow-md shadow-white py-1 rounded-b-md">
                 {mainMenu.map((menuItem) => (
                     <Link 
                         href={menuItem.href} 
                         key={menuItem.name}
-                        className="text-hover text-end px-1  w-full hover:bg-neutral-800 rounded-sm"
+                        className="text-hover text-end p-1  w-full hover:bg-neutral-800 rounded-sm"
                         >{menuItem.name}
                     </Link>
                 ))}
