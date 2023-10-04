@@ -16,7 +16,7 @@ export default async function Index() {
     <div className="w-full flex flex-col items-center">
       <Banner/>
       <TrainersPreviewBanner/>
-      <StoreData auth={user} />
+      <StoreData id={user?.id!} />
     </div>
   )
 }

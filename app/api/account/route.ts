@@ -25,14 +25,14 @@ export async function PUT(request:NextRequest) {
     const {data:{user}} = await supabase.auth.getUser();
     
 
-    const { data } = await supabase
+    const { data , error } = await supabase
       .from("profile")
       .select()
       .match({id:user?.id});
     
     console.log({data,body});
     
-    if(!data){
+    if(error){
       //TODO: Error message
       return ;
     }

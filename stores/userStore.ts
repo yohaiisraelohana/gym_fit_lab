@@ -11,12 +11,12 @@ const sepabase = createClient(supabaseUrl,supabaseApiKey );
 export const userStore = create<TUserStore>()((set) => ({
     error : null,
     user:null,
-    fetchUser: async (auth:any) => {
+    fetchUser: async (id:string) => {
         try {
             const {data,error} = await sepabase
                 .from("profile")
                 .select()
-                .match({id:auth.id});
+                .match({id:id});
             if(error) {
                 set({error:{ message:`${error.message} ,code:${error.code}` , error }});
                 return;

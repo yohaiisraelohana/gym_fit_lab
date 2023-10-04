@@ -2,6 +2,7 @@
 'use client'
 import { EDIT_PROFILE } from '@/constants/url';
 import React, { useState } from 'react'
+import ProfileImageInput from './ProfileImageInput';
 
 export default function EditProfile() {
     const [ gender , setGender ] = useState<string>("זכר");
@@ -18,7 +19,7 @@ export default function EditProfile() {
                 'Content-Type' : "application/json"
             },
             body:JSON.stringify({gender , name , is_trainee , is_trainer , profile_img})
-        })
+        });
         console.log({res});
         
     }
@@ -26,9 +27,7 @@ export default function EditProfile() {
     <form 
     onSubmit={hundleSubmit}
     className="flex flex-col justify-center w-[70vw] items-center gap-6 mt-6">
-
-    <div className="h-[200px] w-[200px] rounded-full border border-white"></div>
-
+    <ProfileImageInput/>
     <div className="flex justify-around w-full">
       <div 
         onClick={()=>setGender("זכר")}
