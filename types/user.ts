@@ -5,4 +5,11 @@ type TUser = {
     profile_img? : string | null;
     is_trainer? : boolean;
     is_trainee? : boolean;
-} 
+} ;
+
+type TUserStore = {
+    error : TError | null ;
+    user : TUser | null ;
+    fetchUser : (user : TUser) => void ;
+}
+

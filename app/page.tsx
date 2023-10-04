@@ -2,11 +2,12 @@ import Banner from '@/components/banner/Banner'
 import TrainersPreviewBanner from '@/components/trainers/TrainersPreviewBanner'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
+import StoreData from './StoreData'
 
 export const dynamic = 'force-dynamic'
 
 export default async function Index() {
-  const supabase = createServerComponentClient({ cookies })
+  const supabase = createServerComponentClient({ cookies });
   const {
     data: { user },
   } = await supabase.auth.getUser()
@@ -15,6 +16,7 @@ export default async function Index() {
     <div className="w-full flex flex-col items-center">
       <Banner/>
       <TrainersPreviewBanner/>
+      <StoreData auth={user} />
     </div>
   )
 }

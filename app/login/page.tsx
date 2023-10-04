@@ -28,7 +28,9 @@ export default function Login() {
           className="rounded-md px-4 py-2 bg-inherit border mb-6 text-end"
           type="password"
           name="password"
+          pattern='^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z0-9]{8,}$'
           placeholder="••••••••"
+          title='הסיסמא חייבת להכיל לפחות 8 תווים ולכלול בתוכה אותיות באנגלית בלבד אות אחת גדולה ומספר אחד לפחות'
           required
         />
         <button >

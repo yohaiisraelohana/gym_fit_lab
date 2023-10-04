@@ -11,5 +11,4 @@ export const userMenuOptions = [
     {name:"חשבון" , href:"/"},
     {name:"אזור מתאמן" , href:"/"},
     {name:"אזור מאמן" , href:"/"},
-    {name:"התנתק" , href:"/"}
 ];

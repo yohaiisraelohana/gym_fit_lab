@@ -12,9 +12,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className="bg-background flex flex-col items-center text-t-gl ">
-        <NavBar/>
+    <html lang="en"> 
+      <body className="bg-background flex flex-col items-center text-t-gl relative">
+        <nav className=' fixed w-screen flex flex-col items-center'>
+          <NavBar/>
+        </nav>
         <main >
           {children}
         </main>
