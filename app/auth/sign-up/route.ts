@@ -1,4 +1,4 @@
-import { validatePassword } from '@/services/validations/validatePassword'
+import { validatePassword } from '@/services/validations/validateInputs'
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'

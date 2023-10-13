@@ -1,84 +1,171 @@
 //TODO: navigate to account if profile updated sucessfully 
 'use client'
 import { EDIT_PROFILE } from '@/constants/url';
-import React, { useState } from 'react'
-import ProfileImageInput from './ProfileImageInput';
+import React, { useEffect, useState } from 'react'
+import { userStore } from '@/stores/userStore';
+import { isAuth } from '@/services/client/requireAuth/authUser';
+import { User } from '@supabase/supabase-js';
+import ProfileForm from './ProfileForm';
+import { uploadSingleImgToCloudinary } from '@/services/cloudinary/uploadImage';
 
 export default function EditProfile() {
-    const [ gender , setGender ] = useState<string>("זכר");
-    const [ name , setName ] = useState<string>("");
-    const [ is_trainer , setIsTrainer ] = useState<boolean>(false);
-    const [ is_trainee , setIsTrainee ] = useState<boolean>(false);
-    const [ profile_img , setProfile_img ] = useState<string | null>(null);
+    const { user , fetchUser } = userStore();
+    const [error , setError] = useState<TError | null>(null);
     
-    const hundleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const res = await fetch(EDIT_PROFILE,{
-            method:"PUT",
-            headers:{
-                'Content-Type' : "application/json"
-            },
-            body:JSON.stringify({gender , name , is_trainee , is_trainer , profile_img})
-        });
-        console.log({res});
-        
+    const getUser = async () => {
+      const auth : User | TError = await isAuth();
+      if('error' in auth )
+        return;
+      fetchUser(auth.id);
     }
-  return (
-    <form 
-    onSubmit={hundleSubmit}
-    className="flex flex-col justify-center w-[70vw] items-center gap-6 mt-6">
-    <ProfileImageInput/>
-    <div className="flex justify-around w-full">
-      <div 
-        onClick={()=>setGender("זכר")}
-        className="flex items-end gap-2">
-        <img 
-            style={gender == "זכר" ? {border:"var(--primary) 1px solid"} : {}}
-            className="h-10 w-10 rounded-full"
-            src="https://res.cloudinary.com/dftounwvk/image/upload/v1696176580/9A484DF4-3F00-450E-A67F-42347A12AD26_1_201_a_sa6dyu.jpg" 
-            alt="male img" />
-        <p className="text">זכר</p>
-      </div>
-      <div 
-        onClick={()=>setGender("נקבה")}
-        className="flex items-end gap-2">
-        <img 
-            style={gender == "נקבה" ? {border:"var(--primary) 1px solid"} : {}}
-            className="h-10 w-10 rounded-full"
-            src="https://res.cloudinary.com/dftounwvk/image/upload/v1696173336/86D20B4B-F732-415E-8427-92A32C389FCF_1_201_a_dnhvvh.jpg" 
-            alt="male img" />
-        <p className="text">נקבה</p>
-      </div>
-    </div>
 
-    <input 
-        onChange={(e) => setName(e.target.value)}
-        type="text"
-        className="w-full outline-[var(--primary)] rounded-md border text text-end p-1 bg-transparent mb-2"
-        placeholder="שם מלא" />
+    useEffect(()=>{getUser();},[]);
+
+    console.log(user);
     
-    <button
-        style={is_trainer ? {border:"var(--primary) 1px solid"} : {}}
-        className="w-full border  rounded-sm p-2 text-end"
-        onClick={()=>setIsTrainer(!is_trainer)}
-      >
-        <h2 className="text-lg ">{"מאמן"}</h2>
-        <p className="text-neutral-300">{"סמן אופציה זאת אם בכוונתך לאמן"}</p>
-    </button>
-    <button
-        style={is_trainee ? {border:"var(--primary) 1px solid"} : {}}
-        onClick={()=>setIsTrainee(!is_trainee)}
-        className="w-full border  rounded-sm p-2 text-end" 
-      >
-        <h2 className="text-lg">{"מתאמן"}</h2>
-        <p className="text-neutral-300">{"סמן אופציה זאת אם בכוונתך להתאמן"}</p>
-    </button>
-    <div className="flex justify-between w-full mt-3">
-      <button className="border p-1 px-3 text border-primary">{"המשך"}</button>
-      <button className="border p-1 px-3">{"דלג"}</button>
-    </div>
 
-  </form>
+    const updateUser = async ( updatedUser : TUser) => {
+      const res = await fetch(EDIT_PROFILE,{
+        method:"PUT",
+        headers:{
+            'Content-Type' : "application/json"
+        },
+        body:JSON.stringify(updatedUser)
+      });
+      const data = await res.json();
+      console.log({data}); 
+    }
+
+    const uploadNewImage =async (new_profile_img:File) : Promise<string | null> => {
+      return "";
+    }
+
+    const deleteOldImage =async (public_id:string) => {
+
+    }
+
+    const hundleSubmit = async (newUser:TUser, new_profile_img : File | null) => {
+      //! check if the user authenticated
+      /*
+        * in case the user uploaded new image
+        TODO - 1. upload the image 
+        TODO - 2. delete the old image if exist
+        TODO - 3. update profile_img to the new secure_url/public_id
+        TODO - 4. upsate the user
+        TODO - 5. navigate to /account
+        * in case the user dont change his image 
+        TODO - 1. upsate the user
+        TODO - 2. navigate to /account    
+      */
+
+      let profile = {...newUser};
+
+      //* CHECK IF USER CHANGED IMAGE 
+      if (new_profile_img != null) {
+        if(profile.profile_img){
+          await deleteOldImage(profile.profile_img);
+        }
+        const uploadRes = await uploadSingleImgToCloudinary(new_profile_img);
+        if(!("public_id" in uploadRes))
+          return "";//!Error
+        profile.profile_img = uploadRes.public_id;
+      };
+
+      await updateUser(profile);
+    }
+
+  return (
+    <ProfileForm user={user} hundleSubmit={hundleSubmit} />
   )
 }
 
+/*
+//TODO: navigate to account if profile updated sucessfully 
+'use client'
+import { EDIT_PROFILE } from '@/constants/url';
+import React, { useEffect } from 'react'
+import { userStore } from '@/stores/userStore';
+import { isAuth } from '@/services/client/requireAuth/authUser';
+import { User } from '@supabase/supabase-js';
+import ProfileForm from './ProfileForm';
+import { uploadToCloudinary } from '@/services/cloudinary/uploadImage';
+
+export default function EditProfile() {
+    const { user , fetchUser } = userStore();
+    
+    const getUser = async () => {
+      const auth : User | TError = await isAuth();
+      if('error' in auth )
+        return;
+      fetchUser(auth.id);
+    }
+
+    useEffect(()=>{getUser();},[]);
+
+    const updateUser = async ( updatedUser : TUser) => {
+      const res = await fetch(EDIT_PROFILE,{
+        method:"PUT",
+        headers:{
+            'Content-Type' : "application/json"
+        },
+        body:JSON.stringify(updatedUser)
+      });
+      const d = await res.json();
+
+      console.log({d}); 
+    }
+
+    const uploadNewImage =async (new_profile_img:File) : Promise<string | null> => {
+      try{
+        const urlObject = new URL(window.location.href);
+        console.log({urlObject});
+        
+        const response = await fetch(`${urlObject.origin}/api/upload/images`);
+        console.log({response});
+        
+        if(response.ok){
+          const { signature } = await response.json();
+          //TODO: 1) get the url of the new image uploaded to cloudinary
+          console.log(signature);
+          
+          const cloudinaryRes : any = await uploadToCloudinary(new_profile_img , signature); 
+          console.log(cloudinaryRes);
+          return cloudinaryRes.secure_url;
+        };
+        return null;
+      } catch(error){
+        console.error('Error while uploading the image:', error);
+        return null;
+      }
+    }
+
+    const deleteOldImage =async () => {
+
+    }
+
+
+    //TODO: 1) check if user is exist end enter the details to inputs
+    //TODO: 2) the profile image input will get the url of the exist image profile or null
+    const hundleSubmit = async (newUser:TUser, new_profile_img : File | null) => {
+        let updatedUser = {...newUser};
+        console.log({newUser,new_profile_img});
+        
+        if(new_profile_img != null){
+          const secureUrl = await uploadNewImage(new_profile_img);
+          console.log(secureUrl);
+          
+          if(secureUrl != null){
+            await deleteOldImage();
+            updatedUser.profile_img = secureUrl;
+          }
+        }
+        await updateUser(updatedUser);        
+    }
+
+  return (
+    <ProfileForm user={user} hundleSubmit={hundleSubmit} />
+  )
+}
+
+
+*/

@@ -33,6 +33,8 @@ export async function PUT(request:NextRequest) {
     console.log({data,body});
     
     if(error){
+      console.log({error});
+      
       //TODO: Error message
       return ;
     }
