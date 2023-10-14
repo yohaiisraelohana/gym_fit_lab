@@ -1,6 +1,7 @@
 'use client'
 
 import { validateImageFile } from '@/services/validations/validateInputs';
+import { CldImage } from 'next-cloudinary';
 import React, { useState } from 'react';
 
 export default function ProfileImageInput(
@@ -39,10 +40,12 @@ export default function ProfileImageInput(
             error ? 
             <p>{error.message}</p>
             : currentProfileImage && 
-            <img 
+            <CldImage 
               src={currentProfileImage} 
               alt="Selected Image" 
-              className="w-full h-full object-cover" />
+              height={200}
+              width={200}
+              style={{borderRadius:"100%",objectFit:'cover'}} />
           )}
           
         </div>

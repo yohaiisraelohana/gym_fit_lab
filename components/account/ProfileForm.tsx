@@ -4,8 +4,8 @@ import ProfileImageInput from './ProfileImageInput';
 import Link from 'next/link';
 
 export default function ProfileForm(
-  {user , hundleSubmit}:
-  {user:TUser | null , hundleSubmit : (e:TUser , img:File | null) => void}
+  {user , hundleSubmit , error}:
+  { user:TUser | null ; hundleSubmit : (e:TUser , img:File | null) => void ; error:null | TError}
   ){
     const [ gender , setGender ] = useState<string>("זכר");
     const [ name , setName ] = useState<string>("");
@@ -81,6 +81,8 @@ export default function ProfileForm(
         <h2 className="text-lg">{"מתאמן"}</h2>
         <p className="text-neutral-300">{"סמן אופציה זאת אם בכוונתך להתאמן"}</p>
     </button>
+    {error 
+      && <div className="h-[100px] w-full border-red-500">{error.message}</div> }
     <div className="flex justify-between w-full mt-3">
         <button 
             type='submit'

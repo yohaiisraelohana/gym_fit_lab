@@ -18,17 +18,3 @@ export async function uploadSingleImgToCloudinary(img:File | null) : Promise<TCl
 
     return {public_id : res.data.public_id};
 }
-/*
-    // Get the signed URL from the backend
-    const response = await axios.get('/api/sign-upload-url');
-    const { signedUrl } = response.data;
-    // Use the signed URL for the direct upload
-    const formData = new FormData();
-    formData.append('file', selectedImage);
-    
-    const uploadResponse = await axios.post(signedUrl, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-*/

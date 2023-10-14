@@ -16,7 +16,7 @@ export default function RigntNavbar({user} : { user : TUser | null }) {
       { user ? (
         <UserProfileImg 
           gender={null}
-          profile_img={null} 
+          profile_img={user.profile_img} 
           handleClick={()=>setOpenUserMenu(prev => !prev)}/>
       ) : (
         <AnimatedGradientBorder rounded="2px" >

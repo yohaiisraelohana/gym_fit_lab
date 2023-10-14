@@ -1,14 +1,8 @@
-import {v2 as cloudinary} from 'cloudinary';
 import { NextResponse } from 'next/server';
-
+import cloudinary from '@/services/cloudinary/config';
 
 
 export async function GET() {
-    cloudinary.config({
-        cloud_name:"",
-        api_key:"",
-        api_secret:""
-    })
     // Define Cloudinary upload options
     const uploadOptions = {
       folder: 'your-upload-folder', // Customize the folder where images are stored

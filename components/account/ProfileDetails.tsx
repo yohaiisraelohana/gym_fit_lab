@@ -1,22 +1,12 @@
 'use client'
 import { userStore } from "@/stores/userStore"
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import Link from "next/link";
 import { useEffect } from "react";
 
 export default function ProfileDetails() {
   const { user , fetchUser } = userStore();
-  const supabase = createClientComponentClient();
 
-  const getUser = async () => {
-    const {data:auth} = await supabase.auth.getUser();
-    if (!auth.user) 
-        return;
-    fetchUser(auth.user?.id);
-  }
-  
-  useEffect(()=>{
-    getUser();
-  },[]);
+  useEffect(()=>{fetchUser();},[]);
 
   return (
     <div className="text">
@@ -25,7 +15,9 @@ export default function ProfileDetails() {
         <h1 className=" text-2xl">{user.name}</h1>
         <p>{user.email}</p>
         <p>{user.created_at?.substring(0,10).replaceAll('-',"/")}{" חבר מאז"}</p>
-      </div>}
+        <Link href={"/account/edit"}>{"עריכה"}</Link>
+      </div>
+      }
     </div>
   )
 }

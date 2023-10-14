@@ -11,6 +11,7 @@ type TUser = {
 type TUserStore = {
     error : TError | null ;
     user : TUser | null ;
-    fetchUser : (id : string) => void ;
+    fetchUser : (id? : string) => Promise<any[]|TError> ;
+    updateUser : (updatedUser : TUser) => Promise<TError|string>;
 }
 
