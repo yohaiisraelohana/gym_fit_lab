@@ -16,5 +16,5 @@ export async function uploadSingleImgToCloudinary(img:File | null) : Promise<TCl
     if(!res.data)
         return {error:res , message:"העלאת התמונה לשרת cloudinary נכשלה" };
 
-    return {public_id : res.data.public_id};
+    return {public_id : res.data.public_id , secure_url:res.data.secure_url};
 }

@@ -18,10 +18,12 @@ export default function ProfileForm(
         if(user){
           setGender(prev => user.gender || prev);
           setIsTrainee(prev => user.is_trainee == undefined ? prev : user.is_trainee);
-          setIsTrainee(prev => user.is_trainer == undefined ? prev : user.is_trainer);
+          setIsTrainer(prev => user.is_trainer == undefined ? prev : user.is_trainer);
           setName(prev => user.name || prev);
           setProfile_img(user.profile_img || null);
         }
+        console.log(user);
+        
     },[user]);
 
     const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {

@@ -1,7 +1,7 @@
 import ProfileIcon from "@/assets/icons/ProfileIcon";
-import {CldImage} from 'next-cloudinary';
-export default function UserProfileImg({handleClick , profile_img , gender }
-    :{ handleClick : Function ; profile_img?:string | null; gender : string | null}) {
+import Image from "next/image";
+export default function UserProfileImg({handleClick , profile_img  }
+    :{ handleClick : Function ; profile_img?:string | null; }) {
       console.log(profile_img);
       
   return (
@@ -10,7 +10,7 @@ export default function UserProfileImg({handleClick , profile_img , gender }
         className="flex rounded-full md:mr-0 focus:ring-4  focus:ring-[var(--primary)] dark:focus:ring-[var(--primary)]" >
         <span className="sr-only">Open user menu</span>
         {profile_img ? (
-            <CldImage 
+            <Image 
               style={{borderRadius:"100%"}}
               width="36" 
               height="36" 

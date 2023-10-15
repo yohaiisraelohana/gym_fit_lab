@@ -4,24 +4,17 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { userStore } from '@/stores/userStore';
-import { isAuth } from '@/services/client/requireAuth/authUser';
-import { User } from '@supabase/supabase-js';
 import ProfileForm from './ProfileForm';
 import { uploadSingleImgToCloudinary } from '@/services/cloudinary/uploadImage';
 import { useRouter } from 'next/navigation';
 import { deleteSingleImageFromCloudinary } from '@/services/cloudinary/deleteImage';
 
 export default function EditProfile() {
-    const { user , fetchUser , updateUser , error:userError } = userStore();
+    const { user , updateUser , error:userError } = userStore();
     const [ error , setError] = useState<TError | null>(null);
     const router = useRouter();
     
-    useEffect(()=>{fetchUser();},[]);
     useEffect(()=>{setError(userError)},[userError]);
-    
-
-
-
 
     const hundleSubmit = async (newUser:TUser, new_profile_img : File | null) => {
       setError(null);
@@ -34,9 +27,9 @@ export default function EditProfile() {
             setError(deleteRes);
         }
         const uploadRes : any | TCldRes | TError = await uploadSingleImgToCloudinary(new_profile_img);
-        if(!("public_id" in uploadRes))
+        if(!("secure_url" in uploadRes))
           return setError(uploadRes);
-        profile.profile_img = uploadRes.public_id;
+        profile.profile_img = uploadRes.secure_url;
       };
 
       const userRes = await updateUser(profile);
