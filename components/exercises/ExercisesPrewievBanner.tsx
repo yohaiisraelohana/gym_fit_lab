@@ -5,7 +5,6 @@ export default async function ExercisesPrewievBanner() {
     const {data , error} = await supabase
         .from("exercises")
         .select();
-    console.log({data,error});
     
     if(error)
         return <></>;

@@ -2,7 +2,6 @@ import ProfileIcon from "@/assets/icons/ProfileIcon";
 import Image from "next/image";
 export default function UserProfileImg({handleClick , profile_img  }
     :{ handleClick : Function ; profile_img?:string | null; }) {
-      console.log(profile_img);
       
   return (
       <button 
