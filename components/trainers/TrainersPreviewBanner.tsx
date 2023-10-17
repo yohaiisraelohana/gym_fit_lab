@@ -4,7 +4,7 @@ import { useRef, useState } from "react"
 export default function TrainersPreviewBanner() { 
   const [showTrainerDetails , setShowTrainerDetails ] = useState<number>(-1);
   return (
-    <div className="w-screen flex flex-col border-b-2 border-primary">
+    <div className="w-screen flex bg-gradient-to-b from-background to-neutral-300  flex-col border-b-2 border-primary">
         <img 
           src="https://res.cloudinary.com/dftounwvk/image/upload/v1695554493/artwork_3_gftskp.png" 
           alt="trainer image "

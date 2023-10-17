@@ -19,7 +19,7 @@ export default async function NavBar() {
     }
   }
   return (
-    <header className=' w-full flex items-center h-16 px-4 lg:px-8 relative '>
+    <header className=' w-full flex items-center h-16 px-4 lg:px-8 relative  bg-background'>
         <Logo/>
         <MainMenu/>
         <RigntNavbar user={profile} />
