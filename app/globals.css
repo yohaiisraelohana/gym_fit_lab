@@ -40,6 +40,10 @@
   @apply text-[var(--primary)]
 }
 
+.title {
+  @apply text-[var(--text-main)] text-2xl md:text-3xl
+}
+
 .bg-primary {
   @apply bg-[var(--primary)];
 }

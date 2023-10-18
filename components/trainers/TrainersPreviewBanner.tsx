@@ -9,8 +9,8 @@ export default function TrainersPreviewBanner() {
           src="https://res.cloudinary.com/dftounwvk/image/upload/v1695554493/artwork_3_gftskp.png" 
           alt="trainer image "
           className=" m-auto h-[400px]" />
-        <p className="text text-xl m-auto "> ! מאות מאמנים מנוסים </p>
-        <p className="text text-xl m-auto "> מצא את המאמן המתאים בשבילך </p>
+        <p className="title m-auto "> ! מאות מאמנים מנוסים </p>
+        <p className="title text-xl m-auto "> מצא את המאמן המתאים בשבילך </p>
         <div className=" m-auto w-[90vw] overflow-x-auto">
           <div className="w-fit overflow-x-scroll flex mt-5 mb-8 gap-5">
             {[1,2,3,4,5,6,7].map((n,ind)=>(
