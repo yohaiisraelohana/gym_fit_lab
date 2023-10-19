@@ -1,7 +1,6 @@
 import supabase from '@/services/supabaseCreateClient';
 import Image from 'next/image';
-import FrontManBodyButtons from './FrontManBodyButtons';
-import BackManBodyButtons from './BackManBodyButtons';
+
 
 export default async function ExercisesPrewievBanner() {
     const {data , error} = await supabase
@@ -12,7 +11,8 @@ export default async function ExercisesPrewievBanner() {
     if(error)
         return <></>;
   return (
-    <div className='text mt-2 flex max-md:flex-col items-center gap-2 max-w-[100vw] lg:px-6 xl:pr-10'>
+    <div className='text mt-2 flex max-md:flex-col items-center gap-2 max-w-[100vw] lg:px-6 xl:pr-10 bg-gradient-to-b from-background to-neutral-300 from-20% border-b-2 border-primary '>
+
         <div className="flex flex-col items-center justify-center md:mt-[-100px] ">
             <Image 
                 height={300}
@@ -89,11 +89,14 @@ export default async function ExercisesPrewievBanner() {
             ))}
         </div>
 
-
     </div>
   )
 }
 /*
+
+*/
+/*
+
         <img 
             className='h-[100px] w-[100px] bg-white rounded-md border border-white'
             src="https://res.cloudinary.com/dftounwvk/image/upload/v1697486100/image_ifpfg9.svg" 
@@ -126,8 +129,5 @@ export default async function ExercisesPrewievBanner() {
             className='h-[100px] w-[100px] rounded-md'
             src="https://res.cloudinary.com/dftounwvk/image/upload/v1697485396/backMuscle_oibw8i.jpg" 
             alt="icon" />
-        <div className="flex max-md:flex-col justify-center items-center w-screen md:bg-gradient-to-t md:from-neutral-200 md:to-50%   ">
-            <FrontManBodyButtons/>
-            <BackManBodyButtons/>
-        </div>
+
 */

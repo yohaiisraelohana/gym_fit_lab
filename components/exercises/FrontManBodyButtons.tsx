@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function FrontManBodyButtons() {
   return (
-    <div className="h-[95vh] flex items-center justify-center max-md:w-screen max-md:bg-gradient-to-t max-md:from-neutral-200 lg:ml-[-30px]">
+    <div className="h-[95vh] flex items-center justify-center max-md:w-screen max-md:bg-gradient-to-t max-md:from-neutral-200  lg:ml-[-30px]">
     <div 
         className={
             `flex flex-col items-start text max-w-[100vw] w-[400px] h-[600px]  

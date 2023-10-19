@@ -2,8 +2,8 @@ import Banner from '@/components/banner/Banner'
 import TrainersPreviewBanner from '@/components/trainers/TrainersPreviewBanner'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
-import StoreData from './StoreData'
 import ExercisesPrewievBanner from '@/components/exercises/ExercisesPrewievBanner'
+import ManBodyButtons from '@/components/exercises/ManBodyButtons'
 
 export const dynamic = 'force-dynamic'
 
@@ -18,6 +18,7 @@ export default async function Index() {
       <Banner/>
       <TrainersPreviewBanner/>
       <ExercisesPrewievBanner/>
+      <ManBodyButtons/>
     </div>
   )
 }
