@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en"> 
       <body className="bg-background flex flex-col items-center text-t-gl relative">
-        <nav className=' fixed w-screen flex flex-col items-center '>
+        <nav className=' z-50 fixed w-screen flex flex-col items-center '>
           <NavBar/>
         </nav>
         <main className='mt-16'>
