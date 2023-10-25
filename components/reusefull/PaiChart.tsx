@@ -1,23 +1,13 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 
-type TPieData = {
-    color : string;
-    val : number;
-    name ? : string;
-}
 
-export default function PaiChart( { data , classNameStyle } : {data:TPieData[] ; classNameStyle : string}) {
+
+export default function PaiChart( { data , classNameStyle } : {data:TPieData[] | null ; classNameStyle : string}) {
     const [pieChart , setPieChart ] = useState<string | null>(null);
     
-    // const data = [
-    //     {color:"#4287f5" ,val:35},
-    //     {color:"#4ef542" ,val:35},
-    //     {color:"#f5da42" ,val:30}
-    // ];
-    
-
     const getPie = () => {
+        if(!data) return;
         let pie : string = "";
         let sum : number = 0;
         let i = 0;
@@ -30,37 +20,39 @@ export default function PaiChart( { data , classNameStyle } : {data:TPieData[] ;
             sum += Math.round((data[i].val / sumVals)*100);
         }
         pie += `${data[i].color} ${3.6 * sum}deg ${3.6 * (Math.round((data[i].val / sumVals)*100) + sum)}deg `;
-
+        console.log(pie)
         setPieChart(pie);
     }
 
 
 
     useEffect(()=>{
-        if(!data) return;
         getPie();
     },[data]);
     
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen gap-2">
-        {pieChart && 
+    <div className="flex flex-col items-center justify-center h-full gap-2">
+        {pieChart &&
             <div 
                 className={classNameStyle}
-                style={{background:`repeating-conic-gradient(
+                style={{transition:'all 1s ease-in-out',background:`repeating-conic-gradient(
                 from 0deg,
                 ${pieChart} )`}}>
             </div>
         }
-        { data && 
-         <div className="flex gap-4">
-            {data.map((d,ind)=>(
-                <div key={ind} className='text flex gap-1 items-center'>
-                    <div style={{backgroundColor:d.color}} className='h-3 w-3 rounded-full'></div>
-                    <p>{d.name}</p>
-                </div>
-            ))}
-         </div> }
+        { 
+        data &&
+            <div className="flex gap-4">
+               {data.map((d,ind)=>(
+                   <div key={ind} className='text flex gap-1 items-center'>
+                       <div style={{backgroundColor:d.color}} className='h-3 w-3 rounded-full'></div>
+                       <p>{d.val == 1 ? 0 : d.val.toFixed()}</p>
+                       <p>{d.name}</p>
+                   </div>
+               ))}
+            </div> 
+        }
   </div>
   )
 }
