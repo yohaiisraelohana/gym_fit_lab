@@ -35,7 +35,7 @@ export default function MealChart({meal}:{meal:TMealFood[] | null}) {
       }
       <div className='text-lg text absolute bg-background h-[130px] w-[130px] mt-[-30px] rounded-full flex flex-col justify-center items-center'>
         <p className=''>קלוריות</p>
-        <p className=''>{mealTotal ? mealTotal.energy : 0}</p>
+        <p className=''>{mealTotal ? mealTotal.energy.toFixed() : 0}</p>
       </div>
     </div>
   )
