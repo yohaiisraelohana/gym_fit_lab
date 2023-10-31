@@ -14,13 +14,10 @@ export default function PaiChart( { data , classNameStyle } : {data:TPieData[] |
         let sumVals : number = data.reduce((acc , crr)=>acc + crr.val,0);
 
         for( i = 0 ; i < data.length - 1 ; i++){
-            console.log(sum , " - " , Math.round((data[i].val / sumVals)*100) + sum , " - " , (3.6 * Math.round((data[i].val / sumVals)*100) + sum ) );
-
             pie += `${data[i].color} ${3.6 * sum}deg ${3.6 * (Math.round((data[i].val / sumVals)*100) + sum)}deg , `;
             sum += Math.round((data[i].val / sumVals)*100);
         }
         pie += `${data[i].color} ${3.6 * sum}deg ${3.6 * (Math.round((data[i].val / sumVals)*100) + sum)}deg `;
-        console.log(pie)
         setPieChart(pie);
     }
 

@@ -1,14 +1,16 @@
 import supabase from '@/services/supabaseCreateClient';
 import Image from 'next/image';
+import ExerciseCard from './ExerciseCard';
 
 
 export default async function ExercisesPrewievBanner() {
-    const {data , error} = await supabase
+    const sRes = await supabase
         .from("exercises")
         .select()
         .limit(12);
     
-    if(error)
+    const data : TExercise [] | null = sRes.data;
+    if(!data || sRes.error)
         return <></>;
   return (
     <div className='text mt-2 flex max-md:flex-col items-center gap-2 max-w-[100vw] lg:px-6 xl:pr-10 bg-gradient-to-b from-background to-neutral-300 from-20% border-b-2 border-primary '>
@@ -23,69 +25,29 @@ export default async function ExercisesPrewievBanner() {
             />
             <p className='title w-80 lg:w-[30vw] xl:w-[40vw]  text-center'>{"תרגילים מחולקים לשרירים"}<br/>{"בנה את התוכנית למטרה שלך"}</p>
         </div>
+
         <div className=" max-[500px]:grid grid-cols-2 gap-[6vw] hidden w-full px-4">
             {data.map((exercise , ind)=> (
-                <div 
-                    style={{display:(ind < 4 ? 'flex' : 'none')}}
-                    key={exercise.id}
-                    className="text-center text-black bg-white flex flex-col ">
-                    <Image 
-                        height={200}
-                        width={200}
-                        className=' bg-white '
-                        src={exercise.gif_url}
-                        alt='exercise gif'
-                        />
-                    <p className='w-full text-lg'>{exercise.name}</p>
-                </div>
+                ind < 4 && <ExerciseCard exercise={exercise} key={ind} />
             ))}
         </div>
+
         <div className="max-[500px]:hidden grid grid-cols-3 gap-4 md:hidden w-full px-10">
             {data.map((exercise , ind)=> (
-                <div 
-                    style={{display:(ind < 6 ? 'flex' : 'none')}}
-                    key={exercise.id}
-                    className="text-center text-black bg-white flex flex-col ">
-                    <Image 
-                        height={200}
-                        width={200}
-                        className=' bg-white '
-                        src={exercise.gif_url}
-                        alt='exercise gif'
-                        />
-                    <p className='w-full text-lg'>{exercise.name}</p>
-                </div>
+                ind < 6 && <ExerciseCard exercise={exercise} key={ind} />
             ))}
         </div>
+
+        
         <div className=" md:grid grid-cols-3 gap-4 hidden lg:hidden w-full pr-4 py-10 ">
             {data.map((exercise , ind)=> (
-                <div 
-                    style={{display:(ind < 9 ? 'flex' : 'none')}}
-                    key={exercise.id}
-                    className="text-center text-black bg-white flex flex-col ">
-                    <img 
-                        // height={150}
-                        // width={150}
-                        className=' bg-white w-[90%]'
-                        src={exercise.gif_url}
-                        alt='exercise gif'
-                        />
-                    <p className='w-full text-lg px-2'>{exercise.name}</p>
-                </div>
+                ind < 9 && <ExerciseCard exercise={exercise} key={ind} />
             ))}
         </div>
+
         <div className=" lg:grid grid-cols-4 gap-4 hidden  py-10 ">
             {data.map((exercise )=> (
-                <div 
-                    key={exercise.id}
-                    className="text-center text-black bg-white flex flex-col ">
-                    <img 
-                        className=' bg-white w-[90%]'
-                        src={exercise.gif_url}
-                        alt='exercise gif'
-                        />
-                    <p className='w-full text-lg px-2'>{exercise.name}</p>
-                </div>
+                <ExerciseCard exercise={exercise} key={exercise.id} />
             ))}
         </div>
 

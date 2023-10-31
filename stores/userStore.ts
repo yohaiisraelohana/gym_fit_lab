@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
 const supabaseApiKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
-console.log({supabaseApiKey,supabaseUrl});
+
 
 const supabase = createClient(supabaseUrl,supabaseApiKey );
 

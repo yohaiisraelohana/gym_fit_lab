@@ -15,9 +15,7 @@ export default function StoreData() {
         fetchUser(auth.data.user.id);
       };
     }
-
-    console.log(user);
-    
+       
     useEffect(()=>{
       getAuthUser();
     },[]);
