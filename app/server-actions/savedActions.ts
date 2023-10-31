@@ -4,18 +4,39 @@ import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
-export async function saveItem(id:number , type:string , user_id:string , revalidate? : string ) : Promise<TError | null>{
+export async function saveItem(item_id:number , type:string , profile_id:string , revalidate? : string ) : Promise<TError | null>{
     const supabase = createServerActionClient({cookies});
 
-    const { data , error } = await supabase
+    const { error } = await supabase
         .from('saved')
-        .insert({type,profile_id:user_id,item_id:id})
-        .select();
+        .insert({type,profile_id,item_id})
     
-    if(revalidate)
+    if(revalidate && !error)
         revalidatePath(revalidate);
     if(error)
-        return {error,message:"פעולה למשתמשים מחוברים בלבד"};
+        return {error,message:"שגיאה לא צפויה בשמירת הפריט"};
     return null ;
     
+}
+
+export async function unSaveItem(item_id:number , profile_id:string , type:string , revalidate? : string ) {
+    const supabase = createServerActionClient({cookies});
+
+    const {data,error} = await supabase
+        .from("saved")
+        .delete()
+        .match({
+            item_id,
+            profile_id,
+            type
+        });
+
+    console.log({data,error});
+
+    if(error)
+        return {error,message:"שגיאה לא צפויה בביטול שמירת הפריט"};
+
+    if(revalidate && !error)
+        revalidatePath(revalidate);
+    return null;
 }
