@@ -31,6 +31,7 @@ export default function ExerciseMenu({id}:{id:number}) {
   return (
     <div className="absolute top-1 right-1 flex flex-col gap-2 justify-center items-center ">
         <button
+          style={{rotate:openMenu ? "45deg" : "0deg" , transition:'all 300ms linear'}}
           onClick={handleOpenMenu}
           ><PlusIcon classNameStyle="h-6 w-6 text-primary " />
         </button>

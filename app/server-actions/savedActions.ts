@@ -19,10 +19,10 @@ export async function saveItem(item_id:number , type:string , profile_id:string 
     
 }
 
-export async function unSaveItem(item_id:number , profile_id:string , type:string , revalidate? : string ) {
+export async function unSaveItem(item_id:number , type:string ,  profile_id:string , revalidate? : string ) {
     const supabase = createServerActionClient({cookies});
 
-    const {data,error} = await supabase
+    const {error} = await supabase
         .from("saved")
         .delete()
         .match({
@@ -30,8 +30,6 @@ export async function unSaveItem(item_id:number , profile_id:string , type:strin
             profile_id,
             type
         });
-
-    console.log({data,error});
 
     if(error)
         return {error,message:"שגיאה לא צפויה בביטול שמירת הפריט"};
