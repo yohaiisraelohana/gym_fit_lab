@@ -11,8 +11,8 @@ export async function saveItem(item_id:number , type:string , profile_id:string 
         .from('saved')
         .insert({type,profile_id,item_id})
     
-    if(revalidate && !error)
-        revalidatePath(revalidate);
+    if(!error)
+        revalidatePath(revalidate || "/saved/exercises");
     if(error)
         return {error,message:"שגיאה לא צפויה בשמירת הפריט"};
     return null ;
@@ -34,7 +34,7 @@ export async function unSaveItem(item_id:number , type:string ,  profile_id:stri
     if(error)
         return {error,message:"שגיאה לא צפויה בביטול שמירת הפריט"};
 
-    if(revalidate && !error)
-        revalidatePath(revalidate);
+    if(!error)
+        revalidatePath(revalidate || "/saved/exercises");
     return null;
 }
