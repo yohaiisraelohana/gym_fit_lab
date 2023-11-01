@@ -16,7 +16,7 @@ export default function ExerciseMenu({id}:{id:number}) {
     if(!user)
       return  alert("פעולה זאת למשתמשים מחוברים בלבד");
     const {data , error} = await supabase
-      .from("saved")
+      .from("savedExercises")
       .select()
       .match({item_id:id,profile_id:user.id});
     console.log({data,error});
