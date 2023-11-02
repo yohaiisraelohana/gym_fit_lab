@@ -15,7 +15,6 @@ export default function RigntNavbar({user} : { user : TUser | null }) {
     <div className="ml-auto flex gap-2 items-center">
       { user ? (
         <UserProfileImg 
-          gender={null}
           profile_img={user.profile_img} 
           handleClick={()=>setOpenUserMenu(prev => !prev)}/>
       ) : (
@@ -24,7 +23,7 @@ export default function RigntNavbar({user} : { user : TUser | null }) {
         </AnimatedGradientBorder>
       ) }
       
-      { openUserMenu && <UserMenu email={user?.email} name={user?.name} />}
+      { openUserMenu && <UserMenu closeUserMenu={()=>setOpenUserMenu(false)} email={user?.email} name={user?.name} />}
       <MainMenuDropDawn/>
     </div>
   )

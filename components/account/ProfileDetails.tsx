@@ -25,7 +25,7 @@ export default function ProfileDetails() {
                   <ProfileIcon classNameStyle="h-[200px] w-[200px] p-[0.35rem] border border-primary rounded-full text" />
           }
 
-          <h1 className=" title">{user.name}</h1>
+          <h1 className=" title">{user.name || "אורח"}</h1>
           <p className="text-primary">{user.email}</p>
         </section>
 

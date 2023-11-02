@@ -8,7 +8,7 @@ export default function ProfileForm(
   { user:TUser | null ; hundleSubmit : (e:TUser , img:File | null) => void ; error:null | TError}
   ){
     const [ gender , setGender ] = useState<string>("זכר");
-    const [ name , setName ] = useState<string>("");
+    const [ name , setName ] = useState<string | null>(null);
     const [ is_trainer , setIsTrainer ] = useState<boolean>(false);
     const [ is_trainee , setIsTrainee ] = useState<boolean>(false);
     const [ profile_img , setProfile_img ] = useState<string | null>(null);
@@ -61,7 +61,8 @@ export default function ProfileForm(
     <input 
         onChange={(e) => setName(e.target.value)}
         type="text"
-        value={name}
+        required
+        value={name || ""}
         className="w-full outline-[var(--primary)] rounded-md border text text-end p-1 bg-transparent mb-2"
         placeholder="שם מלא" />
     

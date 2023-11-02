@@ -1,5 +1,5 @@
 type TUser = {
-    name ? : string ;
+    name ? : string | null;
     email ? : string ;
     gender ? : string ;
     profile_img? : string | null;

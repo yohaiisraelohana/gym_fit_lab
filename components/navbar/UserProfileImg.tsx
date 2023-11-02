@@ -10,6 +10,7 @@ export default function UserProfileImg({handleClick , profile_img  }
         <span className="sr-only">Open user menu</span>
         {profile_img ? (
             <Image 
+              className=" bg-neutral-200/50"
               style={{borderRadius:"100%"}}
               width="36" 
               height="36" 

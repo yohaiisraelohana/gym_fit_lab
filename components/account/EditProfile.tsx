@@ -36,7 +36,6 @@ export default function EditProfile() {
 
       if(typeof userRes !== "string")
         return;
-
       router.push('/account');
     }
 
