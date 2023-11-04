@@ -1,0 +1,1 @@
+export const TRAINER_DEFAULT_IMG = "https://res.cloudinary.com/dftounwvk/image/upload/v1695709580/3D_Animation_Style_muscular_man_training_shoulder_muscles_0_p460uc.jpg";

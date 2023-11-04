@@ -1,12 +1,13 @@
 'use client';
-import React, { useState } from 'react'
+import { TRAINER_DEFAULT_IMG } from '@/constants/defaultValues';
+import React, { useEffect, useState } from 'react'
 
 export default function TrainerCard(
     {trainer}:{trainer:TTrainer}) {
     const [showTrainerDetails , setShowTrainerDetails ] = useState<boolean>(false);
     const currentDate = new Date();
     const startedTime =trainer.training_since ? new Date(trainer.training_since) : new Date();
-    const yearDifference = (currentDate.getFullYear() - startedTime.getFullYear()) * 12 + (currentDate.getMonth() - startedTime.getMonth()) / 12;
+    const yearDifference = (currentDate.getFullYear() - startedTime.getFullYear()) + ((currentDate.getMonth() - startedTime.getMonth()) / 12);
     //const monthsDifference = trainer.training_since ? (Date.now() - new Date(trainer.training_since).getTime() ) / (1000 * 60 * 60 * 24 * 30.44) : 0.0;
     
   return (
@@ -19,7 +20,7 @@ export default function TrainerCard(
           > <div 
               className="w-full md:w-[40%] md:h-full min-h-[260px] border-b md:border-r md:border-b-0 border-neutral-800">
               <img 
-                src={trainer.trainer_img} 
+                src={trainer.trainer_img || TRAINER_DEFAULT_IMG} 
                 className="h-full w-full"
                 alt="trainer image"/>
             </div>
@@ -46,7 +47,7 @@ export default function TrainerCard(
                     <p className='text-end font-bold'>ניסיון</p>
                     <p className='text-end col-span-2 font-bold'>:התמחות</p>
                     <p className='col-span-2 text-end'>{trainer.specializes_at ? trainer.specializes_at.map((item,ind)=> item +( ind + 1 < trainer.specializes_at?.length! ? " , " : "" )) : "ללא"}</p>
-                    <p className='text-end col-span-2 font-bold'>{trainer.bio}</p>
+                    <p className='text-end col-span-2 font-bold'>{trainer.bio && trainer.bio }</p>
               </div>
             </div>
         </form>

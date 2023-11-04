@@ -9,7 +9,7 @@ export const mainMenu = [
 
 export const userMenuOptions = [
     {name:"חשבון" , href:"/account"},
-    {name:"אזור מתאמן" , href:"/account/trainer"},
-    {name:"אזור מאמן" , href:"/"},
+    {name:"אזור מתאמן" , href:"/"},
+    {name:"אזור מאמן" , href:"/account/trainer" },
     {name:"שמורים",href:"/saved"}
 ];

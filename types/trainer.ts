@@ -1,5 +1,5 @@
 type TTrainer = {
-    trainer_img? : string ;
+    trainer_img? : string | null ;
     bio? : string | null ;
     training_since? : string | null;
     trainees_count? : number ;

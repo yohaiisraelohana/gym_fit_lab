@@ -19,13 +19,15 @@ export function validateImageFile(file: File | null): TValidation {
     const maxFileSizeMB: number = 5; 
 
     //check if exist
-    if (!file) {
+    if (!file || file === null) {
       return {valid:false , message:"קובץ לא הועלה"}; 
     }
+    
   
     const fileExtension: string = file.name
       .slice(((file.name.lastIndexOf(".") - 1) >>> 0) + 2)
       .toLowerCase();
+        
   
     //check if in the enabled size and with the right extension
     if (
