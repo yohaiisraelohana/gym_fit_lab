@@ -7,7 +7,7 @@ import TrainerForm from './TrainerForm';
 import { validateImageFile } from '@/services/validations/validateInputs';
 import { TRAINER_DEFAULT_IMG } from '@/constants/defaultValues';
 
-export default function EditTrainer({trainer}:{trainer:TTrainer | null}) {
+export default function EditTrainer({trainer }:{trainer:TTrainer | null }) {
     const {user} = userStore();
     const [ training_since , setTraining_since ] = useState<string | null>(null);
     const [ trainer_img , setTrainer_img ] = useState<string | null>(null); 
@@ -64,7 +64,7 @@ export default function EditTrainer({trainer}:{trainer:TTrainer | null}) {
                 trainees_count : 0 ,
                 bio,
                 specializes_at,
-                profile:trainer?.profile
+                profile:trainer?.profile || {name:"שם המאמן"}
             }} />
         {error && <p>{error.message}</p> }
         <TrainerForm  

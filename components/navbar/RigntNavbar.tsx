@@ -23,7 +23,7 @@ export default function RigntNavbar({user} : { user : TUser | null }) {
         </AnimatedGradientBorder>
       ) }
       
-      { openUserMenu && <UserMenu closeUserMenu={()=>setOpenUserMenu(false)} email={user?.email} name={user?.name} />}
+      { openUserMenu && user && <UserMenu closeUserMenu={()=>setOpenUserMenu(false)} user={user}  />}
       <MainMenuDropDawn/>
     </div>
   )

@@ -13,7 +13,6 @@ export default function ProfileForm(
     const [ is_trainee , setIsTrainee ] = useState<boolean>(false);
     const [ profile_img , setProfile_img ] = useState<string | null>(null);
     const [ new_profile_img , setNewProfileImage ] = useState<File | null>(null);
-    
     useEffect(()=>{
         if(user){
           setGender(prev => user.gender || prev);
@@ -33,7 +32,7 @@ export default function ProfileForm(
   return (
     <form 
     onSubmit={onSubmit}
-    className="flex flex-col justify-center w-[70vw] items-center gap-6 mt-6">
+    className="flex flex-col justify-center w-[70vw] items-center gap-6 mt-6 ">
     <ProfileImageInput currentProfileImage={profile_img} setNewProfileImage={(img:File | null)=>setNewProfileImage(img)} />
     <div className="flex justify-around w-full">
       <div 
@@ -85,7 +84,7 @@ export default function ProfileForm(
         <p className="text-neutral-300">{"סמן אופציה זאת אם בכוונתך להתאמן"}</p>
     </button>
     {error 
-      && <div className="h-[100px] w-full border-red-500">{error.message}</div> }
+      && <div className="w-full border text-center py-2 border-red-500">{error.message}</div> }
     <div className="flex justify-between w-full mt-3">
         <button 
             type='submit'

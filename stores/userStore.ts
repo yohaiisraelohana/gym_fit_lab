@@ -42,8 +42,36 @@ export const userStore = create<TUserStore>()((set) => ({
             set({error:{error:null,message:"עדכון משתמש למשתמשים מחוברים בלבד"}})
             return {error:null , message:"עדכון משתמש למשתמשים מחוברים בלבד"};
         }
+        if(!updatedUser.name || updatedUser.name.length == 0)
+            return {error:"name input" , message:"שדה שם משתמש הינו חובה"};
+
+        const {data , error} = await supabase
+            .from('profile')
+            .update(updatedUser)
+            .match({id:currentUser.id})
+            .select();
+
+        console.log(error);
+        
+            
+        if(error){
+            if(error.code == "23505"){
+                set({error:{error:error,message:"שם משתמש זה תפוס נסה שם אחר"}});
+                return {error:error,message:"שם משתמש זה תפוס נסה שם אחר"};
+            }
+            set({error:{error:error,message:"נכשל בעדכון המשתמש"}});
+            return {error:error,message:"נכשל בעדכון המשתמש"};
+        }
+        if(data)
+            set({user:data[0]});
+        
+        return "המשתמש עודכן בהצלחה";
+            
+    }  
+}))
 
 
+/*
         if(!currentUser.is_trainer && updatedUser.is_trainer ){
             const {error} = await supabase
                 .from("trainer")
@@ -63,22 +91,4 @@ export const userStore = create<TUserStore>()((set) => ({
                 updatedUser.is_trainee = false;
             
         }
-
-
-        const {data , error} = await supabase
-            .from('profile')
-            .update(updatedUser)
-            .match({id:currentUser.id})
-            .select();
-            
-        if(error){
-            set({error:{error:error,message:"נכשל בעדכון המשתמש"}});
-            return {error:error,message:"נכשל בעדכון המשתמש"};
-        }
-        if(data)
-            set({user:data[0]});
-        
-        return "המשתמש עודכן בהצלחה";
-            
-    }  
-}))
+*/

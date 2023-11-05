@@ -18,6 +18,9 @@ export default function EditProfile() {
 
     const hundleSubmit = async (newUser:TUser, new_profile_img : File | null) => {
       setError(null);
+      if(!newUser.name || newUser.name.length == 0)
+        return setError({error:"name is required" , message:"שדה שם משתמש הינו חובה"});
+      
       let profile = {...newUser};
 
       if (new_profile_img != null) {
@@ -34,8 +37,9 @@ export default function EditProfile() {
 
       const userRes = await updateUser(profile);
 
-      if(typeof userRes !== "string")
-        return;
+      if(typeof userRes !== "string" && "error" in userRes)
+        return setError({error:userRes.error, message:userRes.message});
+
       router.push('/account');
     }
 
