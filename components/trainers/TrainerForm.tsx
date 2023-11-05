@@ -15,7 +15,7 @@ export default function TrainerForm({trainer , handleSpecializesInputs , handleI
     <form 
         action={"/api/account/trainer"}
         method="post"
-        className="w-[80vw] flex flex-col justify-start items-center " >
+        className="w-[80vw] md:w-[70vw] lg:w-[60vw] flex flex-col justify-start items-center " >
         <input type="text" name="id" className="hidden" readOnly defaultValue={trainer.id} />
         <input type="text" name="trainer_current_img" className="hidden" readOnly defaultValue={trainer.trainer_img || ""} />
         <div className="w-full">
@@ -56,8 +56,11 @@ export default function TrainerForm({trainer , handleSpecializesInputs , handleI
             className="w-full bg-transparent outline-[var(--primary)] text border border-white rounded-sm text-end py-1 px-2" 
             name="bio"/>
         </div>
+        
+        <div className="grid grid-cols-2 gap-[4vw] w-full">
 
-        <div className="w-full">
+        
+        <div className="w-full max-sm:col-span-2">
           <p className="text w-full text-end text-lg">שנות נסיון</p>
           <input 
               name="training_since"
@@ -71,7 +74,7 @@ export default function TrainerForm({trainer , handleSpecializesInputs , handleI
               onChange={handleTraining_sinceInput} />
         </div>
 
-        <div className="w-full max-w-[80vw] mt-1">
+        <div className="w-full max-w-[80vw] max-sm:mt-1 max-sm:col-span-2 sm:max-w-[38vw] md:max-w-[33vw] lg:max-w-[28vw]">
           <p className="text w-full text-end text-lg mb-2">תמונה להשראה</p>
           <div className=" relative inline-block w-full ">
             <input 
@@ -81,9 +84,11 @@ export default function TrainerForm({trainer , handleSpecializesInputs , handleI
               type="file" 
               id="fileInput" 
               style={{display:'none'}} />
-            <label htmlFor="fileInput" className="px-[40vw] z-10 max-w-[80vw] border border-white p-[10px] rounded-sm cursor-pointer font-bold hover:bg-white/40"></label>
+            <label htmlFor="fileInput" className="px-[40vw] sm:px-[19vw] md:px-[16.5vw] lg:px-[14vw] z-10 max-w-[80vw] border border-white  p-[10px] rounded-sm cursor-pointer font-bold hover:bg-white/40"></label>
             <p className="text absolute inset-[50%]  translate-x-[-41%] w-[100px] top-0 -z-10 ">בחר תמונה</p>
           </div>
+        </div>
+
         </div>
 
         <button 
