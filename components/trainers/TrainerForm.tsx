@@ -52,7 +52,7 @@ export default function TrainerForm({trainer , handleSpecializesInputs , handleI
           < textarea
             defaultValue={trainer.bio || ""}
             onChange={handleBioInput}
-            placeholder="ספר על עצמך בקצרה"
+            placeholder=" ספר על עצמך בקצרה לא יותר מ100 תווים"
             className="w-full bg-transparent outline-[var(--primary)] text border border-white rounded-sm text-end py-1 px-2" 
             name="bio"/>
         </div>

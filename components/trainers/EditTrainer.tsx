@@ -23,7 +23,6 @@ export default function EditTrainer({trainer }:{trainer:TTrainer | null }) {
             setTraining_since(trainer.training_since || null);
         }
     },[trainer]);
-    console.log(trainer);
     
 
     const handleSpecializesInputs = (e:MouseEvent<HTMLInputElement, globalThis.MouseEvent>) => {
@@ -49,7 +48,22 @@ export default function EditTrainer({trainer }:{trainer:TTrainer | null }) {
         setTrainer_img(imageUrl);
     }
 
-    console.log(training_since);
+    const handleBioInput = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
+        if(e.target.value.length < 100){
+            setBio(e.target.value);
+            setError(null);
+        } else setError({error:"textArea chars limit" , message:"חרגת ממספר התווים המצויין (100 תווים)"}) 
+    }
+
+    const handleTraining_sinceInput = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const currentDate = new Date();
+        const inputDate = new Date(e.target.value);
+        if(inputDate > currentDate){
+            setError({error:"wrong date",message:"תאריך תחילתך בתור מאמן לא יכול להיות גדול מהיום"});
+        } else {
+            setTraining_since(e.target.value);
+        }
+    }
     
     
     
@@ -66,7 +80,7 @@ export default function EditTrainer({trainer }:{trainer:TTrainer | null }) {
                 specializes_at,
                 profile:trainer?.profile || {name:"שם המאמן"}
             }} />
-        {error && <p>{error.message}</p> }
+        {error && <p className='w-[80vw] md:w-[70vw] lg:w-[60vw] border text-center py-2 border-red-500 text'>{error.message}</p> }
         <TrainerForm  
             trainer={{
                 id:user?.id,
@@ -78,8 +92,8 @@ export default function EditTrainer({trainer }:{trainer:TTrainer | null }) {
             }}
             handleSpecializesInputs={handleSpecializesInputs}
             handleImageInput={handleImageInput}
-            handleBioInput={(e:React.ChangeEvent<HTMLTextAreaElement>) => setBio(e.target.value)}
-            handleTraining_sinceInput={(e:React.ChangeEvent<HTMLInputElement>) => setTraining_since(e.target.value)}
+            handleBioInput={handleBioInput}
+            handleTraining_sinceInput={handleTraining_sinceInput}
             />
     </div>
   )

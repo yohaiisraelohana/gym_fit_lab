@@ -1,5 +1,6 @@
 
 import { createClient } from "@supabase/supabase-js";
+import { revalidatePath } from "next/cache";
 import { create } from "zustand"
 
 require('dotenv').config();
@@ -64,7 +65,6 @@ export const userStore = create<TUserStore>()((set) => ({
         }
         if(data)
             set({user:data[0]});
-        
         return "המשתמש עודכן בהצלחה";
             
     }  

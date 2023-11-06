@@ -22,41 +22,47 @@ export async function POST(request: Request) {
   let error ;
 
   
-
-  console.log({trainer_img});
-
-  console.log(validateImageFile(trainer_img));
-  
-  console.log("app/api/account/trainer.13",
-    {
-      specializes_at,
-      bio,
-      trainer_img,
-      id,
-      training_since
-    });
-  
-  let trainer_new_img_url ;
-  if(true || validateImageFile(trainer_img).valid){
-    if (trainer_current_img != null && trainer_current_img.length > 0) {
-        const deleteRes = await deleteSingleImageFromCloudinary(trainer_current_img);
-        if(typeof deleteRes !== "string")
-          error =  deleteRes;
-    }
-    const uploadRes : any | TCldRes | TError = await uploadSingleImgToCloudinary(trainer_img);
-    if(!("secure_url" in uploadRes))
-        error = uploadRes;
-    trainer_new_img_url = uploadRes.secure_url;
+  let updatedTrainer : TTrainer = {
+    bio,
+    specializes_at,
+    id
   };
+  if(training_since.length > 0)
+    updatedTrainer.training_since = training_since;
+
+  //TODO: the same check with img
+
+
+  
+  /* 
+  * Upload Image To Cloudinary
+  ! Add validation to the image
+  let trainer_new_img_url ;
+  if (trainer_current_img != null && trainer_current_img.length > 0) {
+      const deleteRes = await deleteSingleImageFromCloudinary(trainer_current_img);
+      if(typeof deleteRes !== "string")
+        error =  deleteRes;
+  }
+  const uploadRes : any | TCldRes | TError = await uploadSingleImgToCloudinary(trainer_img);
+  if(!("secure_url" in uploadRes))
+      error = uploadRes;
+  trainer_new_img_url = uploadRes.secure_url;
+  */
   
 
-  console.log({error,trainer_new_img_url,trainer_current_img});
+  console.log({error});
   
   
-  const supabase = createRouteHandlerClient({ cookies })
+  const supabase = createRouteHandlerClient({ cookies });
+  const {data:tData , error:tError} = await supabase 
+    .from("trainer")
+    .upsert(updatedTrainer,{onConflict:"id"});
+
+    console.log("54 = ",{tData , tError});
+    
   
 
-  return NextResponse.redirect(requestUrl.origin + "/account/trainer", {
+  return NextResponse.redirect( `${requestUrl.protocol}//${requestUrl.host}/account/trainer`, {
     // a 301 status is required to redirect from a POST to a GET route
     status: 301,
   })
