@@ -14,7 +14,12 @@ export default function EditProfile() {
     const [ error , setError] = useState<TError | null>(null);
     const router = useRouter();
     
-    useEffect(()=>{setError(userError)},[userError]);
+    useEffect(()=>{
+      if(!user){
+        setError(userError);
+        router.push("/login");
+      }
+      },[userError,user]);
 
     const hundleSubmit = async (newUser:TUser, new_profile_img : File | null) => {
       setError(null);
