@@ -1,27 +1,57 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { activity_options } from './activityOptions';
+import Select from '../reusefull/Select';
 
-export default function BmrCalculator() {
+type TBmrDetails = {
+    gender_provided?:string;
+    height_provided?:number;
+    weight_provided?:number;
+    age_provided?:number;
+    activity_provided?:number;
+}
+
+export default function BmrCalculator({bmr_details}:{bmr_details?:TBmrDetails}) {
+
     const [ bmr , setBmr ] = useState<number>(0);
     const [gender , setGender ] = useState<string>("זכר");
     const [ height , setHeight ] = useState<number>(0);    
     const [ weight , setWeight ] = useState<number>(0);
     const [ age , setAge ] = useState<number>(0);    
     const [ selected , setSelected ] = useState<number>(0);
-    const activity = [
-        {name:"רמת פעילות",val:1},
-        {name:"נמוכה", val:1.2},
-        {name:"בינונית", val:1.5},
-        {name:"גבוהה" , val:1.9}
-    ];
+    const [ exist_details , setExistDetails ] = useState<boolean>(false);
 
-    const handleCalcBmr = () => {
-        if(gender == "זכר"){
-            setBmr(Math.round((66 + (13.7 * weight) + (5 * height) - (6.8 * age) ) * activity[selected].val));
+
+    const handleCalcBmr = (bmrD?:TBmrDetails) => {
+        let bmrProperties : TBmrDetails = {};
+        if(bmrD){
+            bmrProperties = bmrD;
         } else {
-            setBmr(Math.round((655 + (9.6 * weight) + (1.8 * height) - (4.7 * age)) * activity[selected].val));
+            bmrProperties = {
+                weight_provided : weight,
+                height_provided : height,
+                age_provided : age,
+                activity_provided : selected,
+                gender_provided : gender
+            }
+        }
+        if(bmrProperties.gender_provided == "זכר"){
+            setBmr(Math.round((66 + (13.7 * bmrProperties.weight_provided!) + (5 * bmrProperties.height_provided!) - (6.8 * bmrProperties.age_provided!) ) * activity_options[bmrProperties.activity_provided!].val));
+        } else {
+            setBmr(Math.round((655 + (9.6 * bmrProperties.weight_provided!) + (1.8 * bmrProperties.height_provided!) - (4.7 * bmrProperties.age_provided!)) * activity_options[bmrProperties.activity_provided!].val));
         }
     }
+
+    useEffect(()=>{
+        if(bmr_details?.activity_provided 
+        && bmr_details.age_provided 
+        && bmr_details.gender_provided 
+        && bmr_details.height_provided
+        && bmr_details.weight_provided){
+            setExistDetails(true);
+            handleCalcBmr(bmr_details)
+        }
+    },[bmr_details])
 
   return (
     <div className=' bg-white h-full p-[20px] rounded-md w-[300px] z-10 sm:w-[240px] md:w-[340px] lg:w-[440px] flex flex-col justify-between max-md:gap-6 text-background'>
@@ -29,7 +59,7 @@ export default function BmrCalculator() {
             <h1 className='text-black'>BMR</h1>
             <p className=' text-primary'>{bmr}</p>
         </div>
-
+    { !exist_details &&
         <div className="flex justify-around w-full">
           <div 
             onClick={()=>setGender("זכר")}
@@ -52,6 +82,8 @@ export default function BmrCalculator() {
             <p className="">נקבה</p>
           </div>
         </div>
+    }
+    {  ! exist_details &&
         <form className=" grid grid-cols-3 gap-2">
             <input 
                 type="number"
@@ -72,30 +104,19 @@ export default function BmrCalculator() {
                 className=' border-2 border-background text-end rounded-sm p-1'
                 placeholder='משקל' />
         </form>
-        
-        <select 
-            onChange={(e)=>setSelected(Number(e.target.value))}
-            className="text-end border border-background  md:hidden rounded-sm  block w-full p-1 ">
-            {activity.map((val,ind)=>(
-                ind == selected
-                ? <option key={ind} value={ind} defaultValue={ind}>{val.name}</option>
-                : <option key={ind} value={ind} >{val.name}</option>
-            ))}
-        </select>
-        <select 
-            onChange={(e)=>setSelected(Number(e.target.value))}
-            multiple  
-            className=" max-md:hidden border border-background  text-end rounded-sm focus:ring-[var(--primary)] focus:border-primary block w-full p-1 ">
-            {activity.map((val,ind)=>(
-                ind == selected
-                ? <option key={ind} value={ind} defaultValue={ind}>{val.name}</option>
-                : <option key={ind} value={ind} >{val.name}</option>
-            ))}
-        </select>
+    }
+    {!exist_details 
+    && <Select 
+        select_options={activity_options.map((option , ind) => { return {name:option.name , value:ind} } )} 
+        selected_index={selected}
+        handleSelect={(e:React.ChangeEvent<HTMLSelectElement>)=>setSelected(Number(e.target.value))} />
+    }
+    
+    {   !exist_details &&
         <button 
-            onClick={handleCalcBmr} 
+            onClick={() => handleCalcBmr()} 
             className=' bg-primary   text-background p-1 rounded-sm w-full '>חשב</button>
-
+    }
     </div>
   )
 }

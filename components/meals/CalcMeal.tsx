@@ -46,9 +46,9 @@ export default function CalcMeal() {
 
 
   return (
-    <div className='h-screen w-screen flex flex-wrap lg:items-end lg:justify-center  bg-gradient-to-b from-20% from-background to-neutral-300'>
-        <h1 className='title max-lg:hidden w-full text-center mt-[50px]'>חישוב ערך תזונתי לארוחה</h1>
-        <div className="flex flex-col justify-center gap-5 items-center lg:justify-start  w-full h-full lg:w-[35%] lg:h-[85%]">
+    <div className='h-screen w-screen flex flex-wrap lg:items-end lg:justify-center lg:pb-[1vw]  bg-gradient-to-b from-20% from-background to-neutral-300'>
+        <h1 className='title max-lg:hidden w-full text-center mt-[50px] lg:mt-[75px]'>חישוב ערך תזונתי לארוחה</h1>
+        <div className="flex flex-col justify-center gap-5  items-center lg:justify-start lg:pb-[1vw] w-full h-full lg:w-[35%] lg:h-[85%]">
             <h1 className='title lg:hidden'>חישוב ערך תזונתי לארוחה</h1>
             <MealChart meal={meal} />
             <input 
@@ -59,7 +59,7 @@ export default function CalcMeal() {
                 type="text"
                 onChange={()=>getFoods()}/>
             {/* foodsList / mealTable / amount input */}
-            <ul className="h-[40vh]  w-[85%] bg-white/40 backdrop-blur-sm rounded-md ">
+            <ul className="h-[40vh] w-[85%] bg-white/40  backdrop-blur-sm rounded-md ">
                 {   
                     searchFoodList && 
                     <FoodList 

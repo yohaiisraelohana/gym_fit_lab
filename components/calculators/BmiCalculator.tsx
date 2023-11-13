@@ -1,19 +1,32 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import BmiView from './BmiView';
 
-export default function BmiCalculator() {
+export default function BmiCalculator({height_provided,weight_provided}:{height_provided?:number,weight_provided?:number}) {
     const [bmi , setBmi ] = useState<number>(0); 
     const [ weight , setWeight ] = useState<number | null>(null);
     const [ height , setHeight ] = useState<number | null>(null);
+    const [ existDetails , setExistDetails ] = useState<boolean>(false);
 
-
-    const handleBmiCalc = () => {
+    const handleBmiCalc = (height_provided?:number , weight_provided?:number) => {
+        if(height_provided && weight_provided){
+            const h = (height_provided!/100) * (height_provided!/100);
+            setBmi(Math.round(weight_provided!/h));
+            return;
+        }
         if(!weight || !height) return;
         const h = (height/100) * (height/100);
         setBmi(Math.round(weight/h));
     }
     
+    useEffect(()=>{
+        if(weight_provided && height_provided){
+            setHeight(height_provided);
+            setWeight(weight_provided);
+            setExistDetails(true);
+            handleBmiCalc(height_provided,weight_provided);
+        }
+    },[height_provided,weight_provided]);
     
   return (
     <div className='flex flex-col bg-white p-[20px] gap-4 rounded-md text-background'>
@@ -23,7 +36,13 @@ export default function BmiCalculator() {
         </div>
         
         <BmiView bmi={bmi}/>
-        
+        {
+        existDetails 
+        ?
+        <div className="">
+
+        </div>
+        :
         <form className="md:mt-6 mt-2 w-[260px] z-10 sm:w-[200px] md:w-[300px] lg:w-[400px]">
             <input 
                 type="number"             
@@ -38,12 +57,13 @@ export default function BmiCalculator() {
                 onChange={(e)=>setHeight(Number(e.target.value))} 
                 className='border-2 border-background text-end w-[45%] inline ml-[5%] p-1 rounded-sm outline-none' />
         </form>
+        }
 
-
-
-        <button  
-                onClick={handleBmiCalc}
+        { !existDetails
+        &&  <button  
+                onClick={() => handleBmiCalc()}
                 className=' bg-primary   text-background p-1 rounded-sm w-full '>חשב</button>
+        }
     </div>
   )
 }

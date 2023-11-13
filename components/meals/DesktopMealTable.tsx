@@ -24,7 +24,7 @@ export default function DesktopMealTable(
 
 
   return (
-    <div className="max-lg:hidden flex flex-col justify-start items-center overflow-y-auto w-[60%] h-[80%] mb-[1%] bg-white/40 backdrop-blur-sm rounded-sm  ">
+    <div className="max-lg:hidden flex flex-col justify-start items-center overflow-y-auto w-[60%] h-[75vh] mb-[1%] bg-white/40 backdrop-blur-sm rounded-sm  ">
         {
             foodDetails ?
             <FoodDetails food={foodDetails} handleGoBack={()=>setFoodDetails(null)} />

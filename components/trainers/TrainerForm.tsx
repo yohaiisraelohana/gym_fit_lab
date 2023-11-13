@@ -1,5 +1,6 @@
 import React, { FormEvent, MouseEvent } from "react";
 import { specializes_at_options } from "./specializes_at_options";
+import UploadImageButton from "../reusefull/UploadImageButton";
 
 export default function TrainerForm({trainer , handleSpecializesInputs , handleImageInput , handleBioInput ,handleTraining_sinceInput}:
     {
@@ -76,17 +77,9 @@ export default function TrainerForm({trainer , handleSpecializesInputs , handleI
 
         <div className="w-full max-w-[80vw] max-sm:mt-1 max-sm:col-span-2 sm:max-w-[38vw] md:max-w-[33vw] lg:max-w-[28vw]">
           <p className="text w-full text-end text-lg mb-2">תמונה להשראה</p>
-          <div className=" relative inline-block w-full ">
-            <input 
-              name="trainer_img"
-              onChange={handleImageInput}
-              accept="image/*"
-              type="file" 
-              id="fileInput" 
-              style={{display:'none'}} />
-            <label htmlFor="fileInput" className="px-[40vw] sm:px-[19vw] md:px-[16.5vw] lg:px-[14vw] z-10 max-w-[80vw] border border-white  p-[10px] rounded-sm cursor-pointer font-bold hover:bg-white/40"></label>
-            <p className="text absolute inset-[50%]  translate-x-[-41%] w-[100px] top-0 -z-10 ">בחר תמונה</p>
-          </div>
+          <UploadImageButton 
+            handleImageInput={handleImageInput}
+            text="בחר תמונה" />
         </div>
 
         </div>
