@@ -35,20 +35,20 @@ export default function ChangeCard(
         {before_change 
             && after_change 
             && ( change_show == "לפני" 
-               ? <img className='h-[100vw] w-full' src={before_change.img_url!} alt="before change" />
+               ? <img className='h-[100vw] w-full bg-black/30 text text-center' src={before_change.img_url!} alt="before change" />
                : change_show == "אחרי" 
-               ? <img className='h-[100vw] w-full' src={after_change.img_url!} alt="after change" /> 
+               ? <img className='h-[100vw] w-full bg-black/30 text text-center' src={after_change.img_url!} alt="תמונת אחרי השינוי" /> 
                : <div className="h-[100vw] w-full"></div> )
         }
         <p className='text top-1 right-2 bg-white/30 px-1 rounded-sm backdrop-blur-sm absolute'>{change_show}</p>
-        <div className=" w-full px-[2vw] bg-white h-[7vw] text-black  flex justify-evenly items-center">
-            {is_enable_actions ? <ShareIcon classNameStyle='h-6 w-6'/> : <p className='h-6 w-6'></p> }
-            {is_enable_actions ? <BookmarkIcon classNameStyle='h-6 w-6' /> : <p className='h-6 w-6'></p> }
-            <ChevronLeftIcon classNameStyle=' h-6 w-6' onClick={()=>setChangeShow("לפני")} />
-            <DocumentTextIcon classNameStyle='h-6 w-6' onClick={()=>setChangeShow("פרטים")} />
-            <ChevronRightIcon classNameStyle='h-6 w-6' onClick={()=>setChangeShow("אחרי")} />
-            {is_enable_actions ? <CommentIcon classNameStyle='h-6 w-6' /> : <p className='h-6 w-6'></p> }
-            {is_enable_actions ? <HeartOutline classNameStyle='h-6 w-6' /> : <p className='h-6 w-6'></p> }
+        <div className=" w-full px-[2vw] bg-white h-[7vw] text-black   flex justify-evenly items-center">
+            {is_enable_actions ? <ShareIcon classNameStyle='h-6 w-6 cursor-pointer  text-gray-700'/> : <p className='h-6 w-6'></p> }
+            {is_enable_actions ? <BookmarkIcon classNameStyle='h-6 w-6 cursor-pointer text-blue-600' /> : <p className='h-6 w-6'></p> }
+            <ChevronLeftIcon classNameStyle=' h-6 w-6 cursor-pointer' onClick={()=>setChangeShow("לפני")} />
+            <DocumentTextIcon classNameStyle='h-6 w-6 cursor-pointer text-primary' onClick={()=>setChangeShow("פרטים")} />
+            <ChevronRightIcon classNameStyle='h-6 w-6 cursor-pointer' onClick={()=>setChangeShow("אחרי")} />
+            {is_enable_actions ? <CommentIcon classNameStyle='h-6 w-6 cursor-pointer text-yellow-600' /> : <p className='h-6 w-6'></p> }
+            {is_enable_actions ? <HeartOutline classNameStyle='h-6 w-6 cursor-pointer text-red-600' /> : <p className='h-6 w-6'></p> }
         </div>
     </div>
   )

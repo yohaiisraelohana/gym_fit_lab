@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Select from '../reusefull/Select'
 import { target_options } from './target_options';
 import { activity_options } from '../calculators/activityOptions';
@@ -9,19 +9,39 @@ import { validateImageFile } from '@/services/validations/validateInputs';
 
 
 export default function BodyStatusFrom(
-        {saveBodyStatus}:{
-            saveBodyStatus:(body_status_data : TBodyStatus ,  circumferenceForm : TBodycircumference | null)=>void
+        {saveBodyStatus , last_body_status}:{
+            saveBodyStatus:(body_status_data : TBodyStatus ,  circumferenceForm : TBodycircumference | null)=>void;
+            last_body_status?:TBodyStatus | null;
         }) {
-    const [selected_target , setSelectedTarget] = useState<number>(0);
-    const [selected_activity , setSelectedActivity] = useState<number>(0);
+    
+    const [selected_target , setSelectedTarget] = useState<number>(last_body_status 
+        ? target_options.findIndex((option) => option.name == last_body_status.target) 
+        : 0);
+
+        console.log({selected_target});
+        
+    const [selected_activity , setSelectedActivity] = useState<number>(last_body_status 
+        ? last_body_status.activity! 
+        : 0);
+
     const [body_status_img , setBodyStatusImage ] = useState<File | null>(null);
-    const [body_status_details , setBodyStatusDetails ] = useState<TBodyStatus>(
-        { activity:0 , target:target_options[0].name }
-    );
+    const [body_status_details , setBodyStatusDetails ] = useState<TBodyStatus>(last_body_status
+        ? last_body_status
+        :{ 
+        activity:0 , 
+        target:target_options[0].name,
+        height:0 ,
+        weight:0,
+        age: 0 ,
+        });
+
     const [form_error , setFormError] = useState<string | null>(null);
     const [is_circumference_form , setIsCircumferenceFrom ] = useState<boolean>(false);
     const [circumference_details , setCircumferenceDetails] = useState<TBodycircumference | null>(null);
-    const [preview_img , setPreviewImg] = useState<string | null>(null);
+
+    const [preview_img , setPreviewImg] = useState<string | null>(body_status_details
+        ? body_status_details.img_url!
+        : null);
 
     const handleSaveBodyStatus = async (e:React.FormEvent<HTMLFormElement>) => { 
         e.preventDefault();
@@ -45,6 +65,7 @@ export default function BodyStatusFrom(
         saveBodyStatus({...body_status_details,img_url},circumference_details);
 
     }
+
     
   return (
     <form
@@ -60,8 +81,10 @@ export default function BodyStatusFrom(
                 {placeholder : "משקל" , name : "weight"}
             ].map((option)=>(
                     <input 
+                        defaultValue={body_status_details[option.name as keyof TBodyStatus] || 0}
                         key={option.name} 
                         type="number" 
+                        step="0.001"
                         className='w-full border border-background text-center'
                         placeholder={option.placeholder}
                         onChange={(e)=>setBodyStatusDetails(prev => ({...prev , [e.target.name] : e.target.value}))}
@@ -121,6 +144,7 @@ export default function BodyStatusFrom(
                         placeholder={inputOption.placeholder}
                         name={inputOption.name}
                         type="number"
+                        step="0.01"
                         onChange={(e)=>setCircumferenceDetails(prev => prev ? {...prev , [e.target.name]:e.target.value} : {[e.target.name]:e.target.value})} />
                 ))}
             </div>

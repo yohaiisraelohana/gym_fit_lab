@@ -6,6 +6,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import MinusIcon from "@/assets/icons/MinusIcon";
 import { revalidatePath } from "next/cache";
 import ChangeCard from "../changes/ChangeCard";
+import EditIcon from "@/assets/icons/EditIcon";
 
 export default function BodyStatus(
         {body_status , profile_id }:{
@@ -41,7 +42,13 @@ export default function BodyStatus(
         const {data , error} = await supabase
             .from("body_status")
             .upsert(
-                {...body_status_data , 
+                {
+                    img_url:body_status_data.img_url,
+                    target:body_status_data.target,
+                    activity:body_status_data.activity,
+                    age:body_status_data.age,
+                    height:body_status_data.height,
+                    weight:body_status_data.weight, 
                     created_at:current_date,
                     profile_id,
                     circumferences:circ_id
@@ -49,29 +56,33 @@ export default function BodyStatus(
             .select();
         console.log({data,error});
         setIsBodyStatusFrom(false);
-        revalidatePath("/account/trainee");
+        //revalidatePath("/account/trainee"); 
+        //!revalidate not working
     }
   return (
     <section className="flex flex-col gap-2 w-[77vw] rounded-md  ">
         <div className=" w-full flex justify-between items-center">
-            {is_body_status_form 
-                ? <MinusIcon 
-                    onClick={()=>setIsBodyStatusFrom(false)}
-                    classNameStyle="border border-white text h-5 w-5 cursor-pointer" /> 
-                : <PlusIcon 
-                    onClick={()=>setIsBodyStatusFrom(true)}
-                    classNameStyle="border border-white text h-5 w-5 cursor-pointer "/>
-            }
+            <div className="flex gap-2">
+                {is_body_status_form 
+                    ? <MinusIcon 
+                        onClick={()=>setIsBodyStatusFrom(false)}
+                        classNameStyle="border border-white text h-5 w-5 cursor-pointer" /> 
+                    : <PlusIcon 
+                        onClick={()=>setIsBodyStatusFrom(true)}
+                        classNameStyle="border border-white text h-5 w-5 cursor-pointer "/>
+                }
+                <EditIcon classNameStyle="h-5 w-5 border border-white text  cursor-pointer" />
+            </div>
             <h1 className=" text-xl text">{"השינוי הנוכחי"}</h1>
         </div>
         {/* Here will be a change component from type client */}
         {is_body_status_form ? 
-            <BodyStatusFrom saveBodyStatus={saveBodyStatus}/>
+            <BodyStatusFrom saveBodyStatus={saveBodyStatus} last_body_status={last_body_status}/>
             :
             ( is_body_status ? (
                 <ChangeCard 
                     existChange={[first_body_status!,last_body_status!]} 
-                    is_enable_actions={true}
+                    is_enable_actions={false}
                     />
                 ) : ( 
                 <div className="h-[100vw] rounded-sm w-full flex justify-center items-center shadow-md bg-white">
