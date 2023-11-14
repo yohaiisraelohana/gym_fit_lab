@@ -1,7 +1,7 @@
 "use client"
 import PlusIcon from "@/assets/icons/PlusIcon";
 import { useState } from "react";
-import BodyStatusFrom from "./BodyStatusFrom";
+import BodyStatusForm from "./BodyStatusForm";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import MinusIcon from "@/assets/icons/MinusIcon";
 import { revalidatePath } from "next/cache";
@@ -9,9 +9,9 @@ import ChangeCard from "../changes/ChangeCard";
 import EditIcon from "@/assets/icons/EditIcon";
 
 export default function BodyStatus(
-        {body_status , profile_id }:{
+        {body_status , profile }:{
             body_status : TBodyStatus[] | null;
-            profile_id : string ;
+            profile : TUser ;
         }) {
     const supabase = createClientComponentClient();
     const [is_body_status_form , setIsBodyStatusFrom] = useState<boolean>(false);//!set to false
@@ -19,7 +19,6 @@ export default function BodyStatus(
     const first_body_status = is_body_status ? body_status[0] : null;
     const last_body_status = is_body_status && body_status.length > 1 ? body_status[body_status.length -1] : null;
     const current_date = new Date().toISOString().substring(0,10);
-    console.log({first_body_status , last_body_status});
     
     const saveBodyStatus = async (body_status_data : TBodyStatus ,  circumferenceForm : TBodycircumference | null ) => {
         let circ_id : string | null = null;
@@ -50,11 +49,11 @@ export default function BodyStatus(
                     height:body_status_data.height,
                     weight:body_status_data.weight, 
                     created_at:current_date,
-                    profile_id,
+                    profile_id:profile.id,
                     circumferences:circ_id
                 },{onConflict:"created_at"})
             .select();
-        console.log({data,error});
+        
         setIsBodyStatusFrom(false);
         //revalidatePath("/account/trainee"); 
         //!revalidate not working
@@ -77,10 +76,11 @@ export default function BodyStatus(
         </div>
         {/* Here will be a change component from type client */}
         {is_body_status_form ? 
-            <BodyStatusFrom saveBodyStatus={saveBodyStatus} last_body_status={last_body_status}/>
+            <BodyStatusForm saveBodyStatus={saveBodyStatus} last_body_status={last_body_status}/>
             :
             ( is_body_status ? (
                 <ChangeCard 
+                    existProfile={profile}
                     existChange={[first_body_status!,last_body_status!]} 
                     is_enable_actions={false}
                     />
@@ -92,8 +92,8 @@ export default function BodyStatus(
             ) 
         }
         <button 
-            disabled={!is_body_status}
-            style={is_body_status ? {} : {opacity:'0.3'}}
+            disabled={!is_body_status || body_status.length < 2}
+            style={is_body_status && body_status.length > 2 ? {} : {opacity:'0.3'}}
             className="text-black bg-primary w-full p-1 rounded-sm mb-1">{"פרסם"}</button>
     </section>
   )

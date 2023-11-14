@@ -1,6 +1,7 @@
 import BmiCalculator from "@/components/calculators/BmiCalculator";
 import BmrCalculator from "@/components/calculators/BmrCalculator";
 import ServerRouter from "@/components/reusefull/ServerRouter";
+import BodyCalculators from "@/components/trainee/BodyCalculators";
 import BodyStatus from "@/components/trainee/BodyStatus";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
@@ -14,7 +15,7 @@ export default async function page() {
     }
     const {data:traineeData , error:traineeErr} = await supabase
       .from("profile")
-      .select("name , gender , id")
+      .select()
       .match({id:data.user?.id});
 
     
@@ -39,18 +40,10 @@ export default async function page() {
             <h1 className="title">{trainee.name}</h1>
             <p className="text-xl">{"!"} {"בוא נשיג את המטרות שלך"}</p>
         </section>
-        <BodyStatus body_status={body_status_data} profile_id={data.user.id} />
-        <section className="w-full flex flex-col justify-center items-center gap-1">
-            <BmrCalculator 
-                bmr_details={{
-                    height_provided:170,
-                    weight_provided:70,
-                    age_provided:21,
-                    gender_provided:"זכר",
-                    activity_provided:1
-                }} />
-            <BmiCalculator height_provided={170} weight_provided={70} />
-        </section>
+        <BodyStatus body_status={body_status_data} profile={trainee} />
+        <BodyCalculators 
+            gender={trainee.gender!}
+            body_status_details={body_status_data ? body_status_data[body_status_data.length -1] : null} />
         <section className="bg-white w-[77vw] h-[30vw] flex justify-center items-center">
                 <p className="text-black">ערכי תזונה יומיים</p>
         </section>

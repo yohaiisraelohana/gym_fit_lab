@@ -1,4 +1,6 @@
 'use client';
+import ChevronDownIcon from '@/assets/icons/ChevronDownIcon';
+import ChevronUpIcon from '@/assets/icons/ChevronUpIcon';
 import { TRAINER_DEFAULT_IMG } from '@/constants/defaultValues';
 import React, { useEffect, useState } from 'react'
 
@@ -31,12 +33,9 @@ export default function TrainerCard(
                   onClick={()=>setShowTrainerDetails(!showTrainerDetails)}
                   type='submit'
                   className="text-primary mr-auto md:hidden"
-                  > { showTrainerDetails ? 
-                      ( <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"> 
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />  
-                        </svg> ) : ( <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-                        </svg>  )}                                           
+                  > { showTrainerDetails 
+                      ? <ChevronUpIcon classNameStyle='h-6 w-6' /> 
+                      : <ChevronDownIcon classNameStyle='h-6 w-6'/> }                                           
                 </button>
                 <p className=" font-bold ml-auto text-lg">{trainer.profile?.name}</p>
               </div>

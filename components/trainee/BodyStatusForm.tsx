@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Select from '../reusefull/Select'
 import { target_options } from './target_options';
 import { activity_options } from '../calculators/activityOptions';
@@ -8,7 +8,7 @@ import { uploadSingleImgToCloudinary } from '@/services/cloudinary/uploadImage';
 import { validateImageFile } from '@/services/validations/validateInputs';
 
 
-export default function BodyStatusFrom(
+export default function BodyStatusForm(
         {saveBodyStatus , last_body_status}:{
             saveBodyStatus:(body_status_data : TBodyStatus ,  circumferenceForm : TBodycircumference | null)=>void;
             last_body_status?:TBodyStatus | null;
@@ -17,8 +17,6 @@ export default function BodyStatusFrom(
     const [selected_target , setSelectedTarget] = useState<number>(last_body_status 
         ? target_options.findIndex((option) => option.name == last_body_status.target) 
         : 0);
-
-        console.log({selected_target});
         
     const [selected_activity , setSelectedActivity] = useState<number>(last_body_status 
         ? last_body_status.activity! 
