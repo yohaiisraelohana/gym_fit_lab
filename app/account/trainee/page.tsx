@@ -1,8 +1,8 @@
 import BmiCalculator from "@/components/calculators/BmiCalculator";
 import BmrCalculator from "@/components/calculators/BmrCalculator";
 import ServerRouter from "@/components/reusefull/ServerRouter";
-import BodyCalculators from "@/components/trainee/BodyCalculators";
-import BodyStatus from "@/components/trainee/BodyStatus";
+import BodyCalculators from "@/components/trainee/body_status/BodyCalculators";
+import BodyStatus from "@/components/trainee/body_status/BodyStatus";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
@@ -30,7 +30,8 @@ export default async function page() {
         .select()
         .match({
             profile_id:data.user.id,
-        });
+        })
+        .order("created_at",{ascending:true});
 
 
     

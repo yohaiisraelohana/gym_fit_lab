@@ -1,7 +1,8 @@
-import ChevronDownIcon from "@/assets/icons/ChevronDownIcon";
+"use client"
+import { useState } from "react";
 import { activity_options } from "../calculators/activityOptions";
 import UserProfileImg from "../navbar/UserProfileImg";
-import ChevronUpIcon from "@/assets/icons/ChevronUpIcon";
+import ChangeCircumferencesDetails from "./ChangeCircumferencesDetails";
 
 export default function ChangeDetails(
     {change_profile , before_change , after_change }:{
@@ -9,12 +10,15 @@ export default function ChangeDetails(
         before_change : TBodyStatus ;
         after_change : TBodyStatus ;
     }) {
+        const [show_circ , setShowCirc ] = useState<boolean>(false);
   return (
-    <div className="h-[100vw] w-full flex flex-col gap-4 justify-center items-center">
+    <div className=" max-h-[100vw] overflow-scroll py-4 w-full flex flex-col gap-3  justify-center items-center">
         <div className="flex flex-col items-center">
             <UserProfileImg profile_img={change_profile.profile_img} handleClick={()=>console.log("")} />
             <h2 className='text-xl'>{change_profile.name}</h2>
         </div>
+        
+        { !show_circ && 
         <div className="w-full grid grid-cols-2 gap-y-3">
             
             <h2 className="text-lg text-center font-bold">{"אחרי"}</h2>
@@ -50,11 +54,12 @@ export default function ChangeDetails(
             <p className="text-center">פעילות {activity_options[ after_change.activity!].name}</p>
             <p className="text-center">פעילות {activity_options[before_change.activity!].name}</p>
 
-        </div>
-        <button 
-            className="w-full text-center flex justify-center items-center gap-1"
-            ><ChevronUpIcon classNameStyle="h-4 w-4 " /> <p>היקפים</p> 
-        </button>
+        </div>}
+        <ChangeCircumferencesDetails 
+            setShowCirc={(s)=>setShowCirc(s)}
+            show_circ={show_circ} 
+            before_circ_id={before_change.id!} 
+            after_circ_id={after_change.id!} />
     </div> 
   )
 }

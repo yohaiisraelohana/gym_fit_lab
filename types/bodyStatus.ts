@@ -2,7 +2,6 @@ type TBodyStatus = {
     id? : string;
     profile_id? : string;
     created_at? : string;
-    circumferences ? : string;
     target? : string ;
     activity? : number;
     height? : number;

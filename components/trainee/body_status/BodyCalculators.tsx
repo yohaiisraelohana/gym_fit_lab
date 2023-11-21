@@ -1,5 +1,5 @@
-import BmiCalculator from "../calculators/BmiCalculator";
-import BmrCalculator from "../calculators/BmrCalculator";
+import BmiCalculator from "../../calculators/BmiCalculator";
+import BmrCalculator from "../../calculators/BmrCalculator";
 
 export default function BodyCalculators(
     { body_status_details , gender }:{

@@ -1,9 +1,9 @@
 "use client"
 import React, { useState } from 'react'
-import Select from '../reusefull/Select'
-import { target_options } from './target_options';
-import { activity_options } from '../calculators/activityOptions';
-import UploadImageButton from '../reusefull/UploadImageButton';
+import Select from '../../reusefull/Select'
+import { target_options } from '../target_options';
+import { activity_options } from '../../calculators/activityOptions';
+import UploadImageButton from '../../reusefull/UploadImageButton';
 import { uploadSingleImgToCloudinary } from '@/services/cloudinary/uploadImage';
 import { validateImageFile } from '@/services/validations/validateInputs';
 
