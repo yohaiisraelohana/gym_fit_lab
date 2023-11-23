@@ -14,24 +14,24 @@ export default function BodyStatusTable(
         <table className="table-fixed bg-white w-fit">
             <thead>
               <tr>
-                <th className='w-[100px]'>{"תאריך"}</th>
-                <th className='w-[50px]'>{"גובה"}</th>
-                <th className='w-[50px]'>{"משקל"}</th>
-                <th className='w-[40px]'>{"גיל"}</th>
-                <th className='w-[80px]'>{"פעילות"}</th>
-                <th className='w-[100px]'>{"מטרה"}</th>
-                <th className='w-[50px]'>{"עריכה"}</th>
+                <th className='sm:w-[120px] w-[100px]'>{"תאריך"}</th>
+                <th className='sm:w-[70px] w-[50px]'>{"גובה"}</th>
+                <th className='sm:w-[70px] w-[50px]'>{"משקל"}</th>
+                <th className='sm:w-[50px] w-[40px]'>{"גיל"}</th>
+                <th className='sm:w-[100px] w-[80px]'>{"פעילות"}</th>
+                <th className='sm:w-[130px] w-[120px]'>{"מטרה"}</th>
+                <th className='sm:w-[50px] w-[50px]'>{"עריכה"}</th>
               </tr>
             </thead>
             <tbody>
               {body_status_list.map((bs , ind)=>(
-                <tr key={ind}>
-                  <td className='text-center'>{bs.created_at}</td>
-                  <td className='text-center'>{bs.height}</td>
-                  <td className='text-center'>{bs.weight}</td>
-                  <td className='text-center'>{bs.age}</td>
-                  <td className='text-center'>{activity_options[bs.activity!].name}</td>
-                  <td className='text-center'>{bs.target}</td>
+                <tr key={ind} >
+                  <td className='text-center py-3'>{bs.created_at}</td>
+                  <td className='text-center py-3'>{bs.height}</td>
+                  <td className='text-center py-3'>{bs.weight}</td>
+                  <td className='text-center py-3'>{bs.age}</td>
+                  <td className='text-center py-3'>{activity_options[bs.activity!].name}</td>
+                  <td className='text-center py-3'>{bs.target}</td>
                   <td 
                     onClick={()=>handleEdit(bs)}
                     className='pr-3'>

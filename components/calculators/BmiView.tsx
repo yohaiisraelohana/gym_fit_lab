@@ -1,7 +1,11 @@
 import ArrowIcon from '@/assets/icons/ArrowIcon'
 import React from 'react'
 
-export default function BmiView({bmi}:{bmi:number}) {
+export default function BmiView(
+        {bmi , bmi_view_style}:{
+            bmi:number;
+            bmi_view_style?:{height:string , width:string};
+        }) {
     const bmiLevels = [
         {mr:37,mb:-23,r:-90},//0
         {mr:37,mb:-21,r:-86},
@@ -51,7 +55,9 @@ export default function BmiView({bmi}:{bmi:number}) {
     ];
   return (
         <div className=" relative flex items-end justify-center">
-            <div className="h-[130px] w-[260px] sm:h-[100px] sm:w-[200px] md:h-[150px] md:w-[300px] lg:h-[200px] lg:w-[400px] bg-gradient-to-r from-blue-600 via-[var(--primary)]  via-50% from-5% to-95% to-red-600 rounded-tl-full rounded-tr-full"></div>
+            <div 
+                style={bmi_view_style ? {height:bmi_view_style.height , width:bmi_view_style.width} : {}}
+                className={"h-[130px] w-[260px] sm:h-[100px] sm:w-[200px] md:h-[150px] md:w-[300px] lg:h-[200px] lg:w-[400px] bg-gradient-to-r from-blue-600 via-[var(--primary)]  via-50% from-5% to-95% to-red-600 rounded-tl-full rounded-tr-full"}></div>
             <div className=" absolute bottom-0 w-[70%] h-[70%] bg-white rounded-tl-full rounded-tr-full"></div>
             <ArrowIcon style={{marginBottom:`${bmiLevels[bmi].mb}%`,marginRight:`${bmiLevels[bmi].mr}%`,rotate:`${bmiLevels[bmi].r}deg`,transition:'all 1s ease-in-out'}} classNameStyle={`text-background h-[100%] w-[60%] absolute`} />            
         </div>

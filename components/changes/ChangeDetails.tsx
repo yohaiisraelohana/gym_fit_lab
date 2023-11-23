@@ -12,7 +12,7 @@ export default function ChangeDetails(
     }) {
         const [show_circ , setShowCirc ] = useState<boolean>(false);
   return (
-    <div className=" max-h-[100vw] overflow-scroll py-4 w-full flex flex-col gap-3  justify-center items-center">
+    <div className=" max-h-[100vw] md:max-h-[50vw] overflow-scroll py-4 w-full flex flex-col gap-3  justify-center items-center">
         <div className="flex flex-col items-center">
             <UserProfileImg profile_img={change_profile.profile_img} handleClick={()=>console.log("")} />
             <h2 className='text-xl'>{change_profile.name}</h2>

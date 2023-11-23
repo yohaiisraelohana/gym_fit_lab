@@ -106,7 +106,7 @@ export default function BodyStatus(
     };
 
   return (
-    <section className="flex flex-col gap-2 w-[77vw] rounded-md relative  ">
+    <section className="flex flex-col gap-2 w-[77vw] md:w-[85vw] lg:w-[50vw] lg:order-2 rounded-md relative  ">
         {loading && <LoadingDumbbells  />}
 
         <BodyStatusHeader shown_details={shown_details} setShownDetails={setShownDetails} />

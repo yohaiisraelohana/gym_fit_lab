@@ -11,7 +11,11 @@ type TBmrDetails = {
     activity_provided?:number;
 }
 
-export default function BmrCalculator({bmr_details}:{bmr_details?:TBmrDetails}) {
+export default function BmrCalculator(
+    {bmr_details , bmr_style}:{
+        bmr_details?:TBmrDetails;
+        bmr_style?:{height:string , width:string};
+    }) {
 
     const [ bmr , setBmr ] = useState<number>(0);
     const [gender , setGender ] = useState<string>("זכר");
@@ -54,7 +58,7 @@ export default function BmrCalculator({bmr_details}:{bmr_details?:TBmrDetails}) 
     },[bmr_details])
 
   return (
-    <div className=' bg-white h-full p-[20px] rounded-md w-[300px] z-10 sm:w-[240px] md:w-[340px] lg:w-[440px] flex flex-col justify-between max-md:gap-6 text-background'>
+    <div style={{...bmr_style}} className={' bg-white h-full p-[20px] rounded-md w-[300px] z-10 sm:w-[240px] md:w-[340px] lg:w-[440px] flex flex-col justify-between max-md:gap-6 text-background'}>
         <div className=" flex justify-between text-3xl">
             <h1 className='text-black'>BMR</h1>
             <p className=' text-primary'>{bmr}</p>

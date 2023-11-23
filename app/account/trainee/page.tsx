@@ -1,5 +1,3 @@
-import BmiCalculator from "@/components/calculators/BmiCalculator";
-import BmrCalculator from "@/components/calculators/BmrCalculator";
 import ServerRouter from "@/components/reusefull/ServerRouter";
 import BodyCalculators from "@/components/trainee/body_status/BodyCalculators";
 import BodyStatus from "@/components/trainee/body_status/BodyStatus";
@@ -36,24 +34,41 @@ export default async function page() {
 
     
   return (
-    <div className="flex flex-col w-screen justify-center items-center gap-8">
-        <section className="text-white text-center">
-            <h1 className="title">{trainee.name}</h1>
-            <p className="text-xl">{"!"} {"בוא נשיג את המטרות שלך"}</p>
-        </section>
+    <div className="
+      w-screen flex justify-center items-center
+      max-lg:flex-col  max-lg:gap-8
+      lg:flex-wrap  lg:gap-[3vw] 
+      xl:gap-[2vw]"
+      >
+
+
         <BodyStatus body_status={body_status_data} profile={trainee} />
-        <BodyCalculators 
-            gender={trainee.gender!}
-            body_status_details={body_status_data ? body_status_data[body_status_data.length -1] : null} />
-        <section className="bg-white w-[77vw] h-[30vw] flex justify-center items-center">
-                <p className="text-black">ערכי תזונה יומיים</p>
-        </section>
-        <section className="bg-white w-[77vw] h-[30vw] flex justify-center items-center">
-                <p className="text-black">גרפים</p>
-        </section>
-        <section className="bg-white w-[77vw] h-[30vw] flex justify-center items-center">
-                <p className="text-black">תוכנית אימון</p>
-        </section>
+        <div className="w-[77vw] lg:w-[20vw] flex flex-col justify-center items-center gap-8 ">
+          <section className=" flex flex-col justify-center items-center w-full h-[20vw] ">
+                <h3 className="text text-xl w-full text-end px-2 py-1"> תזונה יומית</h3>
+                <div className="text-black h-full bg-white w-full rounded-md">
+                </div>
+          </section>
+          <section className="  flex flex-col justify-center items-center w-full h-[20vw] ">
+                <h3 className="text text-xl w-full text-end px-2 py-1"> תוכניות אימון</h3>
+                <div className="text-black h-full bg-white w-full rounded-md">
+                </div>
+          </section>
+        </div>
+
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 max-lg:gap-x-4 lg:order-3 lg:grid-cols-1 lg:w-[20vw]">
+          <BodyCalculators 
+              gender={trainee.gender!}
+              body_status_details={body_status_data ? body_status_data[body_status_data.length -1] : null} />
+          <section className=" 
+            w-[77vw] flex flex-col justify-center items-center
+            md:w-full
+            lg:h-[20vw] ">
+                <h3 className="text text-xl w-full text-end px-2 py-1"> גרפים</h3>
+                <div className="text-black h-full bg-white w-full rounded-md">
+                </div>
+          </section>
+        </div>
     </div>
 
   )

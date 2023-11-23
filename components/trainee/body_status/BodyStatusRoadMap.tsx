@@ -18,13 +18,11 @@ export default function BodyStatusRoadMap(
                             ? <img 
                                 src={bs.img_url} 
                                 alt="bs image" className={
-                                    change_data?.before_id == bs.id
-                                    ? "h-[90px] w-full border-2 border-primary"
-                                    : change_data?.after_id == bs.id 
-                                        ? "h-[90px] w-full border-2 border-primary"
-                                        :"h-[90px] w-full border-2 border-background"
+                                    (change_data?.before_id == bs.id || change_data?.after_id == bs.id )
+                                        ? "h-[25vw] w-full border-2 border-primary"
+                                        :"h-[25vw] w-full border-2 border-background"
                                 } /> 
-                            : <div className="h-[90px] w-full bg-white border-2 border-background"></div> }
+                            : <div className="h-[25vw] w-full bg-white border-2 border-background"></div> }
                             {bs.id == change_data?.before_id 
                                 && <p className=" absolute bg-white/30 backdrop-blur-sm px-1 z-10 rounded-sm h-fit w-fit text inset-[50%] translate-x-[50%] translate-y-[-70%]">לפני</p> }
                             {bs.id == change_data?.after_id

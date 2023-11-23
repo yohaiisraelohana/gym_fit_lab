@@ -1,8 +1,14 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { CSSProperties, useEffect, useState } from 'react'
 import BmiView from './BmiView';
 
-export default function BmiCalculator({height_provided,weight_provided}:{height_provided?:number,weight_provided?:number}) {
+export default function BmiCalculator(
+    {height_provided,weight_provided , bmi_view_style}:{
+        height_provided?:number,
+        weight_provided?:number,
+        bmi_view_style?:{height:string , width:string};
+        bmi_style?:CSSProperties;
+    }) {
     const [bmi , setBmi ] = useState<number>(0); 
     const [ weight , setWeight ] = useState<number | null>(null);
     const [ height , setHeight ] = useState<number | null>(null);
@@ -29,13 +35,13 @@ export default function BmiCalculator({height_provided,weight_provided}:{height_
     },[height_provided,weight_provided]);
     
   return (
-    <div className='flex flex-col bg-white p-[20px] gap-4 rounded-md text-background'>
+    <div  className='flex flex-col bg-white p-[20px] gap-4 rounded-md text-background'>
         <div className="w-full flex justify-between text-3xl">
             <h1 className=''>BMI</h1>
             <p className=' text-primary '>{bmi}</p>
         </div>
         
-        <BmiView bmi={bmi}/>
+        <BmiView bmi_view_style={bmi_view_style} bmi={bmi}/>
         {
         existDetails 
         ?

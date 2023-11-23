@@ -68,7 +68,7 @@ export default function BodyStatusForm(
   return (
     <form
         onSubmit={handleSaveBodyStatus}
-        className='min-h-[100vw] overflow-y-auto rounded-sm w-full gap-4 py-4 flex flex-col  justify-evenly items-center shadow-md bg-white px-[4vw]' >
+        className='min-h-[100vw] md:min-h-[70vw] overflow-y-auto rounded-sm w-full gap-4 py-4 flex flex-col  justify-evenly items-center shadow-md bg-white px-[4vw]' >
         <h1 className='text-xl'>הוסף סטטוס גוף עדכני</h1>
         {preview_img && <img src={preview_img} className='w-full h-[100vw]' alt="previw img" /> }
         {form_error && <h2 className='border border-red-600 text-red-600 text-lg'>{form_error}</h2>}
@@ -109,7 +109,7 @@ export default function BodyStatusForm(
             }}/>
 
         <UploadImageButton 
-            classStyleLable= "px-[49.5%] sm:px-[19vw] md:px-[16.5vw] lg:px-[14vw] z-10 max-w-[80vw] border border-background p-1 rounded-sm cursor-pointer font-bold hover:bg-white/40"
+            classStyleLable= "px-[49.5%]  z-10 max-w-[80vw] border border-background p-1 rounded-sm cursor-pointer font-bold hover:bg-white/40"
             classStyleText="text-black  absolute inset-[50%]  translate-x-[-30%] w-[100px] top-0 z-10 "
             handleImageInput={(e)=>{
                 const file = e.target.files ? e.target.files[0] : null ;
