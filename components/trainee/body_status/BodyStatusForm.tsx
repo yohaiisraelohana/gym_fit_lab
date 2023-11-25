@@ -68,9 +68,25 @@ export default function BodyStatusForm(
   return (
     <form
         onSubmit={handleSaveBodyStatus}
-        className='min-h-[100vw] md:min-h-[70vw] overflow-y-auto rounded-sm w-full gap-4 py-4 flex flex-col  justify-evenly items-center shadow-md bg-white px-[4vw]' >
-        <h1 className='text-xl'>הוסף סטטוס גוף עדכני</h1>
-        {preview_img && <img src={preview_img} className='w-full h-[100vw]' alt="previw img" /> }
+        className='
+            min-h-[100vw] w-full py-4 px-[4vw]
+            overflow-y-auto rounded-sm shadow-md bg-white
+            gap-4 flex max-md:flex-col justify-evenly items-center
+            md:min-h-[55vw] md:flex-wrap md:px-[2vw] md:gap-2 md:py-2
+            lg:min-h-[43vw]' >
+        <h1 className='text-xl md:w-full md:text-center'>הוסף סטטוס גוף עדכני</h1>
+
+        {preview_img  
+            && <img 
+                src={preview_img} 
+                className="
+                    w-full  h-[100vw] 
+                    md:w-[43%] md:h-[372px]
+                    lg:h-[408px]" 
+                alt="previw img" /> }
+
+        <div className="flex flex-col justify-evenly items-center gap-4 lg:gap-6 w-full md:w-1/2">
+        
         {form_error && <h2 className='border border-red-600 text-red-600 text-lg'>{form_error}</h2>}
         <div className="grid grid-cols-3 w-full gap-x-4">
             {[
@@ -151,6 +167,7 @@ export default function BodyStatusForm(
             className='p-1 shadow-md w-full bg-primary'>
             שמור
         </button>
+        </div>
     </form>
   )
 }

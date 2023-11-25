@@ -7,7 +7,11 @@ export default function BodyStatusRoadMap(
             handleClick : (bs:TBodyStatus) => void;
         }) {
   return (
-    <div dir="rtl" className="grid grid-cols-3 bg-white gap-[4vw] p-[4vw] ">
+    <div dir="rtl" 
+        className="
+            grid grid-cols-3 bg-white gap-[4vw] p-[4vw] 
+            md:p-[2vw] md:gap-[2vw] md:grid-cols-4 
+            lg:grid-cols-3 ">
                 {/* body_status road */}
                 {body_status_list.map((bs)=>(
                     <div
@@ -19,10 +23,10 @@ export default function BodyStatusRoadMap(
                                 src={bs.img_url} 
                                 alt="bs image" className={
                                     (change_data?.before_id == bs.id || change_data?.after_id == bs.id )
-                                        ? "h-[25vw] w-full border-2 border-primary"
-                                        :"h-[25vw] w-full border-2 border-background"
+                                        ? "h-[25vw] lg:h-[20vw]  w-full border-2 border-primary"
+                                        :"h-[25vw]  lg:h-[20vw] w-full border-2 border-background"
                                 } /> 
-                            : <div className="h-[25vw] w-full bg-white border-2 border-background"></div> }
+                            : <div className="h-[25vw] lg:h-[20vw] w-full bg-white border-2 border-background"></div> }
                             {bs.id == change_data?.before_id 
                                 && <p className=" absolute bg-white/30 backdrop-blur-sm px-1 z-10 rounded-sm h-fit w-fit text inset-[50%] translate-x-[50%] translate-y-[-70%]">לפני</p> }
                             {bs.id == change_data?.after_id

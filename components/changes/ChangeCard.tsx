@@ -36,6 +36,7 @@ export default function ChangeCard(
   return (
     <div className={` 
         h-[107vw] w-full   bg-white shadow-md rounded-sm   relative   flex flex-col justify-between
+        sm:h-[77vw]
         md:h-[55vw]
         lg:h-[43vw]`}>
 
@@ -43,16 +44,16 @@ export default function ChangeCard(
         {   
             change_show == "לפני"  
             && before_change 
-            && <img className='md:hidden h-[100vw] w-full bg-black/30 text text-center' src={before_change.img_url!} alt="before change" /> 
+            && <img className='md:hidden h-[100vw] sm:h-[72vw] w-full bg-black/30 text text-center' src={before_change.img_url!} alt="before change" /> 
         }
         {
             change_show == "אחרי"
             &&
             (is_exist_change 
                 ? (after_change
-                    ? <img className='md:hidden h-[100vw]  w-full bg-black/30 text text-center' src={after_change.img_url!} alt="תמונת אחרי השינוי" /> 
-                    : <div className="md:hidden h-[100vw] w-full bg-white text-background text-center pt-[40%] px-6">{"לא קיימים נתונים לאחרי השינוי , הזן מינימום שני סטטוסי גוף בתאריכים שונים"}</div>)
-                : after_change && <img className='md:hidden h-[100vw] w-full bg-black/30 text text-center' src={after_change.img_url!} alt="תמונת אחרי השינוי" /> )
+                    ? <img className='md:hidden h-[100vw] sm:h-[72vw]  w-full bg-black/30 text text-center' src={after_change.img_url!} alt="תמונת אחרי השינוי" /> 
+                    : <div className="md:hidden h-[100vw] sm:h-[72vw] w-full bg-white text-background text-center pt-[40%] px-6">{"לא קיימים נתונים לאחרי השינוי , הזן מינימום שני סטטוסי גוף בתאריכים שונים"}</div>)
+                : after_change && <img className='md:hidden h-[100vw] sm:h-[72vw] w-full bg-black/30 text text-center' src={after_change.img_url!} alt="תמונת אחרי השינוי" /> )
         }
 
 
@@ -64,7 +65,7 @@ export default function ChangeCard(
             && <img 
                 className=" 
                     h-[100vw] w-full bg-black/30 text text-center
-                    md:h-[50vw] md:w-1/2
+                    md:h-[52vw] md:w-1/2
                     lg:h-[40vw]" 
                 src={before_change.img_url!} 
                 alt="before change" /> 
@@ -75,17 +76,17 @@ export default function ChangeCard(
                 ? (after_change
                     ? <img className=" 
                         h-[100vw]  w-full bg-black/30 text text-center
-                        md:h-[50vw] md:w-1/2
+                        md:h-[52vw] md:w-1/2
                         lg:h-[40vw]" src={after_change.img_url!} alt="תמונת אחרי השינוי" /> 
                     : <div className=" 
                         h-[100vw]  w-full bg-white text-background text-center pt-[40%] px-6
-                        md:h-[50vw] md:w-1/2
+                        md:h-[52vw] md:w-1/2
                         lg:h-[40vw]">{"לא קיימים נתונים לאחרי השינוי , הזן מינימום שני סטטוסי גוף בתאריכים שונים"}</div>)
                 : after_change && 
                     <img 
                         className=" 
                             h-[100vw] w-full bg-black/30 text text-center
-                            md:h-[50vw] md:w-1/2
+                            md:h-[52vw] md:w-1/2
                             lg:h-[40vw]" src={after_change.img_url!} alt="תמונת אחרי השינוי" /> )
         }
         </div>
@@ -103,7 +104,7 @@ export default function ChangeCard(
 
 
         <p className='text top-1 right-2 bg-white/30 px-1 rounded-sm backdrop-blur-sm absolute md:hidden'>{change_show}</p>
-        <div className=" w-full px-[2vw] bg-white h-[7vw] md:h-[5vw] lg:h-[3vw] text-black   flex justify-evenly items-center">
+        <div className=" w-full px-[2vw] bg-white h-[7vw] md:h-[3vw]  text-black   flex justify-evenly items-center">
             {!is_exist_change ? <ShareIcon classNameStyle='h-6 w-6 cursor-pointer  text-gray-700'/> : <p className='h-6 w-6'></p> }
             {!is_exist_change ? <BookmarkIcon classNameStyle='h-6 w-6 cursor-pointer text-blue-600' /> : <p className='h-6 w-6'></p> }
             <ChevronLeftIcon classNameStyle=' h-6 w-6 cursor-pointer md:hidden' onClick={()=>setChangeShow("לפני")} />

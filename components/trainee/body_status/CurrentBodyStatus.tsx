@@ -17,7 +17,7 @@ export default function CurrentBodyStatus(
                     existChange={[first_body_status!,last_body_status!]} 
                     />
             ) : ( 
-                <div className="h-[100vw] md:h-[50vw] rounded-sm w-full flex justify-center items-center shadow-md bg-white">
+                <div className="h-[100vw] md:h-[50vw] lg:h-[45vw] rounded-sm w-full flex justify-center items-center shadow-md bg-white">
                     <p className='text-black'>מלא סטטוס גוף כדי לראות את השינוי שלך</p>
                     <button></button>
                 </div> 

@@ -8,18 +8,13 @@ import CurrentBodyStatus from "./CurrentBodyStatus";
 import BodyStatusTable from "./BodyStatusTable";
 import PublishBodyStatus from "./PublishBodyStatus";
 
-export default function BodyStatus(
-        {body_status , profile }:{
-            body_status : TBodyStatus[] | null;
-            profile : TUser ;
-        }) {
+export default function BodyStatus({body_status , profile }:{ body_status : TBodyStatus[] | null; profile : TUser ;}) {
     const supabase = createClientComponentClient();
     const is_body_status : boolean = body_status != null && body_status.length > 0;
     const is_valid_change : boolean = is_body_status && body_status!.length >= 2 ;
     const first_body_status = is_body_status ? body_status![0] : null;
     const last_body_status = is_body_status && is_valid_change ? body_status![body_status!.length -1] : null;
     const current_date = new Date().toISOString().substring(0,10);
-
 
     const [shown_details , setShownDetails] = useState<string>("השינוי הנוכחי");
     const [loading , setLoading ] = useState<boolean>(false);
@@ -28,10 +23,6 @@ export default function BodyStatus(
     const [body_status_trainers , setBodyStatusTrainers ] = useState<TTrainer[] >([]);
 
 
-
-
-    
-    
     const saveBodyStatus = async (body_status_data : TBodyStatus ,  circumferenceForm : TBodycircumference | null ) => {
         setLoading(true);
 
@@ -106,18 +97,16 @@ export default function BodyStatus(
     };
 
   return (
-    <section className="flex flex-col gap-2 w-[77vw] md:w-[85vw] lg:w-[50vw] lg:order-2 rounded-md relative  ">
+    <section className="flex flex-col   gap-2 w-[77vw] md:w-[85vw] lg:w-[50vw] lg:order-2 rounded-md relative  ">
         {loading && <LoadingDumbbells  />}
-
         <BodyStatusHeader shown_details={shown_details} setShownDetails={setShownDetails} />
 
-        {/* { THE FORM COMPONENT } */}
+        <div className="h-fit  w-full flex flex-col gap-2">
         { shown_details == "הוספת סטטוס גוף"
             && <BodyStatusForm 
                 saveBodyStatus={saveBodyStatus} 
                 last_body_status={last_body_status}/>}
 
-        {/* { THE CHANGE CARD } */}
         { shown_details == "השינוי הנוכחי" 
             && <CurrentBodyStatus 
                 is_body_status={is_body_status} 
@@ -133,7 +122,6 @@ export default function BodyStatus(
                 }}
                 body_status_list={body_status} />}
 
-
         { shown_details == "עריכת סטטוס גוף"
             && edit_body_status
             && <BodyStatusForm 
@@ -146,6 +134,7 @@ export default function BodyStatus(
                 change_data={change_data}
                 setChangeData={setChangeData}
                 body_status_list={body_status} />)}
+        </div>
         <button 
             disabled={!is_body_status || !is_valid_change || loading}
             style={(!is_body_status || !is_valid_change || loading) ?  {opacity:'0.3'} : {}}
@@ -166,6 +155,7 @@ export default function BodyStatus(
                         : "המשך"
                 }
             </button>
+
     </section>
   )
 }

@@ -9,9 +9,9 @@ export default function BodyStatusTable(
 ) {
     
   return (
-    <div dir="rtl" className="  h-[100vw] w-full overflow-auto bg-white/30 backdrop-blur-sm">
+    <div dir="rtl" className="  h-[100vw] sm:h-[80vw] md:h-[55vw] lg:h-[43vw]  w-full overflow-auto bg-white/30 backdrop-blur-sm">
       {  body_status_list ?
-        <table className="table-fixed bg-white w-fit">
+        <table className="table-fixed bg-white w-fit sm:w-full">
             <thead>
               <tr>
                 <th className='sm:w-[120px] w-[100px]'>{"תאריך"}</th>

@@ -37,8 +37,9 @@ export default async function page() {
     <div className="
       w-screen flex justify-center items-center
       max-lg:flex-col  max-lg:gap-8
-      lg:flex-wrap  lg:gap-[3vw] 
-      xl:gap-[2vw]"
+      lg:flex-wrap  lg:gap-x-[3vw] lg:mt-[4vw]
+      xl:gap-x-[2vw] xl:mt-[0.5vw] 
+      2xl:mt-[1vw]"
       >
 
 
@@ -63,7 +64,8 @@ export default async function page() {
           <section className=" 
             w-[77vw] flex flex-col justify-center items-center
             md:w-full
-            lg:h-[20vw] ">
+            lg:h-[20vw]
+            xl:h-[22vw] ">
                 <h3 className="text text-xl w-full text-end px-2 py-1"> גרפים</h3>
                 <div className="text-black h-full bg-white w-full rounded-md">
                 </div>
