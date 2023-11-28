@@ -6,6 +6,7 @@ import ExercisesPrewievBanner from '@/components/exercises/ExercisesPrewievBanne
 import ManBodyButtons from '@/components/exercises/ManBodyButtons'
 import Calculators from '@/components/calculators/Calculators'
 import CalcMeal from '@/components/meals/CalcMeal'
+import ChangesPreviewBanner from '@/components/changes/ChangesPreviewBanner'
 
 export const dynamic = 'force-dynamic'
 
@@ -20,6 +21,7 @@ export default async function Index() {
       <Banner/>
       <TrainersPreviewBanner/>
       <ExercisesPrewievBanner/>
+      <ChangesPreviewBanner />
       <ManBodyButtons/>
       <Calculators/>
       <CalcMeal/>

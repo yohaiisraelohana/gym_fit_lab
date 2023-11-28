@@ -1,8 +1,11 @@
 import MailIcon from '@/assets/icons/MailIcon'
 import Messages from './messages'
 import LockIcon from '@/assets/icons/LockIcon'
+import EmailInput from '@/components/Login/EmailInput'
+
 
 export default function Login() {
+    
   return (
     <div className="flex flex-col w-full px-8  h-[80vh] justify-center">
       <form
@@ -13,12 +16,7 @@ export default function Login() {
         <label className="text-lg" htmlFor="email">
           אימייל
         </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-2 text-end"
-          name="email"
-          placeholder="you@example.com"
-          required
-        />
+        <EmailInput />
         <MailIcon classNameStyle='h-5 w-5 text mt-[-47px] mb-[30px] ml-2' />
 
         <label className="text-lg" htmlFor="password">

@@ -8,11 +8,14 @@ import ProfileForm from './ProfileForm';
 import { uploadSingleImgToCloudinary } from '@/services/cloudinary/uploadImage';
 import { useRouter } from 'next/navigation';
 import { deleteSingleImageFromCloudinary } from '@/services/cloudinary/deleteImage';
+import LoadingDumbbells from '../reusefull/LoadingDumbbells';
 
 export default function EditProfile() {
     const { user , updateUser , error:userError } = userStore();
     const [ error , setError] = useState<TError | null>(null);
+    const [loading , setLoading ] = useState<boolean>(false);
     const router = useRouter();
+  
     
     useEffect(()=>{
       if(!user){
@@ -22,6 +25,7 @@ export default function EditProfile() {
       },[userError,user]);
 
     const hundleSubmit = async (newUser:TUser, new_profile_img : File | null) => {
+      setLoading(true);
       setError(null);
       if(!newUser.name || newUser.name.length == 0)
         return setError({error:"name is required" , message:"שדה שם משתמש הינו חובה"});
@@ -31,26 +35,39 @@ export default function EditProfile() {
       if (new_profile_img != null) {
         if(profile.profile_img){
           const deleteRes = await deleteSingleImageFromCloudinary(profile.profile_img);
-          if(typeof deleteRes !== "string")
+          if(typeof deleteRes !== "string"){
             setError(deleteRes);
+            setLoading(false);
+            return;
+          };
         }
         const uploadRes : any | TCldRes | TError = await uploadSingleImgToCloudinary(new_profile_img);
-        if(!("secure_url" in uploadRes))
-          return setError(uploadRes);
+        if(!("secure_url" in uploadRes)){
+          setError(uploadRes);
+          setLoading(false);
+          return;
+        }
         profile.profile_img = uploadRes.secure_url;
       };
 
       const userRes = await updateUser(profile);
 
-      if(typeof userRes !== "string" && "error" in userRes)
-        return setError({error:userRes.error, message:userRes.message});
-
+      if(typeof userRes !== "string" && "error" in userRes){
+        setError({error:userRes.error, message:userRes.message});
+        setLoading(false);
+        return ;
+      }
+      setLoading(false);
       router.push('/account');
     }
 
 
   return (
-    <ProfileForm user={user} error={error} hundleSubmit={hundleSubmit}  />
+    <>
+      {loading && <LoadingDumbbells/>}
+      <ProfileForm user={user} error={error} hundleSubmit={hundleSubmit}  />
+    </>
+    
   )
 }
 

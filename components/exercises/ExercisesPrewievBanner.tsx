@@ -13,7 +13,7 @@ export default async function ExercisesPrewievBanner() {
     if(!data || sRes.error)
         return <></>;
   return (
-    <div className='text mt-2 flex max-md:flex-col items-center gap-2 max-w-[100vw] lg:px-6 xl:pr-10 bg-gradient-to-b from-background to-neutral-300 from-20% border-b-2 border-primary '>
+    <div className='text py-2 flex max-md:flex-col items-center gap-2 max-w-[100vw] lg:px-6 xl:pr-10 bg-gradient-to-b from-background to-neutral-300 from-20% border-b-2 border-primary '>
 
         <div className="flex flex-col items-center justify-center md:mt-[-100px] ">
             <Image 

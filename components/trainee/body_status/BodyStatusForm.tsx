@@ -88,7 +88,15 @@ export default function BodyStatusForm(
         <div className="flex flex-col justify-evenly items-center gap-4 lg:gap-6 w-full md:w-1/2">
         
         {form_error && <h2 className='border border-red-600 text-red-600 text-lg'>{form_error}</h2>}
+
         <div className="grid grid-cols-3 w-full gap-x-4">
+            {
+                [
+                    {placeholder : "גובה" , name : "height"},
+                    {placeholder :"גיל" , name : "age"},
+                    {placeholder : "משקל" , name : "weight"}
+                ].map((l)=>( <p className='text-center'>{l.placeholder}</p> ))
+            }
             {[
                 {placeholder : "גובה" , name : "height"},
                 {placeholder :"גיל" , name : "age"},
@@ -105,24 +113,30 @@ export default function BodyStatusForm(
                         name={option.name} />
                 ))}
         </div>
-        <Select 
-            select_options={target_options} 
-            selected_index={selected_target} 
-            handleSelect={(e)=>{
-                setSelectedTarget(Number(e.target.value));
-                setBodyStatusDetails(prev => ( {...prev , target:target_options[Number(e.target.value)].name } ));
-            }}/>
-        <Select
-            select_options={activity_options
-                .map((option , ind ) => {
-                    return {name : option.name , value : ind}
-                })
-            }
-            selected_index={selected_activity}
-            handleSelect={(e)=>{
-                setSelectedActivity(Number(e.target.value));
-                setBodyStatusDetails(prev => ( {...prev , activity:Number(e.target.value) } ));
-            }}/>
+        <div className="w-full">
+            <p className='w-full text-end'>מטרה נוכחית</p>
+            <Select 
+                select_options={target_options} 
+                selected_index={selected_target} 
+                handleSelect={(e)=>{
+                    setSelectedTarget(Number(e.target.value));
+                    setBodyStatusDetails(prev => ( {...prev , target:target_options[Number(e.target.value)].name } ));
+                }}/>
+        </div>
+        <div className="w-full">  
+            <p className='w-full text-end'>רמת פעילות</p>
+            <Select
+                select_options={activity_options
+                    .map((option , ind ) => {
+                        return {name : option.name , value : ind}
+                    })
+                }
+                selected_index={selected_activity}
+                handleSelect={(e)=>{
+                    setSelectedActivity(Number(e.target.value));
+                    setBodyStatusDetails(prev => ( {...prev , activity:Number(e.target.value) } ));
+                }}/>
+        </div>
 
         <UploadImageButton 
             classStyleLable= "px-[49.5%]  z-10 max-w-[80vw] border border-background p-1 rounded-sm cursor-pointer font-bold hover:bg-white/40"

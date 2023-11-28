@@ -52,7 +52,7 @@ export default function ChangeCircumferencesDetails(
             && after_circ_details
             && before_circ_details
             &&
-            <div className="grid grid-cols-2 w-full gap-y-2">
+            <div className="grid grid-cols-2 w-full gap-y-[1%]">
 
                 <div className="flex w-full justify-center gap-1">
                     <p>ס״מ</p>

@@ -1,25 +1,58 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { activity_options } from "../calculators/activityOptions";
 import UserProfileImg from "../navbar/UserProfileImg";
 import ChangeCircumferencesDetails from "./ChangeCircumferencesDetails";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-export default function ChangeDetails(
-    {change_profile , before_change , after_change }:{
-        change_profile : TUser;
+export default function ChangeCardDetails(
+    {change_profile , before_change , after_change , change ,change_show ,is_exist_change }:{
+        change_profile : TUser | null;
         before_change : TBodyStatus ;
         after_change : TBodyStatus ;
+        change?:TChange;
+        change_show:string;
+        is_exist_change:boolean;
     }) {
         const [show_circ , setShowCirc ] = useState<boolean>(false);
+        const [trained_by , setTrainedBy ]  = useState<TUser[] | null>(null);
+
+        const getTrainers = async () => {
+            if(!change || !change.trainer_id || change.trainee_id?.length == 0)
+                return;
+            const supabase = createClientComponentClient();
+            const {data , error} = await supabase
+                .from("profile")
+                .select()
+                .in("id",change.trainer_id);
+            if (!data || error ) 
+                return;
+            setTrainedBy(data);
+        }
+
+        useEffect(()=>{ getTrainers(); },[]);
   return (
-    <div className=" max-h-[100vw] md:max-h-[50vw] overflow-scroll py-4 w-full flex flex-col gap-3  justify-center items-center">
-        <div className="flex flex-col items-center">
+    <>
+    {  change_show == "פרטים"
+        && (( before_change  &&  after_change &&  change_profile)
+        ?
+    (<div className=" h-[94%]  overflow-scroll py-4 w-full flex flex-col gap-[1%]  justify-center items-center">
+        <div className="flex flex-col items-center ">
             <UserProfileImg profile_img={change_profile.profile_img} handleClick={()=>console.log("")} />
             <h2 className='text-xl'>{change_profile.name}</h2>
+            {trained_by && trained_by.length > 0 &&
+                <div className="flex">
+                    <p>אומן על ידי </p>
+                    {trained_by
+                        .map((trainer)=>(
+                            <p>{trainer.name}</p>
+                        ))}
+                </div>
+            }
         </div>
         
         { !show_circ && 
-        <div className="w-full grid grid-cols-2 gap-y-3">
+        <div className="w-full grid grid-cols-2 gap-y-[1%] h-full">
             
             <h2 className="text-lg text-center font-bold">{"אחרי"}</h2>
             <h2 className="text-lg text-center font-bold">{"לפני"}</h2>
@@ -60,6 +93,13 @@ export default function ChangeDetails(
             show_circ={show_circ} 
             before_circ_id={before_change.id!} 
             after_circ_id={after_change.id!} />
-    </div> 
+    </div>
+    ) : (
+        is_exist_change
+        ? <div className="h-[94%] w-full bg-white text-background text-center pt-[40%] px-6">{"לא קיימים נתונים לאחרי השינוי , הזן מינימום שני סטטוסי גוף בתאריכים שונים"}</div>
+        : <div className="h-[94%] w-full bg-white text-background text-center pt-[40%] px-6">{"שגיאה בקבלת שינוי "}</div>
+        ) 
+    )}
+    </>
   )
 }
