@@ -1,5 +1,3 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 
 export default async function ChangeCardLikes(
     {change_show , change_id}:{
@@ -7,18 +5,18 @@ export default async function ChangeCardLikes(
         change_id:string;
     }
 ) {
-  const supabase = createServerComponentClient({cookies});
-  const {data:{user}} = await supabase.auth.getUser();
-  const {data:change_likes , error} = await supabase
-    .from("changeLike")
-    .select()
-    .match({item_id:change_id})
-    .limit(20);
-  if(!change_likes || error)
-    return;
+  // const supabase = createServerComponentClient({cookies});
+  // const {data:{user}} = await supabase.auth.getUser();
+  // const {data:change_likes , error} = await supabase
+  //   .from("changeLike")
+  //   .select()
+  //   .match({item_id:change_id})
+  //   .limit(20);
+  // if(!change_likes || error)
+  //   return;
 
   
-  const isLiked : boolean = change_likes.some((like)=> like.profile_id === user?.id);
+  // const isLiked : boolean = change_likes.some((like)=> like.profile_id === user?.id);
 
   /*
   TODO_STEPS :
