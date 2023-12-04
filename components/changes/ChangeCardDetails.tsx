@@ -6,12 +6,11 @@ import ChangeCircumferencesDetails from "./ChangeCircumferencesDetails";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function ChangeCardDetails(
-    {change_profile , before_change , after_change , change ,change_show ,is_exist_change }:{
+    {change_profile , before_change , after_change , change  ,is_exist_change }:{
         change_profile : TUser | null;
         before_change : TBodyStatus ;
         after_change : TBodyStatus ;
         change?:TChange;
-        change_show:string;
         is_exist_change:boolean;
     }) {
         const [show_circ , setShowCirc ] = useState<boolean>(false);
@@ -33,8 +32,8 @@ export default function ChangeCardDetails(
         useEffect(()=>{ getTrainers(); },[]);
   return (
     <>
-    {  change_show == "פרטים"
-        && (( before_change  &&  after_change &&  change_profile)
+    {
+    ( before_change  &&  after_change &&  change_profile)
         ?
     (<div className=" h-[94%]  overflow-scroll py-4 w-full flex flex-col gap-[1%]  justify-center items-center">
         <div className="flex flex-col items-center ">
@@ -99,7 +98,7 @@ export default function ChangeCardDetails(
         ? <div className="h-[94%] w-full bg-white text-background text-center pt-[40%] px-6">{"לא קיימים נתונים לאחרי השינוי , הזן מינימום שני סטטוסי גוף בתאריכים שונים"}</div>
         : <div className="h-[94%] w-full bg-white text-background text-center pt-[40%] px-6">{"שגיאה בקבלת שינוי "}</div>
         ) 
-    )}
+    }
     </>
   )
 }

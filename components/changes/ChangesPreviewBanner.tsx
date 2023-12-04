@@ -22,7 +22,7 @@ export default async function ChangesPreviewBanner() {
 
             <h1 className="title w-3/4 text-center">תחרות שינויים כל חודש <br/> השתתפו כדי לזכות בפרסים</h1>
         </div>
-        <div className="grid grid-flow-col grid-rows-1 w-[90vw] gap-4 overflow-x-auto h-fit">
+        <div className="grid grid-flow-col grid-rows-1 w-[90vw] gap-4 overflow-x-auto overflow-y-hidden h-fit">
             {data && 
                 data.map((change , i) => (
                     <div key={i} className="w-[60vw] sm:w-[50vw] md:w-[55vw] lg:w-[40vw] xl:w-[30vw] h-fit">

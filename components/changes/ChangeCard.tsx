@@ -22,9 +22,7 @@ export default function ChangeCard(
         const [change_profile , setChangeProfile ] = useState<TUser | null>(null);
         const [ change_show  , setChangeShow ] = useState<string>("לפני");
         const [is_exist_change , setIsExistChange] = useState<boolean>(false);
-       
-
-
+               
 
         const getChange = async () => {
             const supabase = createClientComponentClient();
@@ -71,34 +69,33 @@ export default function ChangeCard(
         h-[107vw] w-full   bg-white shadow-md rounded-sm   relative   flex flex-col justify-between
         sm:h-[77vw]
         md:h-[55vw]
-        lg:h-[43vw]`}>
+        lg:h-[43vw] `}>
         <p className='text top-1 right-2 bg-white/30 px-1 rounded-sm backdrop-blur-sm absolute md:hidden'>{change_show}</p>
-
         <BeforeAndAfterChange
             before_change={before_change}
             after_change={after_change}
             is_exist_change={is_exist_change}
             change_show={change_show} />
+
+        {change_show == "פרטים"
+            && <ChangeCardDetails 
+                    change={change}
+                    change_profile={change_profile} 
+                    before_change={before_change!} 
+                    after_change={after_change!}
+                    is_exist_change={is_exist_change}/>}
+
+        {change_show == "תגובות"
+            && <ChangeCardComments 
+                    change_id={change?.id!}/>}
         
-        <ChangeCardDetails 
-            change={change}
-            change_profile={change_profile} 
-            before_change={before_change!} 
-            after_change={after_change!}
-            is_exist_change={is_exist_change}
-            change_show={change_show} />
-        
+        {change_show == "לייקים"
+            && <ChangeCardLikes 
+                    change_id={change?.id!}/>}
+
         <ChangeCardOptions 
             setChangeShow={setChangeShow}
             is_exist_change={is_exist_change}/>
-
-        <ChangeCardComments 
-            change_show={change_show}/>
-        {change && 
-            <ChangeCardLikes 
-                change_id={change?.id!}
-                change_show={change_show} />
-        }
     </div>
   )
 }
