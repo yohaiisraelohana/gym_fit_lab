@@ -50,7 +50,7 @@ export default function ChangeCardComments(
   return (
     <div className="h-[94%] w-full flex flex-col  overflow-y-auto items-center  p-2 md:p-4 gap-4">
       {loading && <LoadingDumbbells />}
-      <div className="flex w-full justify-between ">
+      <div className="flex w-full justify-between  ">
         <div className="flex items-center gap-1 ">
           <CommentIcon 
             onClick={()=>setIsOpenCommentForm(prev => !prev)}
@@ -58,7 +58,7 @@ export default function ChangeCardComments(
           <p className="">{total_commets}</p>
         </div>
         <p className="max-md:bg-yellow-600 md:hidden w-11 h-4 mr-1"></p>
-        <p className="max-md:hidden">לייקים</p>
+        <p className="max-md:hidden">תגובות</p>
       </div>
       {isOpenCommentForm 
         && <ChangeCardCommentFrom 

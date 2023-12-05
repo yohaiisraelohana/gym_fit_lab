@@ -19,7 +19,7 @@ export default async function page() {
         return ( <p>Error</p> );
 
     const isValidExercise = (data: any): data is TExercise => {
-          return true ;
+      return true ;
     };
   return (
     <div className="w-full flex flex-col items-center ">

@@ -3,7 +3,8 @@ import Link from "next/link"
 export default function page() {
     const savedTypes = [
         {name:"תרגילים",link:"/saved/exercises"},
-        {name:"מאמרים",link:"/saved/articles"}
+        {name:"מאמרים",link:"/saved/articles"} ,
+        {name:"שינויים",link:"/saved/changes"}
     ]
   return (
     <section className="flex flex-col justify-center items-center w-screen gap-4 md:gap-6">
@@ -15,7 +16,7 @@ export default function page() {
                     <Link 
                         className="h-[44vw]  md:h-[34vw] lg:h-[28vw]  text text-xl   border rounded-sm    flex justify-center items-center"
                         key={s.name}
-                        href={s.link} 
+                        href={s.link!} 
                         >{s.name}
                     </Link>
                 ))

@@ -1,3 +1,4 @@
+"use client"
 import PhotoIcon from '@/assets/icons/PhotoIcon';
 import BookmarkIcon from '@/assets/icons/BookmarkIcon';
 import ChevronLeftIcon from '@/assets/icons/ChevronLeftIcon';
@@ -6,15 +7,62 @@ import CommentIcon from '@/assets/icons/CommentIcon';
 import DocumentTextIcon from '@/assets/icons/DocumentTextIcon';
 import HeartOutline from '@/assets/icons/HeartOutline';
 import ShareIcon from '@/assets/icons/ShareIcon';
+import { useEffect, useState } from 'react';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { userStore } from '@/stores/userStore';
+import BookmarkSlash from '@/assets/icons/BookmarkSlash';
 export default function ChangeCardOptions(
-    { is_exist_change , setChangeShow}:{
+    { is_exist_change , setChangeShow , change_id}:{
         is_exist_change:boolean;
         setChangeShow:(s:string)=>void;
+        change_id?: number;
     }) {
+      const [isSaved , setIsSaved ] = useState<boolean>(false);
+      const {user} = userStore();
+      const checkIfSaved = async () => {
+        if(!user || !is_exist_change)
+          return;
+        const supabase  =  createClientComponentClient();
+        const {data , error} = await supabase
+          .from("savedChanges")
+          .select()
+          .match({profile_id:user.id ,item_id:change_id })
+        if(!data || error)
+          return;
+        setIsSaved(data.length != 0);
+      };
+      const handleSaveChange = async () => {
+        if(!user)
+          return alert("שמירת שינויים אפשרית למשתמשים רשומים בלבד");
+
+        const supabase  =  createClientComponentClient();
+        if(isSaved){
+          const {error} = await supabase
+            .from("savedChanges")
+            .delete()
+            .match({profile_id:user.id ,item_id:change_id });
+          if(!error)
+            setIsSaved(false);
+        } else {
+          const {error} = await supabase 
+            .from("savedChanges")
+            .insert({profile_id:user.id , item_id:change_id});
+          if(!error)
+            setIsSaved(true);
+        }
+        
+      }
+      useEffect(()=>{ checkIfSaved(); },[])
   return (
     <div className=" w-full px-[2vw] bg-white h-[6%]   text-black   flex justify-evenly items-center">
     {!is_exist_change ? <ShareIcon classNameStyle='h-[80%] w-6 cursor-pointer  text-gray-700'/> : <p className='h-6 w-6'></p> }
-    {!is_exist_change ? <BookmarkIcon classNameStyle='h-[80%] w-6 cursor-pointer text-blue-600' /> : <p className='h-6 w-6'></p> }
+    {!is_exist_change 
+      ? (
+        isSaved 
+        ? <BookmarkSlash onClick={handleSaveChange} classNameStyle='h-[80%] w-6 cursor-pointer text-blue-600' />
+        : <BookmarkIcon onClick={handleSaveChange} classNameStyle='h-[80%] w-6 cursor-pointer text-blue-600' />
+    ) : <p className='h-6 w-6'></p> }
+
     <ChevronLeftIcon 
       classNameStyle=' h-[80%] w-6 cursor-pointer md:hidden' 
       onClick={()=>setChangeShow("לפני")} />

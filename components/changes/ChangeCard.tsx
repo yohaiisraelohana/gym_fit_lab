@@ -70,7 +70,9 @@ export default function ChangeCard(
         sm:h-[77vw]
         md:h-[55vw]
         lg:h-[43vw] `}>
-        <p className='text top-1 right-2 bg-white/30 px-1 rounded-sm backdrop-blur-sm absolute md:hidden'>{change_show}</p>
+        <p 
+            
+            className='text top-1 right-2 bg-white/30 px-1 rounded-sm backdrop-blur-sm absolute md:hidden'>{change_show}</p>
         <BeforeAndAfterChange
             before_change={before_change}
             after_change={after_change}
@@ -93,9 +95,11 @@ export default function ChangeCard(
             && <ChangeCardLikes 
                     change_id={change?.id!}/>}
 
-        <ChangeCardOptions 
-            setChangeShow={setChangeShow}
-            is_exist_change={is_exist_change}/>
+        {change
+            && <ChangeCardOptions 
+                    change_id={change.id}
+                    setChangeShow={setChangeShow}
+                    is_exist_change={is_exist_change}/>}
     </div>
   )
 }
