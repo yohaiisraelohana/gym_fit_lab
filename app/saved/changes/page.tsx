@@ -14,7 +14,7 @@ export default async function Page() {
     
     //get_saved_changes
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2">
+    <div className="grid grid-cols-1 lg:grid-cols-2 lg:px-4 gap-4">
         {data && data.map((change:TChange) => (<ChangeCard change={change} />))}
     </div>
   )
