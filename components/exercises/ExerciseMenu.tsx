@@ -5,6 +5,7 @@ import { useState } from "react";
 import BookmarksExerciseButtons from "./BookmarksExerciseButtons";
 import { userStore } from "@/stores/userStore";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { WhatsappShareButton } from "react-share";
 
 export default function ExerciseMenu({id}:{id:number}) {
   const [openMenu , setOpenMenue] = useState<boolean>(false);
@@ -38,11 +39,16 @@ export default function ExerciseMenu({id}:{id:number}) {
 
         {openMenu && [
           <DumbbelIcon classNameStyle="h-5 w-5 " />,
-          <ShareIcon classNameStyle="h-5 w-5 " />,
+          <WhatsappShareButton
+            title="מצאתי תרגיל שיעניין אותך"
+            url={window.location.href}
+            className="h-fit w-5"
+            ><ShareIcon classNameStyle="h-5 w-5 " />
+          </WhatsappShareButton> ,
           ].map((icon,ind)=>(
             <div 
               key={ind}
-              className="bg-white/40 hover:bg-green-500/30  backdrop-blur-sm p-1 rounded-md"
+              className="bg-white/40 hover:bg-green-500/30  backdrop-blur-sm p-1 rounded-md h-fit flex items-center"
               >{icon}
             </div>
           ))}
