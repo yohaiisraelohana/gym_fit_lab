@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { userStore } from '@/stores/userStore';
 import BookmarkSlash from '@/assets/icons/BookmarkSlash';
+import { WhatsappShareButton } from 'react-share';
 export default function ChangeCardOptions(
     { is_exist_change , setChangeShow , change_id}:{
         is_exist_change:boolean;
@@ -20,7 +21,8 @@ export default function ChangeCardOptions(
       const [isSaved , setIsSaved ] = useState<boolean>(false);
       const {user} = userStore();
       const checkIfSaved = async () => {
-        if(!user || !is_exist_change)
+        
+        if(!user || is_exist_change)
           return;
         const supabase  =  createClientComponentClient();
         const {data , error} = await supabase
@@ -52,10 +54,23 @@ export default function ChangeCardOptions(
         }
         
       }
-      useEffect(()=>{ checkIfSaved(); },[])
+      console.log(window.location.href);
+      
+      useEffect(()=>{ 
+        if(!user)
+          return;  
+        checkIfSaved(); 
+      },[user])
   return (
     <div className=" w-full px-[2vw] bg-white h-[6%]   text-black   flex justify-evenly items-center">
-    {!is_exist_change ? <ShareIcon classNameStyle='h-[80%] w-6 cursor-pointer  text-gray-700'/> : <p className='h-6 w-6'></p> }
+    {!is_exist_change 
+      ? <WhatsappShareButton 
+          url={window.location.href}
+          title='מצאתי שינוי שיעניין אותך'
+          className='h-[80%] w-6'>
+          <ShareIcon classNameStyle='h-full w-6 cursor-pointer  text-gray-700'/>
+        </WhatsappShareButton>
+      : <p className='h-6 w-6'></p> }
     {!is_exist_change 
       ? (
         isSaved 
