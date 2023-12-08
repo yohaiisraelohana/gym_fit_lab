@@ -1,3 +1,4 @@
+"use client"
 import DumbbelIcon from "@/assets/icons/DumbbelIcon";
 import PlusIcon from "@/assets/icons/PlusIcon";
 import ShareIcon from "@/assets/icons/ShareIcon";
@@ -6,12 +7,16 @@ import BookmarksExerciseButtons from "./BookmarksExerciseButtons";
 import { userStore } from "@/stores/userStore";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { WhatsappShareButton } from "react-share";
+import { MainUrl } from "@/constants/url";
+
 
 export default function ExerciseMenu({id}:{id:number}) {
   const [openMenu , setOpenMenue] = useState<boolean>(false);
   const [ saved , setSaved ] = useState<boolean>(false);
   const {user} = userStore();
+
   const supabase = createClientComponentClient();
+  const share_url = MainUrl + "/exercises/" + id ;
 
   const handleOpenMenu = async () => {
     if(!user)
@@ -27,6 +32,7 @@ export default function ExerciseMenu({id}:{id:number}) {
     setOpenMenue(!openMenu);
   }
 
+  
 
 
   return (
@@ -41,7 +47,7 @@ export default function ExerciseMenu({id}:{id:number}) {
           <DumbbelIcon classNameStyle="h-5 w-5 " />,
           <WhatsappShareButton
             title="מצאתי תרגיל שיעניין אותך"
-            url={window.location.href}
+            url={share_url}
             className="h-fit w-5"
             ><ShareIcon classNameStyle="h-5 w-5 " />
           </WhatsappShareButton> ,

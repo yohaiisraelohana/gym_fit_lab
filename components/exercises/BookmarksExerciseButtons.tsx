@@ -13,9 +13,9 @@ export default function BookmarksExerciseButtons(
 
       const handleBookmarkClick = () => {
         if(saved){
-          unSaveItem(id,"exercise",profile_id);
+          unSaveItem(id,"savedExercises",profile_id);
         } else {
-          saveItem(id,"exercise",profile_id);
+          saveItem(id,"savedExercises",profile_id);
         }
         if(afterBookmarkFunction)
           afterBookmarkFunction();

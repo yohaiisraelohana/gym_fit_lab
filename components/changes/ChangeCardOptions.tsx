@@ -12,6 +12,9 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { userStore } from '@/stores/userStore';
 import BookmarkSlash from '@/assets/icons/BookmarkSlash';
 import { WhatsappShareButton } from 'react-share';
+import { saveItem, unSaveItem } from '@/app/server-actions/savedActions';
+import { MainUrl } from '@/constants/url';
+
 export default function ChangeCardOptions(
     { is_exist_change , setChangeShow , change_id}:{
         is_exist_change:boolean;
@@ -20,6 +23,9 @@ export default function ChangeCardOptions(
     }) {
       const [isSaved , setIsSaved ] = useState<boolean>(false);
       const {user} = userStore();
+
+      
+      const share_url = MainUrl + "/changes/" + change_id; 
       const checkIfSaved = async () => {
         
         if(!user || is_exist_change)
@@ -37,24 +43,17 @@ export default function ChangeCardOptions(
         if(!user)
           return alert("שמירת שינויים אפשרית למשתמשים רשומים בלבד");
 
-        const supabase  =  createClientComponentClient();
         if(isSaved){
-          const {error} = await supabase
-            .from("savedChanges")
-            .delete()
-            .match({profile_id:user.id ,item_id:change_id });
+          const error = await unSaveItem(change_id!,"savedChanges",user.id!);
           if(!error)
             setIsSaved(false);
         } else {
-          const {error} = await supabase 
-            .from("savedChanges")
-            .insert({profile_id:user.id , item_id:change_id});
+          const error = await saveItem(change_id!,"savedChanges",user.id!);
           if(!error)
             setIsSaved(true);
         }
         
       }
-      console.log(window.location.href);
       
       useEffect(()=>{ 
         if(!user)
@@ -65,7 +64,7 @@ export default function ChangeCardOptions(
     <div className=" w-full px-[2vw] bg-white h-[6%]   text-black   flex justify-evenly items-center">
     {!is_exist_change 
       ? <WhatsappShareButton 
-          url={window.location.href}
+          url={share_url}
           title='מצאתי שינוי שיעניין אותך'
           className='h-[80%] w-6'>
           <ShareIcon classNameStyle='h-full w-6 cursor-pointer  text-gray-700'/>
