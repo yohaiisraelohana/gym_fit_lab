@@ -22,12 +22,9 @@ export default function ChangeCardOptions(
         change_id?: number;
     }) {
       const [isSaved , setIsSaved ] = useState<boolean>(false);
-      const {user} = userStore();
-
-      
+      const {user} = userStore();  
       const share_url = MainUrl + "/changes/" + change_id; 
       const checkIfSaved = async () => {
-        
         if(!user || is_exist_change)
           return;
         const supabase  =  createClientComponentClient();
