@@ -1,6 +1,3 @@
-//TODO: navigate to account if profile updated sucessfully 
-//! check if the user authenticated before giving him to upload or delete
-
 'use client'
 import React, { useEffect, useState } from 'react'
 import { userStore } from '@/stores/userStore';
@@ -9,6 +6,9 @@ import { uploadSingleImgToCloudinary } from '@/services/cloudinary/uploadImage';
 import { useRouter } from 'next/navigation';
 import { deleteSingleImageFromCloudinary } from '@/services/cloudinary/deleteImage';
 import LoadingDumbbells from '../reusefull/LoadingDumbbells';
+import { uploadAvatarImage } from '@/services/upload/uploadImage';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { isError } from '@/services/functions/isError';
 
 export default function EditProfile() {
     const { user , updateUser , error:userError } = userStore();
@@ -33,27 +33,16 @@ export default function EditProfile() {
       let profile = {...newUser};
 
       if (new_profile_img != null) {
-        if(profile.profile_img){
-          const deleteRes = await deleteSingleImageFromCloudinary(profile.profile_img);
-          if(typeof deleteRes !== "string"){
-            setError(deleteRes);
-            setLoading(false);
-            return;
-          };
-        }
-        const uploadRes : any | TCldRes | TError = await uploadSingleImgToCloudinary(new_profile_img);
-        if(!("secure_url" in uploadRes)){
-          setError(uploadRes);
-          setLoading(false);
-          return;
-        }
-        profile.profile_img = uploadRes.secure_url;
+        const upload_image_res = await uploadAvatarImage( user!.id! , new_profile_img , createClientComponentClient() );
+        if(isError(upload_image_res))
+          return setError(upload_image_res);
+        profile.profile_img = upload_image_res;
       };
 
       const userRes = await updateUser(profile);
 
-      if(typeof userRes !== "string" && "error" in userRes){
-        setError({error:userRes.error, message:userRes.message});
+      if(isError(userRes)){
+        setError(userRes);
         setLoading(false);
         return ;
       }
@@ -73,15 +62,21 @@ export default function EditProfile() {
 
 
 /*
-    const updateUser = async ( updatedUser : TUser) => {
-      const res = await fetch(EDIT_PROFILE,{
-        method:"PUT",
-        headers:{
-            'Content-Type' : "application/json"
-        },
-        body:JSON.stringify(updatedUser)
-      });
-      const data = await res.json();
-      console.log({data}); 
-    }
+      if (new_profile_img != null) {
+        if(profile.profile_img){
+          const deleteRes = await deleteSingleImageFromCloudinary(profile.profile_img);
+          if(typeof deleteRes !== "string"){
+            setError(deleteRes);
+            setLoading(false);
+            return;
+          };
+        }
+        const uploadRes : any | TCldRes | TError = await uploadSingleImgToCloudinary(new_profile_img);
+        if(!("secure_url" in uploadRes)){
+          setError(uploadRes);
+          setLoading(false);
+          return;
+        }
+        profile.profile_img = uploadRes.secure_url;
+      };
 */

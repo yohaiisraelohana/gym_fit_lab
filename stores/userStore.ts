@@ -1,6 +1,5 @@
 
 import { createClient } from "@supabase/supabase-js";
-import { revalidatePath } from "next/cache";
 import { create } from "zustand"
 
 require('dotenv').config();
