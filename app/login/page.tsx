@@ -2,10 +2,16 @@ import MailIcon from '@/assets/icons/MailIcon'
 import Messages from './messages'
 import LockIcon from '@/assets/icons/LockIcon'
 import EmailInput from '@/components/Login/EmailInput'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
+import ServerRouter from '@/components/reusefull/ServerRouter'
 
 
-export default function Login() {
-    
+export default async function Login() {
+    const supabase = createServerComponentClient({cookies});
+    const {data:{user}} = await supabase.auth.getUser();
+    if(user)
+      return <ServerRouter redirectPath='/' />
   return (
     <div className="flex flex-col w-full px-8  h-[80vh] justify-center">
       <form

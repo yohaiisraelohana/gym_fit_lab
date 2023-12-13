@@ -39,3 +39,8 @@ export function validateImageFile(file: File | null): TValidation {
       return {valid: false , message: "סוג הקובץ לא נתמך ו/או התמונה שוקלת מעל 5 מגה בייט"}; 
     }
 }
+
+export const validatePhoneNumber = (number:string) : TValidation =>  {
+  const phoneRegex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
+  return {valid:phoneRegex.test(number),message:"exist number"};
+}

@@ -1,24 +1,46 @@
-import React, { FormEvent, MouseEvent } from "react";
+"use client"
+import React, { Dispatch, MouseEvent, SetStateAction, useState } from "react";
 import { specializes_at_options } from "./specializes_at_options";
 import UploadImageButton from "../reusefull/UploadImageButton";
+import { EmailIcon, FacebookMessengerIcon, TelegramIcon, WhatsappIcon } from "react-share";
 
-export default function TrainerForm({trainer , handleSpecializesInputs , handleImageInput , handleBioInput ,handleTraining_sinceInput}:
+export default function TrainerForm(
+    {handleSubmit, trainer , handleSpecializesInputs , handleImageInput , handleBioInput ,handleTraining_sinceInput , contact_options ,setContactOptions}:
     {
+        handleSubmit: () => void;
         trainer:TTrainer;
+        contact_options:TTrainerContactDetails;
+        setContactOptions:Dispatch<SetStateAction<TTrainerContactDetails>>;
         handleSpecializesInputs : (e:MouseEvent<HTMLInputElement, globalThis.MouseEvent>) => void;
         handleImageInput : (e:React.ChangeEvent<HTMLInputElement>) => void;
         handleBioInput : (e:React.ChangeEvent <HTMLTextAreaElement>) => void ;
         handleTraining_sinceInput : (e:React.ChangeEvent<HTMLInputElement>) => void ;
     }) {
 
+      const [current_contact_input , setCurrentContactInput ] = useState<string>(""); 
+
+      const contact_buttons = [{ 
+        contact_name:"whatsapp" , 
+        icon:<WhatsappIcon size={current_contact_input == "whatsapp" ? 25 : 20} borderRadius={15}/> 
+      },
+      {
+        contact_name:"facebook" , 
+        icon:<FacebookMessengerIcon size={current_contact_input == "facebook" ? 25 : 20} borderRadius={15}/> 
+      },
+      {
+        contact_name:"telegram",
+        icon:<TelegramIcon size={current_contact_input == "telegram" ? 25 : 20} borderRadius={15}/>
+      },
+      {
+        contact_name:"email",
+        icon:<EmailIcon size={current_contact_input == "email" ? 25 : 20} borderRadius={15}/>
+      }
+    ];
+
 
   return (
     <form 
-        action={"/api/account/trainer"}
-        method="post"
-        className="w-[80vw] md:w-[70vw] lg:w-[60vw] flex flex-col justify-start items-center " >
-        <input type="text" name="id" className="hidden" readOnly defaultValue={trainer.id} />
-        <input type="text" name="trainer_current_img" className="hidden" readOnly defaultValue={trainer.trainer_img || ""} />
+        className="w-[80vw] md:w-[70vw] lg:w-[60vw] flex flex-col justify-start items-center pb-4" >
         <div className="w-full">
           <p className="text w-full text-end text-lg">התמחות</p>
             <div className=" w-full grid grid-cols-3 border border-white rounded-sm p-2  gap-y-1 ">
@@ -57,6 +79,36 @@ export default function TrainerForm({trainer , handleSpecializesInputs , handleI
             className="w-full bg-transparent outline-[var(--primary)] text border border-white rounded-sm text-end py-1 px-2" 
             name="bio"/>
         </div>
+        <div className="w-full mt-1 py-2">
+          <p className="text w-full text-end text-lg" >יצירת קשר</p>
+          <div className="w-full flex gap-[2%]">
+                <input
+                  disabled={current_contact_input == ""} 
+                  className="w-[68%] border border-white bg-transparent text-center text-white" 
+                  type="text" 
+                  onChange={(e)=>setContactOptions(prev => ({...prev,[current_contact_input]:e.target.value}))}
+                  value={contact_options[current_contact_input as keyof TTrainerContactDetails] || ""}
+                  placeholder={current_contact_input == "email"
+                    ? "הכנס אימייל ליצירת קשר"
+                    : current_contact_input == "facebook"
+                    ? "הכנס שם משתמש בפייסבוק"
+                    : "הכנס מספר פלאפון ליצירת קשר"}
+                  name="" 
+                  id="" />
+                <div className="flex w-[30%] justify-around">
+                  {contact_buttons.map(({contact_name , icon},ind)=> (
+                    <button
+                      type="button"
+                      key={ind}
+                      style={contact_options[contact_name as keyof TTrainerContactDetails] ? {} : {opacity:0.5}}
+                      onClick={()=>setCurrentContactInput(prev=> (prev == contact_name ? "" : contact_name))}
+                      >{icon}
+                    </button>
+                  ))}
+
+                </div>
+          </div>
+        </div>
         
         <div className="grid grid-cols-2 gap-[4vw] w-full">
 
@@ -85,8 +137,9 @@ export default function TrainerForm({trainer , handleSpecializesInputs , handleI
         </div>
 
         <button 
+            onClick={handleSubmit}
+            type="button"
             className="text-lg rounded-md p-1 bg-primary w-full mt-6"
-            type="submit"
             >שמור
         </button>
     </form>

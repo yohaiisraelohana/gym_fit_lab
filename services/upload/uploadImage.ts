@@ -14,6 +14,10 @@ export const uploadAvatarImage = async (user_id:string , image : File , supabase
     return error ? {error , message:"שגיאה בהעלאת התמונה לשרת"} : AVATAR_IMG_PATH + data.path;
     
 }
+//TODO : use this for avatar and for every were you need unique img
+export const uploadImgToIdFolder = async () => {
+
+}
 
 export const uploadBodyStatusImage = () => {
 
