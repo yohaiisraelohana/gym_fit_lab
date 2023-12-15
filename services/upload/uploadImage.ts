@@ -1,23 +1,24 @@
-import { AVATAR_IMG_PATH } from "@/constants/url";
+import {  SUPABASE_PUBLIC_STORAGE } from "@/constants/url";
 import { SupabaseClient } from "@supabase/supabase-js";
+import { convertImageExt } from "../functions/convertImageExt";
 
-export const uploadAvatarImage = async (user_id:string , image : File , supabase:SupabaseClient ) : Promise<TError |  string> => {
+//TODO : use this for avatar and for every were you need unique img
+export const uploadUniqueImgToIdFolder = async (user_id:string , bucket_name:string , image : File , supabase:SupabaseClient) : Promise<TError |  string> => {
     if(!image)
-        return {message:"קובץ לא הועלה" , error:null};
-    const file_extension = image.name.split('.').pop();
+        return {message:"קובץ לא הועלה" , error:null}; 
+    let image_to_upload = image;
+    let file_extension = image_to_upload.name.split('.').pop();
+    if(file_extension !== "jpeg"){
+        image_to_upload = await convertImageExt(image_to_upload , "jpeg");
+    }
     const {data , error} = await supabase.storage
-        .from("avatars")
-        .upload(`${user_id}/${user_id}.${file_extension}`,image,{
+        .from(bucket_name)
+        .upload(`${user_id}/${user_id}.jpeg`,image,{
             upsert:true
         });
-
-    return error ? {error , message:"שגיאה בהעלאת התמונה לשרת"} : AVATAR_IMG_PATH + data.path;
-    
-}
-//TODO : use this for avatar and for every were you need unique img
-export const uploadImgToIdFolder = async () => {
-
-}
+    console.log({data , error});
+    return error ? {error , message:"שגיאה בהעלאת התמונה לשרת"} : SUPABASE_PUBLIC_STORAGE + `${bucket_name}/` + data.path;
+}   
 
 export const uploadBodyStatusImage = () => {
 

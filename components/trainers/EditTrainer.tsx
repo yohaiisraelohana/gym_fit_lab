@@ -8,7 +8,7 @@ import { validateImageFile } from '@/services/validations/validateInputs';
 import { TRAINER_DEFAULT_IMG } from '@/constants/defaultValues';
 import { useRouter } from 'next/navigation';
 import { createContactDetailsArray, findContactDetails } from '@/services/functions/findContactDetails';
-import { uploadAvatarImage } from '@/services/upload/uploadImage';
+import {  uploadUniqueImgToIdFolder } from '@/services/upload/uploadImage';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { isError } from '@/services/functions/isError';
 import LoadingDumbbells from '../reusefull/LoadingDumbbells';
@@ -58,19 +58,22 @@ export default function EditTrainer({trainer }:{trainer:TTrainer | null }) {
         delete trainer_data.profile;
         delete trainer_data.trainees_count;
         if(new_img){
-            const res = await uploadAvatarImage(user!.id!,new_img,supabase);
+            const res = await uploadUniqueImgToIdFolder(user!.id!,"trainersImg",new_img,supabase); //uploadAvatarImage(user!.id!,new_img,supabase);
             console.log(res);
             
             if(isError(res)){
+                console.log({res});
                 setIsLoading(false)
                 return setError(res); 
             };
             trainer_data.trainer_img = res ;
         }
 
-        const { error } = await supabase
+        const { error , data } = await supabase
             .from("trainer")
             .upsert(trainer_data,{onConflict:"id"});
+        console.log({data,error});
+        
         if(error){
             console.log(error);
             setIsLoading(false);

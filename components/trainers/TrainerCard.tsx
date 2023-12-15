@@ -2,7 +2,7 @@
 import ChevronDownIcon from '@/assets/icons/ChevronDownIcon';
 import ChevronUpIcon from '@/assets/icons/ChevronUpIcon';
 import { TRAINER_DEFAULT_IMG } from '@/constants/defaultValues';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import TrainerRate from './TrainerRate';
 import Link from 'next/link';
 import { calculateTimeDiff } from '@/services/functions/calculateTimeDifference';
@@ -28,10 +28,11 @@ export default function TrainerCard(
               className="w-full md:w-[40%] md:h-full min-h-[260px] border-b md:border-r md:border-b-0 border-neutral-800">
               <Link
                 href={`/trainers/${trainer.id}`}
-                ><img 
+                >     
+                  <img 
                     src={trainer.trainer_img || TRAINER_DEFAULT_IMG}   
                     className="h-full w-full hover:shadow-md  hover:shadow-[var(--primary)]"  
-                    alt="trainer image"/>
+                    alt="trainer image"/> 
               </Link>
             </div>
 

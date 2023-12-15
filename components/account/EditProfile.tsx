@@ -2,11 +2,9 @@
 import React, { useEffect, useState } from 'react'
 import { userStore } from '@/stores/userStore';
 import ProfileForm from './ProfileForm';
-import { uploadSingleImgToCloudinary } from '@/services/cloudinary/uploadImage';
 import { useRouter } from 'next/navigation';
-import { deleteSingleImageFromCloudinary } from '@/services/cloudinary/deleteImage';
 import LoadingDumbbells from '../reusefull/LoadingDumbbells';
-import { uploadAvatarImage } from '@/services/upload/uploadImage';
+import {  uploadUniqueImgToIdFolder } from '@/services/upload/uploadImage';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { isError } from '@/services/functions/isError';
 
@@ -33,7 +31,7 @@ export default function EditProfile() {
       let profile = {...newUser};
 
       if (new_profile_img != null) {
-        const upload_image_res = await uploadAvatarImage( user!.id! , new_profile_img , createClientComponentClient() );
+        const upload_image_res = await uploadUniqueImgToIdFolder(user!.id!,"avatars",new_profile_img,createClientComponentClient() ) //uploadAvatarImage( user!.id! , new_profile_img , createClientComponentClient() );
         if(isError(upload_image_res))
           return setError(upload_image_res);
         profile.profile_img = upload_image_res;

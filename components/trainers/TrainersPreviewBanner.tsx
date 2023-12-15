@@ -1,6 +1,8 @@
 import supabase from "@/services/supabaseCreateClient"
 import TrainerCard from "./TrainerCard";
 
+
+
 export default async function TrainersPreviewBanner() { 
   const {data , error} = await supabase
     .from("trainer")
