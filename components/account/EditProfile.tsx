@@ -31,7 +31,7 @@ export default function EditProfile() {
       let profile = {...newUser};
 
       if (new_profile_img != null) {
-        const upload_image_res = await uploadUniqueImgToIdFolder(user!.id!,"avatars",new_profile_img,createClientComponentClient() ) //uploadAvatarImage( user!.id! , new_profile_img , createClientComponentClient() );
+        const upload_image_res = await uploadUniqueImgToIdFolder(user!.id!,"avatars",new_profile_img,createClientComponentClient() , user?.profile_img!) //uploadAvatarImage( user!.id! , new_profile_img , createClientComponentClient() );
         if(isError(upload_image_res))
           return setError(upload_image_res);
         profile.profile_img = upload_image_res;
