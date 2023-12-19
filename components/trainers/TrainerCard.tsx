@@ -7,6 +7,7 @@ import TrainerRate from './TrainerRate';
 import Link from 'next/link';
 import { calculateTimeDiff } from '@/services/functions/calculateTimeDifference';
 import { stringArrayToLine } from '@/services/functions/stringArrayToLine';
+import { AnimatedGradientBorder } from '../reusefull/AnimatedGradientBorder';
 
 export default function TrainerCard(
     {trainer}:{trainer:TTrainer}) {
@@ -25,18 +26,14 @@ export default function TrainerCard(
           }}
           className="h-[290px] w-[200px] overflow-scroll md:w-[500px] bg-white rounded-sm flex max-md:flex-col"
           > <div 
-              className="w-full md:w-[40%] md:h-full min-h-[260px] border-b md:border-r md:border-b-0 border-neutral-800">
-              <Link
-                href={`/trainers/${trainer.id}`}
-                >     
+              className="w-full md:w-[40%] md:h-full min-h-[260px] border-b md:border-r md:border-b-0 border-neutral-800">  
                   <img 
                     src={trainer.trainer_img || TRAINER_DEFAULT_IMG}   
-                    className="h-full w-full hover:shadow-md  hover:shadow-[var(--primary)]"  
+                    className="h-full w-full"  
                     alt="trainer image"/> 
-              </Link>
             </div>
 
-            <div className="w-full md:w-[60%] min-h-[290px] md:overflow-y-auto md:h-full flex flex-col px-2 md:py-1 md:px-3 ">
+            <div className="w-full md:w-[60%] min-h-[290px] md:overflow-y-auto md:h-full flex flex-col md:justify-around   p-2 pt-0  md:py-1 md:px-3 ">
               <div className="w-full flex items-start h-[60px] md:h-[30px]">
                 <div className="mr-auto flex items-center pt-1">
                 <button
@@ -59,7 +56,15 @@ export default function TrainerCard(
                     <p className='text-end col-span-2 font-bold'>:התמחות</p>
                     <p className='col-span-2 text-end'>{trainer.specializes_at ? stringArrayToLine(trainer.specializes_at) : "ללא"}</p>
                     <p className='text-end col-span-2 font-bold'>{trainer.bio && trainer.bio }</p>
+                    
               </div>
+              <div className="bg-white ml-auto rounded-sm text-center max-md:w-full my-1">
+                <AnimatedGradientBorder rounded="2px" >
+                  <Link className='bg-white px-2 p-1 w-full'
+                        href={`/trainers/${trainer.id}`}>לפרטים נוספים</Link>
+                </AnimatedGradientBorder>
+              </div>
+              
             </div>
         </form>
   )

@@ -59,11 +59,8 @@ export default function ChangeCard(
                 setIsExistChange(true);
             } else if (change) {
                 getChange();
-                //TODO: Get the changes from supabase
-                //TODO: if the change length less chan 2 return a message without the change details 
-                //TODO: also if the is no details about the profile of the change user
             }
-        },[])
+        },[]);
   return (
     <div className={change_card_style ||  ` 
         h-[107vw] w-full   bg-white shadow-md rounded-sm   relative   flex flex-col justify-between
@@ -95,9 +92,9 @@ export default function ChangeCard(
             && <ChangeCardLikes 
                     change_id={change?.id!}/>}
 
-        {change
+        {(change || existChange)
             && <ChangeCardOptions 
-                    change_id={change.id}
+                    change_id={change?.id}
                     setChangeShow={setChangeShow}
                     is_exist_change={is_exist_change}/>}
     </div>

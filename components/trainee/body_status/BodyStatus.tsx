@@ -1,19 +1,19 @@
 "use client"
 import { useState } from "react";
-import BodyStatusForm from "./BodyStatusForm";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import LoadingDumbbells from "../../reusefull/LoadingDumbbells";
 import BodyStatusHeader from "./BodyStatusHeader";
-import CurrentBodyStatus from "./CurrentBodyStatus";
-import BodyStatusTable from "./BodyStatusTable";
-import PublishBodyStatus from "./PublishBodyStatus";
+import { useRouter } from "next/navigation";
+import BodyStatusView from "./BodyStatusView";
+import BodyStatusButton from "./BodyStatusButton";
+import { getCurrentShortTime } from "@/services/functions/getCurrentShortTime";
 
 export default function BodyStatus({body_status , profile }:{ body_status : TBodyStatus[] | null; profile : TUser ;}) {
     const supabase = createClientComponentClient();
     const is_body_status : boolean = body_status != null && body_status.length > 0;
     const is_valid_change : boolean = is_body_status && body_status!.length >= 2 ;
     const first_body_status = is_body_status ? body_status![0] : null;
-    const last_body_status = is_body_status && is_valid_change ? body_status![body_status!.length -1] : null;
+    const [last_body_status , setLastBodyStatus] = useState<TBodyStatus | null>((is_body_status && is_valid_change) ? body_status![body_status!.length -1] : null);
     const current_date = new Date().toISOString().substring(0,10);
 
     const [shown_details , setShownDetails] = useState<string>("השינוי הנוכחי");
@@ -26,7 +26,7 @@ export default function BodyStatus({body_status , profile }:{ body_status : TBod
     const saveBodyStatus = async (body_status_data : TBodyStatus ,  circumferenceForm : TBodycircumference | null ) => {
         setLoading(true);
 
-        const {data:b_s_data , error:b_s_error} = await supabase
+        const { data } = await supabase
             .from("body_status")
             .upsert({
                 img_url:body_status_data.img_url ,  target:body_status_data.target,     activity:body_status_data.activity , 
@@ -35,34 +35,45 @@ export default function BodyStatus({body_status , profile }:{ body_status : TBod
             },{onConflict:"created_at"})
             .select();
         
-        if(!circumferenceForm || !b_s_data){
+        console.log("bsd",data);
+        if(data)
+            setLastBodyStatus(data[0]);
+
+        if(!circumferenceForm || !data){
             setLoading(false);
             setShownDetails("השינוי הנוכחי");
             return;
         }
        
-        const {data:circ_data , error:circ_error} = await supabase
+
+        
+
+        await supabase
             .from("circumferences")
             .upsert({
                 ...circumferenceForm,
-                id:b_s_data[0].id
+                id:data[0].id
             },{
                 onConflict:"id"
             })
             .select();
         
+        
         setShownDetails("השינוי הנוכחי");
         setLoading(false);
-        //revalidatePath("/account/trainee"); 
-        //!revalidate not working
-    }
+
+        const router = useRouter();
+        router.push("/account/trainee");
+    }    
 
     const findTrainers = async () => {
         setLoading(true);
+
         setChangeData({
             ...change_data ,
             trainer_id:[],
-        })
+        });
+
         const {data:t_t_data , error:t_t_err} = await supabase
             .from("trainerTrainee")
             .select(`trainer_id`)
@@ -70,8 +81,6 @@ export default function BodyStatus({body_status , profile }:{ body_status : TBod
         
         if(!t_t_data || t_t_err || t_t_data.length == 0 )
             return setLoading(false);
-
-        console.log({t_t_data , t_t_err});
         
         const {data:trainers_data , error:trainer_error} =  await supabase
             .from("trainer")
@@ -80,6 +89,7 @@ export default function BodyStatus({body_status , profile }:{ body_status : TBod
         
         if(!trainers_data || trainer_error)
             return setLoading(false) ;
+
         setBodyStatusTrainers(trainers_data); 
         setLoading(false) ;
     }
@@ -99,63 +109,38 @@ export default function BodyStatus({body_status , profile }:{ body_status : TBod
   return (
     <section className="flex flex-col   gap-2 w-[77vw] md:w-[85vw] lg:w-[50vw] lg:order-2 rounded-md relative  ">
         {loading && <LoadingDumbbells  />}
+
         <BodyStatusHeader shown_details={shown_details} setShownDetails={setShownDetails} />
 
-        <div className="h-fit  w-full flex flex-col gap-2">
-        { shown_details == "הוספת סטטוס גוף"
-            && <BodyStatusForm 
-                saveBodyStatus={saveBodyStatus} 
-                last_body_status={last_body_status}/>}
-
-        { shown_details == "השינוי הנוכחי" 
-            && <CurrentBodyStatus 
-                is_body_status={is_body_status} 
-                profile={profile}
-                first_body_status={first_body_status}
-                last_body_status={last_body_status} /> }
-        
-        { shown_details == "רשימת סטטוסי גוף" 
-            && <BodyStatusTable 
-                handleEdit={(bs:TBodyStatus)=>{
-                    setEditBodyStatus(bs);
-                    setShownDetails("עריכת סטטוס גוף")
-                }}
-                body_status_list={body_status} />}
-
-        { shown_details == "עריכת סטטוס גוף"
-            && edit_body_status
-            && <BodyStatusForm 
-                saveBodyStatus={saveBodyStatus}
-                last_body_status={edit_body_status}/>}
-
-        { shown_details == "פרסם שינוי" 
-            && (<PublishBodyStatus 
-                trainers_list={body_status_trainers}
-                change_data={change_data}
-                setChangeData={setChangeData}
-                body_status_list={body_status} />)}
-        </div>
-        <button 
-            disabled={!is_body_status || !is_valid_change || loading}
-            style={(!is_body_status || !is_valid_change || loading) ?  {opacity:'0.3'} : {}}
-            onClick={()=>{
-                if(change_data.after_id){
-                    if(change_data.trainer_id)
-                        return publishChange() ;
-
-                    return findTrainers();
-                }
-                setShownDetails("פרסם שינוי");
+        <BodyStatusView 
+            saveBodyStatus={saveBodyStatus}
+            handleEditBs={(bs:TBodyStatus)=>{
+                setEditBodyStatus(bs);
+                setShownDetails("עריכת סטטוס גוף")
             }}
-            className="text-black bg-primary w-full p-1 rounded-sm mb-1">
-                {!change_data.after_id 
-                    ? "פרסם"
-                    : change_data.trainer_id 
-                        ? "שמור"
-                        : "המשך"
-                }
-            </button>
+            setChangeData={setChangeData}
 
+            edit_body_status={edit_body_status}
+            body_status={body_status}
+            body_status_trainers={body_status_trainers}
+            change_data={change_data}
+            first_body_status={first_body_status}
+            last_body_status={last_body_status}
+            profile={profile}
+            shown_details={shown_details}
+            is_body_status={is_body_status}
+            />
+        
+            <BodyStatusButton 
+                publishChange={publishChange}
+                setShownDetails={setShownDetails}
+                findTrainers={findTrainers}
+
+                change_data={change_data}
+                is_body_status={is_body_status}
+                is_valid_change={is_valid_change}
+                loading={loading}
+            />
     </section>
   )
 }
