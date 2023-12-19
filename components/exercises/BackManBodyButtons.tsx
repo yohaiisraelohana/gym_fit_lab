@@ -22,6 +22,3 @@ export default function BackManBodyButtons() {
 
   )
 }
-//https://res.cloudinary.com/dftounwvk/image/upload/v1697535120/backMuscle_o3xruz.jpg
-//https://res.cloudinary.com/dftounwvk/image/upload/v1697538372/Default_Muscular_man_posing_back_look_standing_bit_far_0_17a12161-3ace-4da6-afb3-50f407c2cd38_0_1_p87g7h.png
-//https://res.cloudinary.com/dftounwvk/image/upload/v1697536464/artwork_6_1_wrf9ns.png

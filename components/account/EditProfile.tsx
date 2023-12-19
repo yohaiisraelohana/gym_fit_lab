@@ -58,23 +58,3 @@ export default function EditProfile() {
   )
 }
 
-
-/*
-      if (new_profile_img != null) {
-        if(profile.profile_img){
-          const deleteRes = await deleteSingleImageFromCloudinary(profile.profile_img);
-          if(typeof deleteRes !== "string"){
-            setError(deleteRes);
-            setLoading(false);
-            return;
-          };
-        }
-        const uploadRes : any | TCldRes | TError = await uploadSingleImgToCloudinary(new_profile_img);
-        if(!("secure_url" in uploadRes)){
-          setError(uploadRes);
-          setLoading(false);
-          return;
-        }
-        profile.profile_img = uploadRes.secure_url;
-      };
-*/

@@ -146,22 +146,3 @@ export default function TrainerForm(
   )
 }
 
-
-
-/**
- *    const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
-          e.preventDefault();
-          
-          // Access form data here and send a POST request to the server component
-          const formData = new FormData(e.currentTarget);
-          
-          const arr = specializes_at_options.map((option) => formData.get(option));
-          console.log(arr);
-          
-          const selectedOptions = formData.getAll('selectedOptions[]').join(' , ');
-          const serverAction = formData.get('serverAction');
-          console.log({selectedOptions,serverAction});
-          
-          
-    }
- */

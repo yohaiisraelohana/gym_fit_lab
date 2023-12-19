@@ -10,7 +10,6 @@
     "@supabase/supabase-js": "latest",
     "autoprefixer": "10.4.14",
     "axios": "^1.5.1",
-    "cloudinary": "^1.41.0",
     "dotenv": "^16.3.1",
     "next": "latest",
     "postcss": "8.4.24",

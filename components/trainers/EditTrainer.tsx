@@ -21,17 +21,12 @@ export default function EditTrainer({trainer }:{trainer:TTrainer | null }) {
     const [new_img , setNewImg] = useState<File | null>(null); 
     const [ trainer_form , setTrainerForm ] = useState<TTrainer>({
         id:user?.id,
-        bio:null,
-        training_since:null,
+        bio:null, training_since:null,
         trainer_img:TRAINER_DEFAULT_IMG,
-        specializes_at:[],
-        contact_options:[]
+        specializes_at:[], contact_options:[]
     });
     const [contact_options , setContactOptions] = useState<TTrainerContactDetails>({
-        whatsapp:null,
-        facebook:null,
-        telegram:null,
-        email:null
+        whatsapp:null,facebook:null,telegram:null,email:null
     }) 
 
     useEffect(()=>{
@@ -83,7 +78,6 @@ export default function EditTrainer({trainer }:{trainer:TTrainer | null }) {
         router.push("/account/trainer")
     }
      
-
     const handleSpecializesInputs = (e:MouseEvent<HTMLInputElement, globalThis.MouseEvent>) => {
         if(e.currentTarget.value == e.currentTarget.placeholder){
             setTrainerForm(prev => ({
@@ -137,8 +131,6 @@ export default function EditTrainer({trainer }:{trainer:TTrainer | null }) {
             }))
         }
     }
-    
-    
     
   return (
     <div className='flex flex-col w-screen items-center gap-6 relative'>

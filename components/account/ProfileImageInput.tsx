@@ -54,45 +54,4 @@ export default function ProfileImageInput(
 };
 
 
-/*
-// components/ImageUploadButton.js
-import { useState } from 'react';
-
-const ImageUploadButton = () => {
-  const [image, setImage] = useState(null);
-
-  const handleFileInputChange = async (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const isValidImage = await validateImage(file); // Assume you have implemented this function
-      if (isValidImage) {
-        // Request the signature from the backend
-        try {
-          const response = await fetch('/api/upload/image/route.ts');
-          if (response.ok) {
-            const { signature } = await response.json();
-            // Upload the image to Cloudinary using the signature
-            await uploadToCloudinary(file, signature); // Implement this function
-          } else {
-            console.error('Failed to fetch signature from the server.');
-          }
-        } catch (error) {
-          console.error('Error while uploading the image:', error);
-        }
-      } else {
-        console.error('Invalid image format or size.');
-      }
-    }
-  };
-
-  return (
-    <div>
-      <input type="file" accept="image/*" onChange={handleFileInputChange} />
-    </div>
-  );
-};
-
-export default ImageUploadButton;
-
-*/
 
