@@ -1,10 +1,20 @@
 import React from 'react'
-import ChangeCard from '../changes/ChangeCard';
+import ChangeCard from '../../changes/ChangeCard';
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
 
-export default function TraineesChange(
-    {changes}:{
-        changes:TChange[];
-    }) {
+export default async function TraineesChange({trainer_id}:{trainer_id:string;}) {
+
+    const supabase = createServerComponentClient({cookies});
+
+    //TODO: add limit in supabase
+    const {data , error} = await supabase
+        .rpc("get_trainer_trainees_change",{profile_id:trainer_id});
+    
+    if(!data && error)
+        return <div className="">Error</div>;    
+
+    const changes : TChange[] = data;   
   return (
     <div className='w-full flex flex-col items-center gap-4 '>
         <h1 className="text-white text-3xl">שינויים של מתאמנים</h1>

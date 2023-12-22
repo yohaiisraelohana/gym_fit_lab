@@ -6,7 +6,6 @@ import BodyStatusHeader from "./BodyStatusHeader";
 import { useRouter } from "next/navigation";
 import BodyStatusView from "./BodyStatusView";
 import BodyStatusButton from "./BodyStatusButton";
-import { getCurrentShortTime } from "@/services/functions/getCurrentShortTime";
 
 export default function BodyStatus({body_status , profile }:{ body_status : TBodyStatus[] | null; profile : TUser ;}) {
     const supabase = createClientComponentClient();
@@ -35,7 +34,6 @@ export default function BodyStatus({body_status , profile }:{ body_status : TBod
             },{onConflict:"created_at"})
             .select();
         
-        console.log("bsd",data);
         if(data)
             setLastBodyStatus(data[0]);
 
@@ -45,9 +43,6 @@ export default function BodyStatus({body_status , profile }:{ body_status : TBod
             return;
         }
        
-
-        
-
         await supabase
             .from("circumferences")
             .upsert({
@@ -129,18 +124,18 @@ export default function BodyStatus({body_status , profile }:{ body_status : TBod
             profile={profile}
             shown_details={shown_details}
             is_body_status={is_body_status}
-            />
+        />
         
-            <BodyStatusButton 
-                publishChange={publishChange}
-                setShownDetails={setShownDetails}
-                findTrainers={findTrainers}
-
-                change_data={change_data}
-                is_body_status={is_body_status}
-                is_valid_change={is_valid_change}
-                loading={loading}
-            />
+        <BodyStatusButton 
+            publishChange={publishChange}
+            setShownDetails={setShownDetails}
+            findTrainers={findTrainers}
+            
+            change_data={change_data}
+            is_body_status={is_body_status}
+            is_valid_change={is_valid_change}
+            loading={loading}
+        />
     </section>
   )
 }
