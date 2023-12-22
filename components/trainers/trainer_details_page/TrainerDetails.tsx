@@ -26,7 +26,7 @@ export default async function TrainerDetails(
 
         // TODO: check request status and present in the button below
   return (
-        <div className="flex max-md:flex-col items-center px-[6vw] gap-3 md:gap-[3vw] w-full lg:w-[92vw] ">
+        <div className="flex max-md:flex-col items-center px-[6vw] md:mt-[5vw] gap-3 md:gap-[3vw] w-full lg:w-[92vw] xl:w-[85vw] xl:gap-[5vw] ">
             <div className="flex w-full justify-between md:hidden">
                 <TrainerRate 
                     style="flex items-center text-white gap-1"
