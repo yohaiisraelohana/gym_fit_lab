@@ -33,6 +33,21 @@ export default async function TraineesChange({trainer_id}:{trainer_id:string;}) 
                             change={change} />
                     </div>
             ))}
+            {changes.map((change , i) => (
+                    <div dir='ltr' key={i} className="w-[60vw] sm:w-[50vw] md:w-[55vw] lg:w-[40vw] xl:w-[30vw] h-fit">
+                        <ChangeCard 
+                            change_card_style="h-[80vw] sm:h-[65vw] md:h-[40vw] lg:h-[30vw] xl:h-[22vw] w-full   bg-white shadow-md rounded-sm   relative   flex flex-col justify-between" 
+                            change={change} />
+                    </div>
+            ))}
+            {changes.map((change , i) => (
+                    <div dir='ltr' key={i} className="w-[60vw] sm:w-[50vw] md:w-[55vw] lg:w-[40vw] xl:w-[30vw] h-fit">
+                        <ChangeCard 
+                            change_card_style="h-[80vw] sm:h-[65vw] md:h-[40vw] lg:h-[30vw] xl:h-[22vw] w-full   bg-white shadow-md rounded-sm   relative   flex flex-col justify-between" 
+                            change={change} />
+                    </div>
+            ))}
+
         </div>
 
     </div>
