@@ -19,14 +19,14 @@ export default async function Login() {
         action="/auth/sign-in"
         method="post"
       >
-        <label className="text-lg" htmlFor="email">
+        <label className="text-lg" htmlFor="email" >
           אימייל
         </label>
         <EmailInput />
         <MailIcon classNameStyle='h-5 w-5 text mt-[-47px] mb-[30px] ml-2' />
 
         <label className="text-lg" htmlFor="password">
-          סיסמא
+          סיסמה
         </label>
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6 text-end"
@@ -39,6 +39,14 @@ export default async function Login() {
         />
         <button >
           <LockIcon classNameStyle='h-5 w-5 text mt-[-64px] mb-[30px] ml-2' />
+        </button>
+
+        <button
+          className='text-start mt-[-30px] text-white/70 mb-4 underline'
+          dir='rtl'
+          //href={"/login?message=בדקו את האימייל כדי להמשיך בשחזור הסיסמא"}
+          formAction={"/auth/reset-password"}
+          >שכחת סיסמה ? 
         </button>
 
         <button className="bg-primary rounded px-4 py-2 text-black mb-2">
