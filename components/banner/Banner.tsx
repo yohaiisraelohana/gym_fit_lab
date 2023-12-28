@@ -9,7 +9,7 @@ export default function Banner() {
           xl:right-[25vw] xl:top-[250px]  
           lg:w-[47vh] lg:right-[20vw] lg:top-[260px]
           md:w-[37vh] md:right-[15vw] md:top-[260px]
-          w-[40vh] left-[50%] translate-x-[-50%] sm:top-[30px] top-[50px]
+          w-[40vh] max-md:left-[50%] max-md:translate-x-[-50%] sm:top-[30px] top-[50px]
           ">
 
           <h1 className="w-full text-center md:text-start text-3xl md:text-4xl lg:text-6xl text-white ">
