@@ -11,11 +11,9 @@ export const removeImageFromIdFolder = async (
     bucket_name:string ,  
     supabase:SupabaseClient) : Promise<TError | string> => {
 
-    const { data , error} = await supabase.storage
+    const {  error} = await supabase.storage
             .from(bucket_name)
             .remove([`${user_id}/${getImageName(image_url)}`]);
-
-    console.log("removeImageFromIdFolder",{data , error});
     
 
     return error ?
@@ -45,13 +43,11 @@ export const uploadUniqueImgToIdFolder = async (
         .from(bucket_name)
         .upload(`${user_id}/${image_to_upload.name}`,image);
 
-    console.log({data , error});
 
     if(old_image){
-        const {data:d , error:e} = await supabase.storage
+        await supabase.storage
             .from(bucket_name)
             .remove([`${user_id}/${getImageName(old_image)}`]);
-        console.log({d,e});
     }
     return error 
         ? {error , message:"שגיאה בהעלאת התמונה לשרת"} 
@@ -77,7 +73,6 @@ export const uploadToPrivateBucket = async (
         .from(bucket_name)
         .upload(`${user_id}/${image_to_upload.name}`,image);
 
-    console.log("uploadToPrivateBucket",{data,error});
     if(old_image) 
         await removeImageFromIdFolder(old_image,user_id,bucket_name,supabase);
 

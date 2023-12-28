@@ -7,7 +7,6 @@ export default async function ChangesPreviewBanner() {
         .select("*,profile(name , profile_img)")
         .limit(5);
 
-    console.log({data,error});
     
     
   return (

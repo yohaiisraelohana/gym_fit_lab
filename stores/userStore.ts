@@ -31,7 +31,7 @@ export const userStore = create<TUserStore>()((set) => ({
             set({user:data[0],error:null});
             return data;
         } catch (error) {
-            console.log(error);
+            console.error(error);
             set({error:{ message:"שגיאה לא צפויה בקבלת המשתמש" , error }});
             return { message:"שגיאה לא צפויה בקבלת המשתמש"  , error };
         }
@@ -51,7 +51,7 @@ export const userStore = create<TUserStore>()((set) => ({
             .match({id:currentUser.id})
             .select();
 
-        console.log(error);
+        console.error(error);
         
             
         if(error){
@@ -69,25 +69,3 @@ export const userStore = create<TUserStore>()((set) => ({
     }  
 }))
 
-
-/*
-        if(!currentUser.is_trainer && updatedUser.is_trainer ){
-            const {error} = await supabase
-                .from("trainer")
-                .insert([{id:currentUser.id}]);
-
-            if(error)
-                updatedUser.is_trainer = false;
-
-        }
-
-        
-        if(!currentUser.is_trainee && updatedUser.is_trainee ){
-            const {error} =  await supabase
-                .from("trainee")
-                .insert([{id:currentUser.id}]);
-            if(error)
-                updatedUser.is_trainee = false;
-            
-        }
-*/

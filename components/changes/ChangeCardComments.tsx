@@ -45,7 +45,6 @@ export default function ChangeCardComments(
       getChangeComments(); 
       countComments();
     },[]);
-    console.log(comments_list);
     
   return (
     <div className="h-[94%] w-full flex flex-col  overflow-y-auto items-center  p-2 md:p-4 gap-4">

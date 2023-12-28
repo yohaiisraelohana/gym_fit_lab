@@ -18,7 +18,6 @@ export default function ChangeCardCommentFrom(
       .from("changeComment")
       .insert({item_id , profile_id , text})
       .select();
-    console.log({data,error});
     
     if(error || !data )
       return setLoading(false);

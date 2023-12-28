@@ -54,10 +54,9 @@ export default function EditTrainer({trainer }:{trainer:TTrainer | null }) {
         delete trainer_data.trainees_count;
         if(new_img){
             const res = await uploadUniqueImgToIdFolder(user!.id!,"trainersImg",new_img,supabase,trainer?.trainer_img!); //uploadAvatarImage(user!.id!,new_img,supabase);
-            console.log(res);
             
             if(isError(res)){
-                console.log({res});
+                console.error(res);
                 setIsLoading(false)
                 return setError(res); 
             };
@@ -67,10 +66,9 @@ export default function EditTrainer({trainer }:{trainer:TTrainer | null }) {
         const { error , data } = await supabase
             .from("trainer")
             .upsert(trainer_data,{onConflict:"id"});
-        console.log({data,error});
         
         if(error){
-            console.log(error);
+            console.error(error);
             setIsLoading(false);
             return setError({error:error , message:"נכשל בעדכון המאמן"});
         }

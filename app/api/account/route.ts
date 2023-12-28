@@ -19,10 +19,9 @@ export async function PUT(request:NextRequest) {
       .select()
       .match({id:user?.id});
     
-    console.log({data,body});
     
     if(error){
-      console.log({error});
+      console.error({error});
       
       //TODO: Error message
       return ;
@@ -45,7 +44,7 @@ export async function PUT(request:NextRequest) {
     
     return NextResponse.json({message:"הפרטים נשמרו בהצלחה"}); 
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return NextResponse.json({error:error , message:"עדכון המשתמש נכשל"});
   }
 

@@ -15,7 +15,6 @@ export default function DesktopMealTable(
         const getFoodDetails =async (food:TMealFood) => {
             try {
                 const { data } = await axios(api + food.shmmitzrach);
-                console.log(data);
                 setFoodDetails({...data.result.records[0],amount:food.amount});
             } catch (error) {   
                 console.error(error);

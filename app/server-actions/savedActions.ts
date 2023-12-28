@@ -6,13 +6,12 @@ import { cookies } from "next/headers";
 
 export async function saveItem(item_id:number , type:string , profile_id:string , revalidate? : string ) : Promise<TError | null>{
     const supabase = createServerActionClient({cookies});
-    console.log({type});
 
     const { error } = await supabase
         .from(type)
         .insert({profile_id,item_id})
     
-    console.log({error});
+    console.error({error});
     
     if(!error)
         revalidatePath(revalidate || "/saved");

@@ -34,14 +34,5 @@ export async function convertImageExt(image: File , extension:string): Promise<F
     });
 }
   
-//   // Example usage:
-//   const uploadedFile = /* Replace this with your uploaded file object of type File */;
-//   convertToJPEG(uploadedFile)
-//     .then((jpegBlob) => {
-//       // Use the converted JPEG Blob here
-//       console.log('Converted to JPEG Blob:', jpegBlob);
-//     })
-//     .catch((error) => {
-//       console.error('Conversion error:', error);
-//     });
+
   

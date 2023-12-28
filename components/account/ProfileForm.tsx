@@ -21,7 +21,6 @@ export default function ProfileForm(
           setName(prev => user.name || prev);
           setProfile_img(user.profile_img || null);
         }
-        console.log(user);
         
     },[user]);
 

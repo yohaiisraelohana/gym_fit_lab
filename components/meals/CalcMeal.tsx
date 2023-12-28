@@ -1,7 +1,7 @@
 'use client'
 import axios from 'axios';
 import React, { useRef, useState } from 'react'
-import MealChart from './MealChart';
+import MealChart from './mealChart';
 import FoodList from './FoodList';
 import AmountForm from './AmountForm';
 import MobileMealTable from './MobileMealTable';
@@ -21,7 +21,6 @@ export default function CalcMeal() {
         
         try {
             const {data} = await axios(api + q);
-            console.log(data);
             setSearchFoodList(data.result.records);
         } catch (error) {
             console.error(error);

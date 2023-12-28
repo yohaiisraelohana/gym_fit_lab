@@ -91,10 +91,10 @@ export default function BodyStatus({body_status , profile }:{ body_status : TBod
 
     const publishChange = async () => {
         setLoading(true);
-        const {data , error} = await supabase
+        await supabase
             .from("change")
             .upsert(change_data,{onConflict:"trainee_id"});
-        console.log({data,error});
+
         setChangeData({ trainee_id:profile.id  });
         setShownDetails("השינוי הנוכחי");
         setLoading(false);

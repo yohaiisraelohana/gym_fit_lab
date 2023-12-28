@@ -21,11 +21,11 @@ export default function ExerciseMenu({id}:{id:number}) {
   const handleOpenMenu = async () => {
     if(!user)
       return  alert("פעולה זאת למשתמשים מחוברים בלבד");
-    const {data , error} = await supabase
+    const {data } = await supabase
       .from("savedExercises")
       .select()
       .match({item_id:id,profile_id:user.id});
-    console.log({data,error});
+
     if(!data)
       return;
     setSaved(data.length > 0);

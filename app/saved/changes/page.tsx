@@ -8,10 +8,8 @@ export default async function Page() {
     const { data: { user } } = await supabase.auth.getUser();
     if(!user)
         redirect("/");
-    const {data , error} = await supabase.rpc("get_saved_changes",{profile_id:user.id});
-    
-    console.log({data , error});
-    
+    const {data } = await supabase.rpc("get_saved_changes",{profile_id:user.id});
+        
     //get_saved_changes
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 lg:px-4 gap-4">

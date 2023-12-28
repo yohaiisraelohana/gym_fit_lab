@@ -27,7 +27,6 @@ export default function PublishBodyStatus(
             })
         }
     }
-    console.log(change_data);
     
   return (
     <div className="h-[100vw] sm:h-[85vw] md:h-[55vw] lg:h-[43vw] overflow-y-auto w-full bg-white">{

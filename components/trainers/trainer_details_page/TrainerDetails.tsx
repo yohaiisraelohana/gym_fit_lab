@@ -18,7 +18,7 @@ export default async function TrainerDetails(
             .match({id:trainer_id});
         
         if(!data || error){
-            console.log({data,error})
+            console.error(error);
             return <ServerRouter redirectPath="/trainers"/>
         }
     
