@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 
 
 //TODO: add the validation function
-export async function PUT(request:NextRequest) {
+export async function PUT(request:NextRequest):Promise<NextResponse> {
   try {
     const supabase = createRouteHandlerClient({ cookies });
     const body : TUser = await request.json();
@@ -22,9 +22,7 @@ export async function PUT(request:NextRequest) {
     
     if(error){
       console.error({error});
-      
-      //TODO: Error message
-      return ;
+      return NextResponse.json({error,message:"user not found"});
     }
     const profile : TUser = data[0];
 
