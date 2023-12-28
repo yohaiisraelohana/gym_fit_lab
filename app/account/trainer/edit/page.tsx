@@ -1,11 +1,11 @@
 import ServerRouter from "@/components/reusefull/ServerRouter";
 import EditTrainer from "@/components/trainers/EditTrainer";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import ServerClient from "@/supabase/ServerClient";
+
 
 export default async function page() {
     //TODO: try to fetch the teiner if exicst pass to the form
-    const supabase = createServerComponentClient({cookies});
+    const supabase = ServerClient();
     const {data:{user}} = await supabase.auth.getUser();
     if(!user){
       return <ServerRouter redirectPath="/login" />;

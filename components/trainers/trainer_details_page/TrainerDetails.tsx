@@ -4,14 +4,13 @@ import TrainerRate from "@/components/trainers/TrainerRate";
 import { TRAINER_DEFAULT_IMG } from "@/constants/defaultValues";
 import { calculateTimeDiff } from "@/services/functions/calculateTimeDifference";
 import { stringArrayToLine } from "@/services/functions/stringArrayToLine";
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import ServerRouter from '@/components/reusefull/ServerRouter';
-import { cookies } from 'next/headers';
 import TrainerSendRequestBtnProvider from './TrainerSendRequestBtnProvider';
+import ServerClient from '@/supabase/ServerClient';
 
 export default async function TrainerDetails(
     {trainer_id}:{trainer_id:string}) {
-        const supabase = createServerComponentClient({cookies});
+        const supabase = ServerClient();
         const { data , error } = await supabase
             .from("trainer")
             .select("*,profile(name)")

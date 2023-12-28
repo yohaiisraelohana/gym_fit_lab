@@ -4,8 +4,6 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
 
-
-
 //TODO: add the validation function
 export async function PUT(request:NextRequest):Promise<NextResponse> {
   try {

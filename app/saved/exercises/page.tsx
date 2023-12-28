@@ -1,11 +1,11 @@
 import ExerciseCard from "@/components/exercises/ExerciseCard";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import ServerClient from "@/supabase/ServerClient";
+
 
 
 
 export default async function page() {
-  const supabase = createServerComponentClient({cookies});
+  const supabase = ServerClient();
   const { data: { user } } = await supabase.auth.getUser();
   
   const {data:savedExercises , error:savedError} = await supabase

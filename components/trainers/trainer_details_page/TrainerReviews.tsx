@@ -1,9 +1,8 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import ServerClient from '@/supabase/ServerClient';
 import React from 'react'
 
 export default async function TrainerReviews({trainer_id}:{trainer_id:string;}) {
-    const supabase = createServerComponentClient({cookies})
+    const supabase = ServerClient();
     const {data , error} = await supabase
         .from("trainerRate")
         .select()

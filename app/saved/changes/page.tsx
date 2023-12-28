@@ -1,10 +1,9 @@
 import ChangeCard from "@/components/changes/ChangeCard";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import ServerClient from "@/supabase/ServerClient";
 import { redirect } from "next/navigation";
 
 export default async function Page() {
-    const supabase = createServerComponentClient({cookies});
+    const supabase = ServerClient();
     const { data: { user } } = await supabase.auth.getUser();
     if(!user)
         redirect("/");

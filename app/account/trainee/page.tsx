@@ -1,11 +1,10 @@
 import ServerRouter from "@/components/reusefull/ServerRouter";
 import BodyCalculators from "@/components/trainee/body_status/BodyCalculators";
 import BodyStatus from "@/components/trainee/body_status/BodyStatus";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import ServerClient from "@/supabase/ServerClient";
 
 export default async function page() {
-    const supabase = createServerComponentClient({cookies});
+    const supabase = ServerClient();
     const {data , error} = await supabase.auth.getUser();
 
     if(error){

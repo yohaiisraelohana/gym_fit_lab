@@ -1,13 +1,12 @@
 
 import { getCurrentShortTime } from '@/services/functions/getCurrentShortTime';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
 import React from 'react'
 import TrainerSendRequestBtn from './TrainerSendRequestBtn';
+import ServerClient from '@/supabase/ServerClient';
 // ? consider create another client component to handle state menagment changes
 
 export default async function TrainerSendRequestBtnProvider({trainer_id}:{trainer_id:string;}) {
-    const supabase = createServerComponentClient({cookies});
+    const supabase = ServerClient();
 
     const { data:{user} } = await supabase.auth.getUser();
     

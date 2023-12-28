@@ -1,11 +1,10 @@
 import React from 'react'
 import ChangeCard from '../../changes/ChangeCard';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import ServerClient from '@/supabase/ServerClient';
 
 export default async function TraineesChange({trainer_id}:{trainer_id:string;}) {
 
-    const supabase = createServerComponentClient({cookies});
+    const supabase = ServerClient();
 
     //TODO: add limit in supabase
     const {data , error} = await supabase
