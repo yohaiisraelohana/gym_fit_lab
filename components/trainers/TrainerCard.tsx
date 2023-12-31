@@ -24,7 +24,7 @@ export default function TrainerCard(
             e.preventDefault();
             e.currentTarget.scrollTop = e.currentTarget.scrollTop > 0 ? 0 : 260;
           }}
-          className="h-[290px] w-[200px] overflow-scroll md:w-[500px] bg-white rounded-sm flex max-md:flex-col"
+          className="max-h-[290px] h-[290px] w-[200px] overflow-scroll md:w-[500px] bg-white rounded-sm flex max-md:flex-col"
           > <div 
               className="w-full md:w-[40%] md:h-full min-h-[260px] border-b md:border-r md:border-b-0 border-neutral-800">  
                   <img 
