@@ -12,7 +12,7 @@ export default function ExerciseCard({exercise}:{exercise : TExercise}) {
         <Image 
             height={200}
             width={200}
-            className=' bg-white md:w-[90%]'
+            className=' bg-white w-[90%] xl:w-[85%]'
             src={exercise.gif_url}
             alt='exercise gif'
         />
