@@ -15,17 +15,28 @@ export default function page() {
   const router = useRouter();
 
   const handleResetPassword = async () => {
+    setIsLoading(true);
+    // validate the password
     const {valid , message} = validatePassword(password);
-    if(!valid)
+    if(!valid){
+      setIsLoading(false);
       return setFormError(message);
+    }
+
+    // update the password
     const supabase = createClientComponentClient();
     const { error} = await supabase
       .auth
       .updateUser({
         password
       });
-    if(error)
+    
+    if(error){
+      setIsLoading(false); 
       return setFormError(error.message);
+    }
+
+    setIsLoading(false);
     router.push("/login");
   }
 

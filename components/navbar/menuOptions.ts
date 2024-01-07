@@ -8,8 +8,8 @@ export const mainMenu = [
 ];
 
 export const userMenuOptions = [
-    {name:"חשבון" , href:"/account"},
     {name:"אזור מתאמן" , href:"/account/trainee"},
     {name:"אזור מאמן" , href:"/account/trainer" },
-    {name:"שמורים",href:"/saved"}
+    {name:"שמורים",href:"/saved"},
+    {name:"עריכה",href:"/account/edit"}
 ];

@@ -19,17 +19,17 @@ export default function UserMenu({user,closeUserMenu}:{
           <span className="block text-sm text-gray-200">{user.name || "אורח"}</span>
           <span className="block text-sm truncate text-primary text-start">{user.email}</span>
         </div>
-        <ul className="py-2" >
+        <ul className="pt-2" >
           {userMenu
             .map((menu) => (<li key={menu.name}>
             <Link 
               onClick={closeUserMenu}
               href={menu.href} 
-              className="block px-4 py-2 text-sm  dark:hover:bg-[var(--primary)] ">{menu.name}</Link>
+              className="block px-4 py-2 text-sm  dark:hover:bg-[var(--primary)] hover:text-black rounded-md ">{menu.name}</Link>
           </li>))}
           <li><form action="/auth/sign-out" method="post">
             <button 
-              className="block px-4 py-2 text-sm  dark:hover:bg-[var(--primary)] w-full text-end"
+              className="block px-4 py-2 text-sm  dark:hover:bg-[var(--primary)] hover:text-black rounded-md  w-full text-end"
               type='submit'>{"התנתק"}</button>
           </form></li>
         </ul>
