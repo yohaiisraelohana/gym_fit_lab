@@ -53,9 +53,10 @@ export default function CalcMeal() {
             <input 
                 ref={qRef}
                 disabled={currentFood != null}
-                className='text-end text p-1 px-2 w-[85%] border-2 border-white bg-transparent rounded-sm outline-1 outline-[var(--primary)]'
+                className='text p-1 px-2 w-[85%] border-2 border-white bg-transparent rounded-sm outline-1 outline-[var(--primary)]'
                 placeholder='חפש שם של מוצר'
                 type="text"
+                dir='rtl'
                 onChange={()=>getFoods()}/>
             {/* foodsList / mealTable / amount input */}
             <ul className="h-[40vh] w-[85%] bg-white/40  backdrop-blur-sm rounded-md ">
