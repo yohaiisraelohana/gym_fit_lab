@@ -2,7 +2,7 @@
 import ChevronDownIcon from '@/assets/icons/ChevronDownIcon';
 import ChevronUpIcon from '@/assets/icons/ChevronUpIcon';
 import { TRAINER_DEFAULT_IMG } from '@/constants/defaultValues';
-import React, { useState } from 'react'
+import React, {  useRef, useState } from 'react'
 import TrainerRate from './TrainerRate';
 import Link from 'next/link';
 import { calculateTimeDiff } from '@/services/functions/calculateTimeDifference';
@@ -16,14 +16,16 @@ export default function TrainerCard(
       trainer.training_since ? new Date(trainer.training_since) : new Date(),
       new Date(),
       "year");
-    //const monthsDifference = trainer.training_since ? (Date.now() - new Date(trainer.training_since).getTime() ) / (1000 * 60 * 60 * 24 * 30.44) : 0.0;
     
+    const formRef = useRef<HTMLFormElement | null>(null);
+    const handleShowDetailsOnMobile = () => {
+      setShowTrainerDetails(!showTrainerDetails)
+      formRef.current!.scrollTop = formRef.current!.scrollTop > 0 ? 0 : 260;
+    }
+
   return (
         <form 
-          onSubmit={(e) => {
-            e.preventDefault();
-            e.currentTarget.scrollTop = e.currentTarget.scrollTop > 0 ? 0 : 260;
-          }}
+          ref={formRef}
           className="max-h-[290px] h-[290px] w-[200px] overflow-scroll md:w-[500px] bg-white rounded-sm flex max-md:flex-col"
           > <div 
               className="w-full md:w-[40%] md:h-full min-h-[260px] border-b md:border-r md:border-b-0 border-neutral-800">  
@@ -37,8 +39,7 @@ export default function TrainerCard(
               <div className="w-full flex items-start h-[60px] md:h-[30px]">
                 <div className="mr-auto flex items-center pt-1">
                 <button
-                  onClick={()=>setShowTrainerDetails(!showTrainerDetails)}
-                  type='submit'
+                  onClick={handleShowDetailsOnMobile}
                   className="text-primary md:hidden "
                   > { showTrainerDetails 
                       ? <ChevronUpIcon classNameStyle='h-6 w-6' /> 
