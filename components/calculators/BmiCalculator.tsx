@@ -35,7 +35,7 @@ export default function BmiCalculator(
     },[height_provided,weight_provided]);
     
   return (
-    <div  className='flex flex-col bg-white p-[20px] gap-4 rounded-md text-background'>
+    <div  className='flex flex-col bg-white shadow-lg p-[20px] gap-4 rounded-md text-background'>
         <div className="w-full flex justify-between text-3xl">
             <h1 className=''>BMI</h1>
             <p className=' text-primary '>{bmi}</p>

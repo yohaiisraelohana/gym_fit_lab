@@ -58,7 +58,7 @@ export default function BmrCalculator(
     },[bmr_details])
 
   return (
-    <div style={{...bmr_style}} className={' bg-white h-full p-[20px] rounded-md w-[300px] z-10 sm:w-[240px] md:w-[340px] lg:w-[440px] flex flex-col justify-between max-md:gap-6 text-background'}>
+    <div style={{...bmr_style}} className={' shadow-lg bg-white h-full p-[20px] rounded-md w-[300px] z-10 sm:w-[240px] md:w-[340px] lg:w-[440px] flex flex-col justify-between max-md:gap-6 text-background'}>
         <div className=" flex justify-between text-3xl">
             <h1 className='text-black'>BMR</h1>
             <p className=' text-primary'>{bmr}</p>
@@ -69,7 +69,7 @@ export default function BmrCalculator(
             onClick={()=>setGender("זכר")}
             className="flex items-end gap-2">
             <img 
-                style={gender == "זכר" ? {border:"var(--primary) 2px solid"} : {}}
+                style={gender == "זכר" ? {border:" var(--primary) 3px solid "} : {}}
                 className="h-10 w-10 rounded-full"
                 src="https://res.cloudinary.com/dftounwvk/image/upload/v1696176580/9A484DF4-3F00-450E-A67F-42347A12AD26_1_201_a_sa6dyu.jpg" 
                 alt="male img" />
@@ -79,7 +79,7 @@ export default function BmrCalculator(
             onClick={()=>setGender("נקבה")}
             className="flex items-end gap-2">
             <img 
-                style={gender == "נקבה" ? {border:"var(--primary) 2px solid"} : {}}
+                style={gender == "נקבה" ? {border:"var(--primary) 3px solid"} : {}}
                 className="h-10 w-10 rounded-full"
                 src="https://res.cloudinary.com/dftounwvk/image/upload/v1696173336/86D20B4B-F732-415E-8427-92A32C389FCF_1_201_a_dnhvvh.jpg" 
                 alt="male img" />

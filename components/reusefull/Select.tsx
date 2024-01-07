@@ -21,10 +21,11 @@ export default function Select(
                 && <option key={ind} value={option.value} >{option.name}</option>
             ))}
         </select>
+
         <select 
             onChange={(e)=> handleSelect(e)}
             multiple  
-            className=" max-md:hidden border border-background  text-end rounded-sm focus:ring-[var(--primary)] focus:border-primary block w-full p-1 ">
+            className=" max-md:hidden border border-background overscroll-none text-end rounded-sm focus:ring-[var(--primary)] focus:border-primary block w-full p-1 ">
             <option 
               value={select_options[selected_index].value} 
               defaultValue={select_options[selected_index].value}>{select_options[selected_index].name}</option>

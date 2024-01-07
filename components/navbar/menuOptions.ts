@@ -1,7 +1,7 @@
 
 export const mainMenu = [
     {name:"מאמנים" , href:"/"},
-    {name:"תרגילים" , href:"/"},
+    {name:"תרגילים" , href:"/exercises"},
     {name:"שינויים" , href:"/"},
     {name:"מתכונים" , href:"/"},
     {name:"חנות" , href:"/"}
