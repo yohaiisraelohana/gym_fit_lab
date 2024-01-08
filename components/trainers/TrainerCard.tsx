@@ -39,6 +39,7 @@ export default function TrainerCard(
               <div className="w-full flex items-start h-[60px] md:h-[30px]">
                 <div className="mr-auto flex items-center pt-1">
                 <button
+                  type='button'
                   onClick={handleShowDetailsOnMobile}
                   className="text-primary md:hidden "
                   > { showTrainerDetails 
