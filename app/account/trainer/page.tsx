@@ -1,6 +1,5 @@
 import ServerRouter from "@/components/reusefull/ServerRouter";
 import ServerClient from "@/supabase/ServerClient";
-import Link from "next/link";
 
 export default async function page() {
     const supabase = ServerClient();
@@ -23,13 +22,10 @@ export default async function page() {
     const trainer :TTrainer = trainerData[0];
     
   return (
-    <div className="">
-      <Link 
-          href={"/account/trainer/edit"}
-          className="title"
-          >עריכה
-      </Link>
-    </div>
-
+      <div className="h-full w-screen flex ">
+        <h1 className="m-auto title">עמוד זה בבניה ויהיה מוכן בקרוב</h1>
+      </div>
   )
 }
+
+

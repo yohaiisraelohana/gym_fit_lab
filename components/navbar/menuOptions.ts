@@ -1,6 +1,6 @@
 
 export const mainMenu = [
-    {name:"מאמנים" , href:"/triners"},
+    {name:"מאמנים" , href:"/trainers"},
     {name:"תרגילים" , href:"/exercises"},
     {name:"שינויים" , href:"/changes"},
     {name:"מתכונים" , href:"/recipes"},
