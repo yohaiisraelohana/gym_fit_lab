@@ -1,10 +1,10 @@
 
 export const mainMenu = [
-    {name:"מאמנים" , href:"/"},
+    {name:"מאמנים" , href:"/triners"},
     {name:"תרגילים" , href:"/exercises"},
-    {name:"שינויים" , href:"/"},
-    {name:"מתכונים" , href:"/"},
-    {name:"חנות" , href:"/"}
+    {name:"שינויים" , href:"/changes"},
+    {name:"מתכונים" , href:"/recipes"},
+    {name:"מאמרים" , href:"/articles"}
 ];
 
 export const userMenuOptions = [
