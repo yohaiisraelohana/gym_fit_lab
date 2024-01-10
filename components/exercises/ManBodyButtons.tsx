@@ -12,7 +12,6 @@ export default function ManBodyButtons(
 ) {
   const [bodyPartOnMobile , setBodyPartOnMobile] = useState<string>("front");
 
-
   
   return (
     <div className="flex  justify-center items-center w-screen md:bg-gradient-to-t md:from-neutral-200 md:to-50% relative border-b-2 border-primary ">

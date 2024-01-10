@@ -6,11 +6,18 @@ export default async function page() {
     .from("exercises")
     .select()
     .limit(20);
+  
+  const { count } = await supabase
+    .from("exercises")
+    .select('*', { count: 'exact', head: true });
 
   if(!data)
     return <h1>תרגילים לא נמצאו</h1>
 
   const exercises : TExercise[] = data;
 
-  return (  <ExercisesPage exercises_first_list={exercises} />  )
+  return (  
+    <ExercisesPage 
+      all_exercises_count={count || 0}
+      exercises_first_list={exercises} />  )
 }

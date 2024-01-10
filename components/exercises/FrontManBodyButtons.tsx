@@ -15,8 +15,8 @@ export default function FrontManBodyButtons(
       {className:"ml-9 mt-[10%]  lg:ml-12 lg:mt-[13%]",name:"מקרבי ירך"},
       {className:"ml-9 mt-[3%]  lg:ml-12 lg:mt-[4%]",name:"ארבע ראשי"}
     ]
-  return (
-    <div className="h-[90vh] flex items-center justify-center max-md:w-screen max-md:bg-gradient-to-t max-md:from-neutral-200  lg:ml-[-30px]">
+  return ( 
+    <div className="h-[85vh] sm:h-[90vh] flex items-center justify-center max-md:w-screen max-md:bg-gradient-to-t max-md:from-neutral-200 max-md:to-[80%]  lg:ml-[-30px]">
     <div 
         className={
             `flex flex-col items-start text max-w-[100vw] w-[400px] h-[600px]  

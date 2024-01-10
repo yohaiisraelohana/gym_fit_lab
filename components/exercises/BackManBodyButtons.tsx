@@ -17,8 +17,8 @@ export default function BackManBodyButtons(
     {name:"האמסטרינג",className:"mr-1 mt-[1%]  lg:mt-[2%]"},
     {name:"תאומים",className:"mr-1 mt-[14%] lg:mt-[15%]"}
   ]
-  return (
-    <div className="max-md:bg-gradient-to-t max-md:from-neutral-200 flex justify-center items-center w-screen md:w-[400px] lg:w-[400px] lg:ml-[-30px] h-[90vh]">
+  return ( 
+    <div className="h-[85vh] sm:h-[90vh] max-md:bg-gradient-to-t max-md:from-neutral-200 max-md:to-[80%] flex justify-center items-center w-screen md:w-[400px] lg:w-[400px] lg:ml-[-30px] ">
     <div 
         className={`
             flex flex-col items-end mt-10 text w-[320px] h-[530px] 
