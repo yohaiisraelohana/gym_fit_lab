@@ -22,7 +22,7 @@ export default function RootLayout({
         <nav className=' z-50 fixed w-screen flex flex-col items-center '>
           <NavBar/>
         </nav>
-        <main className='mt-16 h-[calc(100vh-64px)] overflow-y-auto'>
+        <main className='mt-16 h-[calc(100vh-64px)] '>
           <StoreData />
           {children}
         </main>

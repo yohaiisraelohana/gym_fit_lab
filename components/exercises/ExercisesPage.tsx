@@ -81,12 +81,13 @@ export default function ExercisesPage(
     }
    }
 
+
    const hundleBodyPartSelected = (body_part:string) => {
         setSelectedBodyPart(prev => prev == body_part ? "" : body_part);
         updateExercisesList(body_part);
+        window.scrollBy(0,500);
     }
 
-    console.log(count_exercises);
   return (
     <>
         { is_loading && <LoadingDumbbells />}
