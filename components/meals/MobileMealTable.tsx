@@ -22,7 +22,7 @@ export default function MobileMealTable(
         }
 
   return (
-        <div className="flex flex-col justify-start items-center h-full w-full lg:hidden">
+        <div className="flex flex-col justify-start items-center h-full w-full lg:hidden overflow-y-auto">
             { foodDetails ? 
                 <FoodDetails 
                     handleGoBack={()=>setFoodDetails(null)}
