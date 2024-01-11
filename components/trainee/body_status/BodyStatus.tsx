@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import LoadingDumbbells from "../../reusefull/LoadingDumbbells";
+import LoadingDumbbells from "../../common/LoadingDumbbells";
 import BodyStatusHeader from "./BodyStatusHeader";
 import { useRouter } from "next/navigation";
 import BodyStatusView from "./BodyStatusView";

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { userStore } from '@/stores/userStore';
 import ProfileForm from './ProfileForm';
 import { useRouter } from 'next/navigation';
-import LoadingDumbbells from '../reusefull/LoadingDumbbells';
+import LoadingDumbbells from '../common/LoadingDumbbells';
 import {  uploadUniqueImgToIdFolder } from '@/services/upload/uploadImage';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { isError } from '@/services/functions/isError';

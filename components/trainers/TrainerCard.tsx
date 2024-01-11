@@ -7,7 +7,7 @@ import TrainerRate from './TrainerRate';
 import Link from 'next/link';
 import { calculateTimeDiff } from '@/services/functions/calculateTimeDifference';
 import { stringArrayToLine } from '@/services/functions/stringArrayToLine';
-import { AnimatedGradientBorder } from '../reusefull/AnimatedGradientBorder';
+import { AnimatedGradientBorder } from '../common/AnimatedGradientBorder';
 
 export default function TrainerCard(
     {trainer}:{trainer:TTrainer}) {

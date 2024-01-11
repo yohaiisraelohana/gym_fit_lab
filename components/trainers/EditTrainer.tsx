@@ -11,7 +11,7 @@ import { createContactDetailsArray, findContactDetails } from '@/services/functi
 import {  uploadUniqueImgToIdFolder } from '@/services/upload/uploadImage';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { isError } from '@/services/functions/isError';
-import LoadingDumbbells from '../reusefull/LoadingDumbbells';
+import LoadingDumbbells from '../common/LoadingDumbbells';
 
 export default function EditTrainer({trainer }:{trainer:TTrainer | null }) {
     const {user} = userStore();

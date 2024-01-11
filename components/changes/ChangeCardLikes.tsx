@@ -5,7 +5,7 @@ import { userStore } from "@/stores/userStore";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import ChevronUpIcon from "@/assets/icons/ChevronUpIcon";
-import LoadingDumbbells from "../reusefull/LoadingDumbbells";
+import LoadingDumbbells from "../common/LoadingDumbbells";
 import ChangeCardLikesList from "./ChangeCardLikesList";
 
 export default  function ChangeCardLikes(

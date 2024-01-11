@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { activity_options } from './activityOptions';
-import Select from '../reusefull/Select';
+import Select from '../common/Select';
 
 type TBmrDetails = {
     gender_provided?:string;

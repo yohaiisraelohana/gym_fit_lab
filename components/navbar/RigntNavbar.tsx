@@ -3,7 +3,7 @@ import { useState } from "react";
 import MainMenuDropDawn from "./MainMenuDropDawn";
 import UserProfileImg from "./UserProfileImg";
 import UserMenu from "./UserMenu";
-import { AnimatedGradientBorder } from "../reusefull/AnimatedGradientBorder";
+import { AnimatedGradientBorder } from "../common/AnimatedGradientBorder";
 import Link from "next/link";
 
 

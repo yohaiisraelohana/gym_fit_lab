@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import PaiChart from '../reusefull/PaiChart'
+import PaiChart from '../common/PaiChart'
 
 export default function MealChart({meal}:{meal:TMealFood[] | null}) {
   const [ mealTotal , setMealTotal ] = useState<TMealTotal | null>(null);

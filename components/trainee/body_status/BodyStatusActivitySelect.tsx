@@ -1,5 +1,5 @@
 import { activity_options } from '@/components/calculators/activityOptions';
-import Select from '@/components/reusefull/Select';
+import Select from '@/components/common/Select';
 import React from 'react'
 
 export default function BodyStatusActivitySelect(

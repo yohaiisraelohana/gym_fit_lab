@@ -5,7 +5,7 @@ import ExercisesList from "./ExercisesList"
 import ManBodyButtons from "./ManBodyButtons"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import LoadNextExercisesButton from "./LoadNextExercisesButton";
-import LoadingDumbbells from "../reusefull/LoadingDumbbells";
+import LoadingDumbbells from "../common/LoadingDumbbells";
 
 export default function ExercisesPage(
     {exercises_first_list , all_exercises_count}:{

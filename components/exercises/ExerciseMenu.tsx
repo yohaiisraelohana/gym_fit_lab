@@ -1,5 +1,4 @@
 "use client"
-import DumbbelIcon from "@/assets/icons/DumbbelIcon";
 import PlusIcon from "@/assets/icons/PlusIcon";
 import ShareIcon from "@/assets/icons/ShareIcon";
 import { useState } from "react";
@@ -8,6 +7,8 @@ import { userStore } from "@/stores/userStore";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { WhatsappShareButton } from "react-share";
 import { MainUrl } from "@/constants/url";
+import Link from "next/link";
+import DocumentTextIcon from "@/assets/icons/DocumentTextIcon";
 
 
 export default function ExerciseMenu({id}:{id:number}) {
@@ -44,7 +45,9 @@ export default function ExerciseMenu({id}:{id:number}) {
         </button>
 
         {openMenu && [
-          <DumbbelIcon classNameStyle="h-5 w-5 " />,
+          <Link href={`/exercises/${id}`}>
+            <DocumentTextIcon classNameStyle="h-5 w-5 " />
+          </Link>,
           <WhatsappShareButton
             title="מצאתי תרגיל שיעניין אותך"
             url={share_url}

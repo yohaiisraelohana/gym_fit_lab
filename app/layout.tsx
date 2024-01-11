@@ -25,6 +25,7 @@ export default function RootLayout({
         <main className='mt-16 h-[calc(100vh-64px)] '>
           <StoreData />
           {children}
+          
         </main>
       </body>
     </html>

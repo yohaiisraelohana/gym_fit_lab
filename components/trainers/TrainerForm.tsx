@@ -1,7 +1,7 @@
 "use client"
 import React, { Dispatch, MouseEvent, SetStateAction, useState } from "react";
 import { specializes_at_options } from "./specializes_at_options";
-import UploadImageButton from "../reusefull/UploadImageButton";
+import UploadImageButton from "../common/UploadImageButton";
 import { EmailIcon, FacebookMessengerIcon, TelegramIcon, WhatsappIcon } from "react-share";
 
 export default function TrainerForm(

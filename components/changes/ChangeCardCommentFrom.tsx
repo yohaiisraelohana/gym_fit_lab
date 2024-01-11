@@ -2,7 +2,7 @@
 import SendIcon from "@/assets/icons/SendIcon";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
-import LoadingDumbbells from "../reusefull/LoadingDumbbells";
+import LoadingDumbbells from "../common/LoadingDumbbells";
 
 export default function ChangeCardCommentFrom(
     {item_id , profile_id ,addComment }

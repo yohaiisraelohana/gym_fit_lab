@@ -3,7 +3,7 @@ import CommentIcon from '@/assets/icons/CommentIcon';
 import React, { useEffect, useState } from 'react'
 import ChangeCardCommentFrom from './ChangeCardCommentFrom';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import LoadingDumbbells from '../reusefull/LoadingDumbbells';
+import LoadingDumbbells from '../common/LoadingDumbbells';
 import ChangeCardCommentsList from './ChangeCardCommentsList';
 import ChevronUpIcon from '@/assets/icons/ChevronUpIcon';
 import { userStore } from '@/stores/userStore';

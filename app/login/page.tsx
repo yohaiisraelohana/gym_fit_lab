@@ -2,7 +2,7 @@ import MailIcon from '@/assets/icons/MailIcon'
 import Messages from './messages'
 import LockIcon from '@/assets/icons/LockIcon'
 import EmailInput from '@/components/Login/EmailInput'
-import ServerRouter from '@/components/reusefull/ServerRouter'
+import ServerRouter from '@/components/common/ServerRouter'
 import ServerClient from '@/supabase/ServerClient'
 
 

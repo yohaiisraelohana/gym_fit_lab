@@ -1,4 +1,4 @@
-import ServerRouter from "@/components/reusefull/ServerRouter";
+import ServerRouter from "@/components/common/ServerRouter";
 import EditTrainer from "@/components/trainers/EditTrainer";
 import ServerClient from "@/supabase/ServerClient";
 

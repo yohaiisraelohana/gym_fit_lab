@@ -1,12 +1,12 @@
 "use client"
 import React, { useState } from 'react'
 import { target_options } from '../target_options';
-import UploadImageButton from '../../reusefull/UploadImageButton';
+import UploadImageButton from '../../common/UploadImageButton';
 import { validateImageFile } from '@/services/validations/validateInputs';
 import { uploadToPrivateBucket } from '@/services/upload/uploadImage';
 import { userStore } from '@/stores/userStore';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import LoadingDumbbells from '@/components/reusefull/LoadingDumbbells';
+import LoadingDumbbells from '@/components/common/LoadingDumbbells';
 import { isError } from '@/services/functions/isError';
 import CircumferenceForm from './CircumferenceForm';
 import BodyStatusActivitySelect from './BodyStatusActivitySelect';

@@ -1,5 +1,5 @@
 'use client'
-import LoadingDumbbells from '@/components/reusefull/LoadingDumbbells';
+import LoadingDumbbells from '@/components/common/LoadingDumbbells';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { User } from '@supabase/supabase-js';
 import React, { useState } from 'react'

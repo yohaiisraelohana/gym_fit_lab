@@ -1,4 +1,4 @@
-import Select from '@/components/reusefull/Select';
+import Select from '@/components/common/Select';
 import React from 'react'
 import { target_options } from '../target_options';
 

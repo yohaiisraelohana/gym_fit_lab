@@ -4,7 +4,7 @@ import TrainerRate from "@/components/trainers/TrainerRate";
 import { TRAINER_DEFAULT_IMG } from "@/constants/defaultValues";
 import { calculateTimeDiff } from "@/services/functions/calculateTimeDifference";
 import { stringArrayToLine } from "@/services/functions/stringArrayToLine";
-import ServerRouter from '@/components/reusefull/ServerRouter';
+import ServerRouter from '@/components/common/ServerRouter';
 import TrainerSendRequestBtnProvider from './TrainerSendRequestBtnProvider';
 import ServerClient from '@/supabase/ServerClient';
 

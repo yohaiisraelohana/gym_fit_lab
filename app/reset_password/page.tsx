@@ -5,7 +5,7 @@ import { validatePassword } from '@/services/validations/validateInputs';
 import LockIcon from '@/assets/icons/LockIcon';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
-import LoadingDumbbells from '@/components/reusefull/LoadingDumbbells';
+import LoadingDumbbells from '@/components/common/LoadingDumbbells';
 
 export default function page() {
   const [formError , setFormError ] = useState<string>("");

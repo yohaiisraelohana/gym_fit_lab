@@ -1,4 +1,4 @@
-import ServerRouter from "@/components/reusefull/ServerRouter";
+import ServerRouter from "@/components/common/ServerRouter";
 import BodyCalculators from "@/components/trainee/body_status/BodyCalculators";
 import BodyStatus from "@/components/trainee/body_status/BodyStatus";
 import ServerClient from "@/supabase/ServerClient";

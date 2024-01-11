@@ -1,5 +1,3 @@
-"use client"
-
 import ExerciseCard from "./ExerciseCard";
 
 export default function ExercisesList(
