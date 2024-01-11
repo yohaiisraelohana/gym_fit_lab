@@ -21,10 +21,16 @@ export default function ExerciseDetails(
       <div className="flex flex-col w-[80%] justify-center items-center gap-2">
         <h1 className='title max-lg:hidden'>{exercise.name}</h1>
         <h3 className='text font-bold'>{exercise.body_part} - {exercise.equipment}</h3>
-        <ul dir='rtl' className='list-disc'>
+        <ul dir='rtl' className=''>
           {exercise.description && exercise.description
             .map((description) => (
-              <li className='text'>{description}</li>
+              <li className='text relative'>
+                <span className='text-5xl text-primary absolute right-0 top-[-15px]'>{"•"}</span>
+                <p>
+                  {Array(6).fill(0).map((val,ind) => <span key={ind}>{"\u00a0"}</span>)}
+                  {description}
+                </p>
+              </li>
             ))}
         </ul>
       </div>
