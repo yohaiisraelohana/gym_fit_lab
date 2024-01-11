@@ -24,12 +24,9 @@ export default function ExerciseDetails(
         <ul dir='rtl' className=''>
           {exercise.description && exercise.description
             .map((description) => (
-              <li className='text relative'>
-                <span className='text-5xl text-primary absolute right-0 top-[-15px]'>{"•"}</span>
-                <p>
-                  {Array(6).fill(0).map((val,ind) => <span key={ind}>{"\u00a0"}</span>)}
-                  {description}
-                </p>
+              <li className='text flex items-start my-2 gap-1 '>
+                <span className='text-5xl text-primary mt-[-13px]'>{"•"}</span>
+                <p className="">{description}</p>
               </li>
             ))}
         </ul>
