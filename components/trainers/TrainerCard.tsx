@@ -17,40 +17,41 @@ export default function TrainerCard(
       new Date(),
       "year");
     
-    const formRef = useRef<HTMLFormElement | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
     const handleShowDetailsOnMobile = () => {
       setShowTrainerDetails(!showTrainerDetails)
-      formRef.current!.scrollTop = formRef.current!.scrollTop > 0 ? 0 : 260;
+      containerRef.current!.scrollTop = containerRef.current!.scrollTop > 0 ? 0 : 260;
     }
-
   return (
-        <form 
-          ref={formRef}
-          className="max-h-[290px] h-[290px] w-[200px] overflow-scroll md:w-[500px] bg-white rounded-sm flex max-md:flex-col"
-          > <div 
-              className="w-full md:w-[40%] md:h-full min-h-[260px] border-b md:border-r md:border-b-0 border-neutral-800">  
-                  <img 
-                    src={trainer.trainer_img || TRAINER_DEFAULT_IMG}   
-                    className="h-full w-full"  
-                    alt="trainer image"/> 
-            </div>
-
-            <div className="w-full md:w-[60%] min-h-[290px] md:overflow-y-auto md:h-full flex flex-col md:justify-around   p-2 pt-0  md:py-1 md:px-3 ">
-              <div className="w-full flex items-start h-[60px] md:h-[30px]">
-                <div className="mr-auto flex items-center pt-1">
-                <button
-                  type='button'
-                  onClick={handleShowDetailsOnMobile}
-                  className="text-primary md:hidden "
-                  > { showTrainerDetails 
-                      ? <ChevronUpIcon classNameStyle='h-6 w-6' /> 
-                      : <ChevronDownIcon classNameStyle='h-6 w-6'/> }                                           
-                </button>
-                <TrainerRate style='flex items-center gap-1' total_rate={trainer.total_rate!} total_raters={trainer.total_raters!} />
+    <div 
+        ref={containerRef}
+        className='h-[290px] w-[200px] rounded-sm  flex max-md:flex-col  overflow-x-hidden md:w-[500px]  max-md:overflow-y-auto md:overflow-hidden'>
+        <div className=" w-[200px] max-md:min-h-[257px] md:h-[290px] ">
+            <img
+                src={trainer.trainer_img || TRAINER_DEFAULT_IMG}
+                alt='trainer image'
+                className='w-full h-full'/>
+        </div>
+        <div className=" w-[200px] md:w-[300px] md:overflow-y-auto bg-white">
+            <div className="flex flex-col px-2 min-h-[285px] justify-between pb-2">
+                {/* Header */}
+                <div className="w-full flex items-start h-[60px] md:h-[30px]">
+                    <div className="mr-auto flex items-center pt-1">
+                    <button
+                      type='button'
+                      onClick={handleShowDetailsOnMobile}
+                      className="text-primary md:hidden "
+                      > { showTrainerDetails 
+                          ? <ChevronUpIcon classNameStyle='h-6 w-6' /> 
+                          : <ChevronDownIcon classNameStyle='h-6 w-6'/> }                                           
+                    </button>
+                    <TrainerRate style='flex items-center gap-1' total_rate={trainer.total_rate!} total_raters={trainer.total_raters!} />
+                    </div>
+                    <p className=" font-bold ml-auto text-lg text-end break-words ">{trainer.profile?.name}</p>
                 </div>
-                <p className=" font-bold ml-auto text-lg text-end break-words ">{trainer.profile?.name}</p>
-              </div>
-              <div className="grid grid-cols-2 w-full">
+
+                {/* Content */}
+                <div className="grid grid-cols-2 w-full">
                     <p>{trainer.trainees_count}</p>
                     <p className='text-end font-bold'>מתאמנים</p>
                     <p>{yearDifference.toFixed(1)}Y</p>
@@ -58,16 +59,18 @@ export default function TrainerCard(
                     <p className='text-end col-span-2 font-bold'>:התמחות</p>
                     <p className='col-span-2 text-end'>{trainer.specializes_at ? stringArrayToLine(trainer.specializes_at) : "ללא"}</p>
                     <p className='text-end col-span-2 font-bold'>{trainer.bio && trainer.bio }</p>
-                    
-              </div>
-              <div className="bg-white ml-auto rounded-sm text-center max-md:w-full my-1">
-                <AnimatedGradientBorder rounded="2px" >
-                  <Link className='bg-white px-2 p-1 w-full'
-                        href={`/trainers/${trainer.id}`}>לפרטים נוספים</Link>
-                </AnimatedGradientBorder>
-              </div>
-              
+                </div>
+
+                {/* Footer */}
+                <div className="bg-white ml-auto rounded-sm text-center max-md:w-full my-1 ">
+                    <AnimatedGradientBorder rounded="2px" >
+                      <Link className='bg-white px-2 p-1 w-full'
+                            href={`/trainers/${trainer.id}`}>לפרטים נוספים</Link>
+                    </AnimatedGradientBorder>
+                </div>
+
             </div>
-        </form>
+        </div>
+    </div>
   )
 }

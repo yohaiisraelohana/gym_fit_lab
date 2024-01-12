@@ -3,6 +3,7 @@ import TrainerCard from "./TrainerCard";
 
 
 
+
 export default async function TrainersPreviewBanner() { 
   const {data , error} = await supabase
     .from("trainer")
@@ -20,6 +21,9 @@ export default async function TrainersPreviewBanner() {
 
         <div className=" m-auto w-[90vw] overflow-x-auto">
           <div className="w-fit overflow-x-scroll flex mt-5 mb-8 gap-5">
+            {data && data.map((triner,ind)=>(
+              <TrainerCard trainer={triner} key={ind} />
+            ))}
             {data && data.map((triner,ind)=>(
               <TrainerCard trainer={triner} key={ind} />
             ))}
