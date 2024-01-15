@@ -20,16 +20,15 @@ export default function ExerciseMenu({id}:{id:number}) {
   const share_url = MainUrl + "/exercises/" + id ;
 
   const handleOpenMenu = async () => {
-    if(!user)
-      return  alert("פעולה זאת למשתמשים מחוברים בלבד");
-    const {data } = await supabase
-      .from("savedExercises")
-      .select()
-      .match({item_id:id,profile_id:user.id});
+    if(user){
+      const {data } = await supabase
+        .from("savedExercises")
+        .select()
+        .match({item_id:id,profile_id:user.id});
 
-    if(!data)
-      return;
-    setSaved(data.length > 0);
+      if(data)
+        setSaved(data.length > 0);
+    }
     setOpenMenue(!openMenu);
   }
 
@@ -67,7 +66,7 @@ export default function ExerciseMenu({id}:{id:number}) {
               <BookmarksExerciseButtons               
                   classNemeStyle="bg-white/40 hover:bg-green-500/30  backdrop-blur-sm p-1 rounded-md" 
                   afterBookmarkFunction={()=>setOpenMenue(false)}
-                  profile_id={user.id!} 
+                  profile_id={user.id} 
                   saved={saved}
                   id={id} />
           }

@@ -6,12 +6,14 @@ export default function BookmarksExerciseButtons(
     {id , classNemeStyle , profile_id , afterBookmarkFunction , saved } : { 
       id : number ;
       classNemeStyle:string;
-      profile_id : string ;
+      profile_id? : string ;
       afterBookmarkFunction? : () => void ;
       saved : boolean ;
     }){
 
       const handleBookmarkClick = () => {
+        if(!profile_id)
+          return alert("שמירת תרגילים אפשרית למשתמשים מחוברים בלבד");
         if(saved){
           unSaveItem(id,"savedExercises",profile_id);
         } else {
