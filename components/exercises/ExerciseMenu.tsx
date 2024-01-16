@@ -47,12 +47,21 @@ export default function ExerciseMenu({id}:{id:number}) {
           <Link href={`/exercises/${id}`}>
             <DocumentTextIcon classNameStyle="h-5 w-5 " />
           </Link>,
+
           <WhatsappShareButton
             title="מצאתי תרגיל שיעניין אותך"
             url={share_url}
             className="h-fit w-5"
             ><ShareIcon classNameStyle="h-5 w-5 " />
           </WhatsappShareButton> ,
+
+          <BookmarksExerciseButtons               
+            classNemeStyle="bg-white/40  backdrop-blur-sm  rounded-md" 
+            afterBookmarkFunction={()=>setOpenMenue(false)}
+            profile_id={user?.id} 
+            saved={saved}
+            id={id} />
+
           ].map((icon,ind)=>(
             <div 
               key={ind}
@@ -61,15 +70,6 @@ export default function ExerciseMenu({id}:{id:number}) {
             </div>
           ))}
 
-          {
-            openMenu && user &&
-              <BookmarksExerciseButtons               
-                  classNemeStyle="bg-white/40 hover:bg-green-500/30  backdrop-blur-sm p-1 rounded-md" 
-                  afterBookmarkFunction={()=>setOpenMenue(false)}
-                  profile_id={user.id} 
-                  saved={saved}
-                  id={id} />
-          }
     </div>
   )
 }
