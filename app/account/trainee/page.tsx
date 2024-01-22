@@ -45,19 +45,20 @@ export default async function page() {
         <BodyStatus body_status={body_status_data} profile={trainee} />
         <div className="w-[77vw] lg:w-[20vw] flex flex-col justify-center items-center gap-8 ">
           <section className=" flex flex-col justify-center items-center w-full h-[20vw] ">
-                <h3 className="text text-xl w-full text-end px-2 py-1"> תזונה יומית</h3>
-                <div className="text-black h-full bg-white w-full rounded-md">
+                <h3 className="text text-xl w-full text-end px-2 py-1 border-b-2 border-white"> תזונה יומית</h3>
+                <div className="text-black h-full  w-full rounded-md">
                 </div>
           </section>
           <section className="  flex flex-col justify-center items-center w-full h-[20vw] ">
-                <h3 className="text text-xl w-full text-end px-2 py-1"> תוכניות אימון</h3>
-                <div className="text-black h-full bg-white w-full rounded-md">
+                <h3 className="text text-xl w-full text-end px-2 py-1 border-b-2 border-white"> תוכניות אימון</h3>
+                <div className="text-black h-full  w-full rounded-md">
                 </div>
           </section>
         </div>
 
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2 max-lg:gap-x-4 lg:order-3 lg:grid-cols-1 lg:w-[20vw]">
           <BodyCalculators 
+              title={<h3 className="text text-xl w-full text-end px-2 py-1 border-b-2 border-white">מחשבוני גוף</h3>}
               gender={trainee.gender!}
               body_status_details={body_status_data ? body_status_data[body_status_data.length -1] : null} />
           <section className=" 
@@ -65,8 +66,8 @@ export default async function page() {
             md:w-full
             lg:h-[20vw]
             xl:h-[22vw] ">
-                <h3 className="text text-xl w-full text-end px-2 py-1"> גרפים</h3>
-                <div className="text-black h-full bg-white w-full rounded-md">
+                <h3 className="text text-xl w-full text-end px-2 py-1 border-b-2 border-white"> גרפים</h3>
+                <div className="text-black h-full  w-full rounded-md">
                 </div>
           </section>
         </div>

@@ -1,15 +1,17 @@
+import { ReactNode } from "react";
 import BmiCalculator from "../../calculators/BmiCalculator";
 import BmrCalculator from "../../calculators/BmrCalculator";
 
 export default function BodyCalculators(
-    { body_status_details , gender }:{
-        body_status_details:TBodyStatus | null;
+    { body_status_details , gender ,title }:{
+        body_status_details : TBodyStatus | null;
         gender : string ;
+        title? : ReactNode;
     }) {
         
   return (
     <section className="w-full flex flex-col justify-center items-center gap-2">
-        <h1 className=" w-[75vw] md:w-[320px] lg:w-[20vw] text-right text text-xl">מחשבוני גוף</h1>
+        {title || <h1 className=" w-[75vw] md:w-[320px] lg:w-[20vw] text-right text text-xl">מחשבוני גוף</h1>}
 
         <div className="md:hidden ">
         {body_status_details 

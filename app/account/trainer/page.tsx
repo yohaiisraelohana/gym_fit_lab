@@ -24,7 +24,7 @@ export default async function page() {
     const trainer :TTrainer = trainerData[0];
 
   return (
-      <div className="h-full w-screen flex flex-col justify-center items-center">
+      <div className="h-full w-screen flex flex-col gap-[50px] justify-center items-center">
       
         {/* TRAINER CARD CONTAINER */}
         <TrainerCardPreview trainer={trainer} />

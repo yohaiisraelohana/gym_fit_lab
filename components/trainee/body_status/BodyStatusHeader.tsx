@@ -9,21 +9,21 @@ export default function BodyStatusHeader(
         setShownDetails: (d:string) => void;
     }) {
   return (
-    <div className=" w-full flex justify-between items-center">
+    <div className=" w-full flex justify-between items-center border-b-2 border-white">
         <div className="flex gap-2">
             {shown_details == "הוספת סטטוס גוף" 
                 ? <MinusIcon 
                     onClick={()=>setShownDetails("השינוי הנוכחי")}
-                    classNameStyle="border border-white text h-5 w-5 cursor-pointer" /> 
+                    classNameStyle=" text h-5 w-5 cursor-pointer" /> 
                 : <PlusIcon 
                     onClick={()=>setShownDetails("הוספת סטטוס גוף")}
-                    classNameStyle="border border-white text h-5 w-5 cursor-pointer "/>
+                    classNameStyle=" text h-5 w-5 cursor-pointer border border-white rounded-sm"/>
             }
             <EditIcon 
                 onClick={()=>setShownDetails("רשימת סטטוסי גוף")}
-                classNameStyle="h-5 w-5 border border-white text  cursor-pointer" />
+                classNameStyle="h-5 w-5  text  cursor-pointer" />
         </div>
-        <h1 className=" text-xl text">{shown_details}</h1>
+        <h1 className=" text-xl text ">{shown_details}</h1>
     </div>
   )
 }
