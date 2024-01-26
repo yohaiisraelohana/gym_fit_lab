@@ -1,45 +1,58 @@
 "use client"
-import React, { useEffect, useRef } from 'react';
+import "./modal.css"
+import { useEffect, useRef, useState } from "react";
 
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+type Props = {
   children: React.ReactNode;
-}
-
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-  const modalRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-        onClose();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen, onClose]);
-
-  return (
-    <>
-      {isOpen && (
-        <div className="fixed h-screen w-screen top-0 left-0 bg-white/20  flex flex-col items-center  justify-center ">
-          <div ref={modalRef} className="modal">
-            <button className=" text-red-600" onClick={onClose}>
-              Close
-            </button>
-            {children}
-          </div>
-        </div>
-      )}
-    </>
-  );
+  isOpen: boolean;
+  setIsOpen: Function;
+  onOpen?: Function;
+  onClose?: Function;
 };
 
-export default Modal;
+export const Modal = (props: Props) => {
+  const [isClosing, setIsClosing] = useState(false);
+
+  const modalRef = useRef<HTMLDivElement>(null)
+
+  const closeModal = () => {
+    if (props.onClose) props.onClose();
+    setIsClosing(true);
+    setTimeout(() => {
+      props.setIsOpen(false);
+      setIsClosing(false);
+    }, 300);
+  };
+
+  useEffect(() => {
+    if (props.onOpen) props.onOpen();
+  }, []);
+
+  useEffect(() => {
+    if (!modalRef.current) return
+    const closeButton = modalRef.current.querySelector("#close-button") as HTMLButtonElement
+    if (!closeButton) return
+    closeButton.onclick = closeModal
+  }, [props.children])
+
+  return (
+    props.isOpen && (
+      <div
+      ref={modalRef}
+        onClick={closeModal}
+        className={`${
+          isClosing && "modal-container-vanish backdrop-blur-none"
+        } modal`}
+      >
+        <article
+          onClick={(e) => e.stopPropagation()}
+          className={`${
+            isClosing ? "modal-shrink" : "modal-grow"
+          } modal-children`}
+        >
+          {props.children}
+        </article>
+      </div>
+    )
+  );
+};

@@ -1,11 +1,11 @@
 import ProfileIcon from "@/assets/icons/ProfileIcon";
 import Image from "next/image";
 export default function UserProfileImg({handleClick , profile_img  }
-    :{ handleClick : Function ; profile_img?:string | null; }) {
+    :{ handleClick ?: Function ; profile_img?:string | null; }) {
       
   return (
       <button 
-        onClick={()=>handleClick()}
+        onClick={()=>handleClick ? handleClick() : console.log("no action provided")}
         className="flex rounded-full md:mr-0 focus:ring-4  focus:ring-[var(--primary)] dark:focus:ring-[var(--primary)]" >
         <span className="sr-only">Open user menu</span>
         {profile_img ? (
