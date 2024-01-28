@@ -4,4 +4,7 @@ type TTrainerTraineeProgram = {
     trainee_id?:string;
     trainer_id?:string;
     start_date?:string;
-    end_date?:str
+    end_date?:string;
+    name?:string;
+    comment?:string;
+}
