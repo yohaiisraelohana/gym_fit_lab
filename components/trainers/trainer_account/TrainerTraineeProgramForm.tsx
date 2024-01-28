@@ -1,4 +1,7 @@
+"use client"
 import UserProfileImg from '@/components/navbar/UserProfileImg'
+import { getCurrentShortTime } from '@/services/functions/getCurrentShortTime';
+import { userStore } from '@/stores/userStore';
 import React, {  useState } from 'react'
 
 export default function TrainerTraineeProgramForm(
@@ -7,11 +10,23 @@ export default function TrainerTraineeProgramForm(
         exist_program?:TTrainerTraineeProgram;
     }
 ) {
+    const [some , setSome ] = useState<any>();
+    const {user} = userStore();
+    const [trainer_trainee_program , setTrainerTraineeProgram] = useState<TTrainerTraineeProgram>({
+        start_date:getCurrentShortTime(),
+        trainee_id:trainee.id,
+        trainer_id:user?.id
+    });
+
+    const handleInputChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+        console.log({type_target:e.target.type , type:e.type});
+    }
+
+    console.log({trainer_trainee_program});
     
-    const [trainer_trainee_program , setTrainerTraineeProgram] = useState<TTrainerTraineeProgram>();
-    // ! start date will be the currant day date getCurrentShortTime();
+
   return (
-    <form className='w-[350px] md:w-[500px] h-fit pb-4 gap-3 bg-white flex flex-col items-center border border-black shadow-lg rounded-2xl text-background'>
+    <form dir='rtl' className='w-[350px] md:w-[500px] h-fit pb-4 gap-3 bg-white flex flex-col items-center border border-black shadow-lg rounded-2xl text-background'>
         <div className="mt-[-20px] flex flex-col items-center">
             <div className="border border-black w-fit rounded-full">
                 <UserProfileImg profile_img={trainee.profile_img} />
@@ -24,22 +39,22 @@ export default function TrainerTraineeProgramForm(
         <div className="w-full flex justify-around">
             <div className="flex flex-col items-center">
                 <label htmlFor="start">תאריך התחלה</label>
-                <input type="date" name='start' className='border border-black rounded-sm' />
+                <input onChange={handleInputChange} type="date" name='start' className='border border-black rounded-sm' />
             </div>
             <div className="flex flex-col items-center">
                 <label htmlFor="start">תאריך סיום</label>
-                <input type='date' name='end' className='border border-black rounded-sm' />
+                <input onChange={handleInputChange} type='date' name='end' className='border border-black rounded-sm' />
             </div>
         </div>
 
         <div className="flex flex-col w-full px-4">
             <label className='w-full' htmlFor="program_name">שם התוכנית</label>
-            <input className='w-full border border-black rounded-sm' type="text" name='program_name' />
+            <input onChange={handleInputChange} className='w-full border border-black rounded-sm px-2' type="text" name='program_name' />
         </div>
 
         <div className="flex flex-col w-full px-4">
             <label htmlFor="comment" className='w-full' >הערות</label>
-            <textarea name="comment" className='w-full border border-black rounded-sm' ></textarea>
+            <textarea name="comment" className='w-full border border-black rounded-sm px-2' ></textarea>
         </div>
 
         <button
